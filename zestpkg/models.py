@@ -28,7 +28,7 @@ class Profile(db.Model):
 	roll_number = db.Column(db.String(40), nullable=False)
 	phone = db.Column(db.String(15), nullable=False)
 	college = db.Column(db.String(150), nullable=False)
-	#gender = db.Column(db.Enum('M', 'F'), nullable=False)
+	gender = db.Column(db.String(1), nullable=False)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 	def __repr__(self):
