@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="col-md-4">
+	<h1>{{ user.name }}</h1>
+	<small><a href="#">{{ user.username }}</a></small>
+	<p>{{ user.phone }}</p>
+	<p>{{ user.college }}</p>
+	<p>{{ user.course }}</p>
+	
+</div>
+{% endblock %}

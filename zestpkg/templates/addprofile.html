@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="col-md-4">
+	<h1>{{ legend }}</h1>
+	<form action="" method="POST">
+		{{ form.hidden_tag() }}
+		{{ form.first_name.label(class='') }}
+		{{ form.first_name(class='') }}<br>
+		{{ form.last_name.label(class='') }}
+		{{ form.last_name(class='') }}<br>
+
+		{{ form.image.label(class='') }}
+		{{ form.image(class='') }}<br>
+		{{ form.course.label(class='') }}
+		{{ form.course(class='') }}<br>
+		{{ form.branch.label(class='') }}
+		{{ form.branch(class='') }}<br>
+		{{ form.roll_num.label(class='') }}
+		{{ form.roll_num(class='') }}<br>
+		{{ form.phone.label(class='') }}
+		{{ form.phone(class='') }}<br>
+		{{ form.college.label(class='') }}
+		{{ form.college(class='') }}<br>
+		{{ form.gender(class='') }}<br>
+		{{ form.submit(class='btn btn-info') }}
+	</form>
+</div>
+{% endblock %}

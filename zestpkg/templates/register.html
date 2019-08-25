@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="col-md-4">
+	<h1>Registeration Form</h1>
+	<form action="" method="POST">
+		{{ form.hidden_tag() }}
+		{{ form.username.label(class='') }}
+		{{ form.username(class='') }}<br>
+		{{ form.email.label(class='') }}
+		{{ form.email(class='') }}<br>
+		{{ form.password.label(class='') }}
+		{{ form.password(class='') }}<br>
+		{{ form.confirm_password.label(class='') }}
+		{{ form.confirm_password(class='') }}<br>
+		{{ form.submit(class='btn btn-info') }}
+	</form>
+</div>
+{% endblock %}
