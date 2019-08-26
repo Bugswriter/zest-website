@@ -33,3 +33,67 @@ class Profile(db.Model):
 
 	def __repr__(self):
 		return "Profile({}, {}, {})".format(self.name, self.phone, self.course)
+
+
+class Event(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	title = db.Column(db.String(50), nullable=False)
+	image = db.Column(db.String(60), nullable=False, default='default.jpg')
+	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+	participators = db.relationship('Participants', backref='event', lazy=True)
+	team_limit = db.Column(db.Integer, nullable=False, default=1)
+	time = db.Column(db.String(15), nullable=True)
+	price = db.Column(db.String(30), nullable=True)
+	detail_txt = db.Column(db.String(60), nullable=True)
+
+	def eventType(self):
+		if self.team_limit == 1:
+			return "Solo"
+		else:
+			return "Team"
+
+	def getParticipation(self):
+		if self.team_limit == 1:
+			party = self.participators
+			participators = []
+			for member in party: 
+				user = User.query.get_or_404(member.user_id)
+				participators.append(user)
+
+			return participators
+		else:
+			party = self.participators
+			teams = []
+			for member in party:
+				team = Team.query.get_or_404(member.team_id)
+				teams.append(team)
+
+			return teams
+
+
+class Participants(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+	event_id = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=False)
+	team_id = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=True)
+
+
+class Team(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	name = db.Column(db.String(30), nullable=False)
+	members = db.relationship('Participants', backref='team', lazy=True)
+	team_code = db.Column(db.String(10), nullable=False)
+
+	def getMember(self):
+		party = self.members
+		members = []
+		for x in party:
+			user = User.query.get_or_404(x.user_id)
+			members.append(user)
+
+		return members
+
+
+
+
+

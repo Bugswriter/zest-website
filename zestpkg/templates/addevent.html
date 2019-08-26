@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="col-md-4">
+	<h1>Register Event</h1>
+	<form action="" method="POST">
+		{{ form.hidden_tag() }}
+		{{ form.title.label(class='') }}
+		{{ form.title(class='') }}<br>
+		{{ form.event_type.label(class='') }}
+		{{ form.event_type(class='') }}<br>
+		{{ form.num_of_member.label(class='') }}
+		{{ form.num_of_member(class='') }}<br>
+		{{ form.detail.label(class='') }}
+		{{ form.detail(class='') }}<br>
+		{{ form.submit(class='btn btn-info') }}
+	</form>
+</div>
+{% endblock %}
