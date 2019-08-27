@@ -1,8 +1,10 @@
-from flask import Blueprint, render_template, flash, request, redirect, url_for
+from flask import Blueprint, render_template, flash, request, redirect, url_for, current_app
 from zestpkg.users.forms import RegisterForm, LoginForm
 from flask_login import current_user, login_user, logout_user
 from zestpkg import bcrypt, db
 from zestpkg.models import User
+from zestpkg.users.utils import send_confirmation_link
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
 users = Blueprint('users', __name__)
 
@@ -13,15 +15,27 @@ def register():
 
 	registerform = RegisterForm()
 	if registerform.validate_on_submit():
-		hashed_password = bcrypt.generate_password_hash(registerform.password.data).decode('utf-8')
-		user = User(username=registerform.username.data, email=registerform.email.data, password=hashed_password)
+		send_confirmation_link( registerform.username.data, registerform.email.data, registerform.password.data)
+		flash(f"Conformation link is on your email", 'success')
+		return redirect(url_for('users.login'))
+	return render_template('register.html', title='Register', form=registerform)
+
+
+@users.route('/register/<token>', methods=['GET'])
+def confirmation(token):
+	if current_user.is_authenticated:
+		return redirect(url_for('main.home'))
+	s=Serializer(current_app.config['SECRET_KEY'])
+	try:
+		username=s.loads(token)['username']
+		email=s.loads(token)['email']
+		password=hashed_password = bcrypt.generate_password_hash(s.loads(token)['password']).decode('utf-8')
+		user = User(username=username, email=email, password=hashed_password, verified=1)
 		db.session.add(user)
 		db.session.commit()
-		flash(f'You are successfully registered', 'success')
-
-		return render_template(url_for('users.login'))
-
-	return render_template('register.html', title='Register', form=registerform)
+	except Exception as e:
+		raise e
+	return redirect(url_for('users.login'))
 
 
 @users.route('/login', methods=['GET', 'POST'])
