@@ -1,18 +1,58 @@
 {% extends 'layout.html' %}
 {% block content %}
 <div class="col-md-4">
-	<h1>Registeration Form</h1>
 	<form action="" method="POST">
 		{{ form.hidden_tag() }}
-		{{ form.username.label(class='') }}
-		{{ form.username(class='') }}<br>
-		{{ form.email.label(class='') }}
-		{{ form.email(class='') }}<br>
-		{{ form.password.label(class='') }}
-		{{ form.password(class='') }}<br>
-		{{ form.confirm_password.label(class='') }}
-		{{ form.confirm_password(class='') }}<br>
-		{{ form.submit(class='btn btn-info') }}
+		<fieldset class="form-group">
+			<legend class="the-legend border-bottom mb-4">Register</legend>
+			<div class="form-group">
+				{{ form.username.label(class='form-control-label') }}
+				{{ form.username(class='form-control form-control-lg') }}
+				<div class="invalid-feedback d-block">
+					{% if form.username.errors %}
+						{% for error in form.username.errors %}
+							{{ error }}
+						{% endfor %}
+					{% endif %}
+				</div>
+			</div>
+			<div class="form-group">
+				{{ form.email.label(class='form-control-label') }}
+				{{ form.email(class='form-control form-control-lg') }}
+				<div class="invalid-feedback d-block">
+					{% if form.email.errors %}
+						{% for error in form.email.errors %}
+							{{ error }}
+						{% endfor %}
+					{% endif %}
+				</div>
+			</div>
+			<div class="form-group">
+				{{ form.password.label(class="form-control-label") }}
+				{{ form.password(class="form-control form-control-lg") }}
+				{% if form.password.errors %}
+					<div class="invalid-feedback d-block">
+					{% for error in form.password.errors %}
+						{{ error }}
+					{% endfor %}
+					</div>
+				{% endif %}
+			</div>
+			<div class="form-group">
+				{{ form.confirm_password.label(class="form-control-label") }}
+				{{ form.confirm_password(class="form-control form-control-lg") }}
+				{% if form.confirm_password.errors %}
+					<div class="invalid-feedback d-block">
+					{% for error in form.confirm_password.errors %}
+						{{ error }}
+					{% endfor %}
+					</div>
+				{% endif %}
+			</div>
+		</fieldset>
+		<div class="form-group">
+			{{ form.submit(class='btn btn-outline-info') }}
+		</div>
 	</form>
 </div>
 {% endblock %}

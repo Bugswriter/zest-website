@@ -1,11 +1,16 @@
 {% extends 'layout.html' %}
 {% block content %}
-<div class="col-md-4">
-	<h1>{{ user.name }}</h1>
-	<small><a href="#">{{ user.username }}</a></small>
-	<p>{{ user.phone }}</p>
-	<p>{{ user.college }}</p>
-	<p>{{ user.course }}</p>
-	
+<div class="container">
+	<img src="{{ url_for('static', filename='profile_pics/'+user.image) }}" width="120px" height="120px">
+	<ul>
+		<li>{{ user.name }}</li>
+		<li>{{ title }}</li>
+		<li>{{ user.roll_number }}</li>
+		<li>{{ user.course }}</li>
+
+		<li>{{ user.branch }}</li>
+		<li>{{ user.gender }}</li>
+		<li>{{ user.college }}</li>
+	</ul>
 </div>
 {% endblock %}

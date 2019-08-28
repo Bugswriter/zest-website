@@ -1,28 +1,121 @@
 {% extends 'layout.html' %}
 {% block content %}
 <div class="col-md-4">
-	<h1>{{ legend }}</h1>
 	<form action="" method="POST">
 		{{ form.hidden_tag() }}
-		{{ form.first_name.label(class='') }}
-		{{ form.first_name(class='') }}<br>
-		{{ form.last_name.label(class='') }}
-		{{ form.last_name(class='') }}<br>
-
-		{{ form.image.label(class='') }}
-		{{ form.image(class='') }}<br>
-		{{ form.course.label(class='') }}
-		{{ form.course(class='') }}<br>
-		{{ form.branch.label(class='') }}
-		{{ form.branch(class='') }}<br>
-		{{ form.roll_num.label(class='') }}
-		{{ form.roll_num(class='') }}<br>
-		{{ form.phone.label(class='') }}
-		{{ form.phone(class='') }}<br>
-		{{ form.college.label(class='') }}
-		{{ form.college(class='') }}<br>
-		{{ form.gender(class='') }}<br>
-		{{ form.submit(class='btn btn-info') }}
+		<fieldset class="form-group">
+			<legend class="the-legend border-bottom mb-4">{{ legend }}</legend>
+			<div class="form-group form-row">
+				<div class="col">
+					{{ form.first_name.label(class='form-control-label') }}
+					{{ form.first_name(class='form-control') }}
+					<div class="invalid-feedback d-block">
+					{% if form.first_name.errors %}
+						{% for error in form.first_name.errors %}
+							{{ error }}
+						{% endfor %}
+					{% endif %}
+					</div>
+				</div>
+				<div class="col">
+					{{ form.last_name.label(class='form-control-label') }}
+					{{ form.last_name(class='form-control') }}
+					<div class="invalid-feedback d-block">
+					{% if form.last_name.errors %}
+						{% for error in form.last_name.errors %}
+							{{ error }}
+						{% endfor %}
+					{% endif %}
+					</div>
+				</div>
+			</div>
+			<div class="form-group form-row">
+				<div class="col">
+					{{ form.course.label(class='form-control-label') }}
+					{{ form.course(class='form-control') }}
+					<div class="invalid-feedback d-block">
+					{% if form.course.errors %}
+						{% for error in form.course.errors %}
+							{{ error }}
+						{% endfor %}
+					{% endif %}
+					</div>
+				</div>
+				<div class="col">
+					{{ form.branch.label(class='form-control-label') }}
+					{{ form.branch(class='form-control') }}
+					<div class="invalid-feedback d-block">
+					{% if form.branch.errors %}
+						{% for error in form.branch.errors %}
+							{{ error }}
+						{% endfor %}
+					{% endif %}
+					</div>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="col form-group">
+					{{ form.roll_num.label(class='form-control-label') }}
+					{{ form.roll_num(class='form-control') }}
+					<div class="invalid-feedback d-block">
+					{% if form.roll_num.errors %}
+						{% for error in form.roll_num.errors %}
+							{{ error }}
+						{% endfor %}
+					{% endif %}
+					</div>
+				</div>
+				<div class="col form-group">
+					{{ form.phone.label(class='form-control-label') }}
+					{{ form.phone(class='form-control') }}
+					<div class="invalid-feedback d-block">
+					{% if form.phone.errors %}
+						{% for error in form.phone.errors %}
+							{{ error }}
+						{% endfor %}
+					{% endif %}
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				{{ form.college.label(class='form-control-label') }}
+				{{ form.college(class='form-control') }}
+				<div class="invalid-feedback d-block">
+					{% if form.college.errors %}
+						{% for error in form.college.errors %}
+							{{ error }}
+						{% endfor %}
+					{% endif %}
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="col form-group">
+					{{ form.image.label(class='form-control-label') }}
+					{{ form.image(class='form-control-file') }}
+					<div class="invalid-feedback d-block">
+					{% if form.image.errors %}
+						{% for error in form.image.errors %}
+							{{ error }}
+						{% endfor %}
+					{% endif %}
+					</div>
+				</div>
+				<div class="col form-group form-check">
+					{{ form.gender.label(class='form-control-label') }}
+					{{ form.gender(class='form-control') }}	
+					<div class="invalid-feedback d-block">
+					{% if form.gender.errors %}
+						{% for error in form.gender.errors %}
+							{{ error }}
+						{% endfor %}
+					{% endif %}
+					</div>
+				</div>
+			</div>
+		</fieldset>
+		<div class="form-group">
+			{{ form.submit(class='btn btn-outline-info') }}
+		</div>
 	</form>
 </div>
 {% endblock %}

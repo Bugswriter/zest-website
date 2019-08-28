@@ -1,10 +1,18 @@
+import string
+import random
 from zestpkg import db
 from flask_login import UserMixin
 from zestpkg import login_manager
 
+
 @login_manager.user_loader
 def load_user(user_id):
 	return User.query.get(int(user_id))
+
+
+def generate_team_code():
+	return ''.join(random.choices(string.ascii_uppercase + string.digits, k=5))
+
 
 class User(db.Model, UserMixin):
 	id = db.Column(db.Integer, primary_key=True)
@@ -44,7 +52,7 @@ class Event(db.Model):
 	team_limit = db.Column(db.Integer, nullable=False, default=1)
 	time = db.Column(db.String(15), nullable=True)
 	price = db.Column(db.String(30), nullable=True)
-	detail_txt = db.Column(db.String(60), nullable=True)
+	detail_txt = db.Column(db.Text(60), nullable=True)
 
 	def eventType(self):
 		if self.team_limit == 1:
@@ -68,7 +76,11 @@ class Event(db.Model):
 				team = Team.query.get_or_404(member.team_id)
 				teams.append(team)
 
-			return teams
+			return list(set(teams))
+
+
+	def __repr__(self):
+		return "Event({}, {})".format(self.title, self.eventType())
 
 
 class Participants(db.Model):
@@ -78,11 +90,13 @@ class Participants(db.Model):
 	team_id = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=True)
 
 
+
 class Team(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	name = db.Column(db.String(30), nullable=False)
 	members = db.relationship('Participants', backref='team', lazy=True)
-	team_code = db.Column(db.String(10), nullable=False)
+	event_id = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=False )
+	team_code = db.Column(db.String(10), nullable=False, default=generate_team_code())
 
 	def getMember(self):
 		party = self.members
@@ -92,6 +106,10 @@ class Team(db.Model):
 			members.append(user)
 
 		return members
+
+
+	def __repr__(self):
+		return "Team({}, {})".format(self.name, self.team_code)
 
 
 

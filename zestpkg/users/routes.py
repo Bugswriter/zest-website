@@ -25,11 +25,11 @@ def register():
 def confirmation(token):
 	if current_user.is_authenticated:
 		return redirect(url_for('main.home'))
-	s=Serializer(current_app.config['SECRET_KEY'])
+	s = Serializer(current_app.config['SECRET_KEY'])
 	try:
-		username=s.loads(token)['username']
-		email=s.loads(token)['email']
-		password=hashed_password = bcrypt.generate_password_hash(s.loads(token)['password']).decode('utf-8')
+		username = s.loads(token)['username']
+		email = s.loads(token)['email']
+		password = hashed_password = bcrypt.generate_password_hash(s.loads(token)['password']).decode('utf-8')
 		user = User(username=username, email=email, password=hashed_password, verified=1)
 		db.session.add(user)
 		db.session.commit()

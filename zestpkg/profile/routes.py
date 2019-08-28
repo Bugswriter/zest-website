@@ -3,6 +3,7 @@ from zestpkg.profile.forms import ProfileForm
 from flask_login import current_user, login_required
 from zestpkg import db
 from zestpkg.models import Profile, User
+from zestpkg.profile.utils import save_picture
 
 profile = Blueprint('profile', __name__)
 
@@ -32,11 +33,15 @@ def create_profile(username):
 	if current_user.username != username:
 		abort(403)
 
-	pform = ProfileForm()
-	if pform.validate_on_submit():
-		picture = "default.jpg" #soon will be replaced
-		name = pform.first_name.data + " " + pform.last_name.data
-		profile = Profile(name=name, image=picture, course=pform.course.data, branch=pform.branch.data, roll_number=pform.roll_num.data, phone=pform.phone.data, college=pform.college.data, gender=pform.gender.data,  user_id=current_user.id)
+	form = ProfileForm()
+	if form.validate_on_submit():
+		if form.image.data:
+			picture = save_picture(form.image.data)
+		else:
+			picture = "default.png"
+
+		name = form.first_name.data + " " + form.last_name.data
+		profile = Profile(name=name, image=picture, course=form.course.data, branch=form.branch.data, roll_number=form.roll_num.data, phone=form.phone.data, college=form.college.data, gender=form.gender.data,  user_id=current_user.id)
 		db.session.add(profile)
 		db.session.commit()
 		flash("You created your profile successfully!", 'success')
@@ -44,7 +49,7 @@ def create_profile(username):
 		return redirect(url_for('main.home'))
 
 
-	return render_template('addprofile.html', form=pform, legend='Create profile', title='Create Profile')
+	return render_template('addprofile.html', form=form, legend='Create profile', title='Create Profile')
 
 
 @profile.route('/<string:username>/update', methods=['GET', 'POST'])
@@ -57,8 +62,12 @@ def update_profile(username):
 	form = ProfileForm()
 	if form.validate_on_submit():
 		profile.name = form.first_name.data + ' ' + form.last_name.data
-		picture = "default.jpg" #soon will be change
-		profile.image = picture
+		print(str(form.image.data))
+		if not form.image.data:
+			profile.image = "default.png"	
+		else:
+			profile.image = save_picture(form.image.data)
+
 		profile.course = form.course.data
 		profile.branch = form.branch.data
 		profile.roll_num = form.roll_num.data

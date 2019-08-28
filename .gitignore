@@ -1,7 +1,8 @@
 *.pyc
 <<<<<<< HEAD
 =======
-hungrynigga/site.db
+zestpkg/site.db
 */__pycache__/
-hungrynigga/static/item_pics
+zestpkg/static/profile_pics
+zestpkg/static/event_pics
 >>>>>>> database
