@@ -60,6 +60,11 @@ class Event(db.Model):
 		else:
 			return "Team"
 
+	def getOrganizer(self):
+		user = User.query.get(self.user_id)
+		return user
+		
+
 	def getParticipation(self):
 		if self.team_limit == 1:
 			party = self.participators
@@ -88,6 +93,12 @@ class Participants(db.Model):
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 	event_id = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=False)
 	team_id = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=True)
+
+	def __repr__(self):
+		user = User.query.get(self.user_id)
+		event = Event.query.get(self.event_id)
+
+		return "Participant({}, {})".format(user.username, event.name)
 
 
 

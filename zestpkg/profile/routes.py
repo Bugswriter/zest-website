@@ -18,6 +18,7 @@ def getProfile(uname):
 
 	return profile[0]
 
+
 @profile.route('/<string:username>')
 def show_profile(username):
 	profile = getProfile(username)
@@ -63,10 +64,11 @@ def update_profile(username):
 	if form.validate_on_submit():
 		profile.name = form.first_name.data + ' ' + form.last_name.data
 		print(str(form.image.data))
-		if not form.image.data:
-			profile.image = "default.png"	
-		else:
+		if form.image.data:
 			profile.image = save_picture(form.image.data)
+		else:
+			profile.image = "default.png"
+			
 
 		profile.course = form.course.data
 		profile.branch = form.branch.data
