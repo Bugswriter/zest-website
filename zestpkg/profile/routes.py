@@ -28,11 +28,13 @@ def show_profile(username):
 		abort(404)
 
 
-@profile.route('/<string:username>/create', methods=['GET', 'POST'])
+@profile.route('/create_profile', methods=['GET', 'POST'])
 @login_required
-def create_profile(username):
-	if current_user.username != username:
-		abort(403)
+def create_profile():
+	profile = Profile.query.filter_by(user_id=current_user.id).first()
+	if profile:
+		flash('You already created one profile. You can only update!', 'info')
+		return redirect(url_for('profile.update_profile'))
 
 	form = ProfileForm()
 	if form.validate_on_submit():
@@ -45,7 +47,7 @@ def create_profile(username):
 		profile = Profile(name=name, image=picture, course=form.course.data, branch=form.branch.data, roll_number=form.roll_num.data, phone=form.phone.data, college=form.college.data, gender=form.gender.data,  user_id=current_user.id)
 		db.session.add(profile)
 		db.session.commit()
-		flash("You created your profile successfully!", 'success')
+		flash("You created your profile successfully!", category='success')
 
 		return redirect(url_for('main.home'))
 
@@ -53,13 +55,16 @@ def create_profile(username):
 	return render_template('addprofile.html', form=form, legend='Create profile', title='Create Profile')
 
 
-@profile.route('/<string:username>/update', methods=['GET', 'POST'])
-@login_required
-def update_profile(username):
-	if current_user.username != username:
-		abort(403)
 
-	profile = getProfile(username)
+@profile.route('/update_profile', methods=['GET', 'POST'])
+@login_required
+def update_profile():
+	profile = Profile.query.filter_by(user_id=current_user.id).first()
+	if not profile:
+		flash("You have not created your profile. First create", category='danger')
+		return redirect('profile.create_profile')
+
+	profile = getProfile(current_user.username)
 	form = ProfileForm()
 	if form.validate_on_submit():
 		profile.name = form.first_name.data + ' ' + form.last_name.data
@@ -72,7 +77,7 @@ def update_profile(username):
 
 		profile.course = form.course.data
 		profile.branch = form.branch.data
-		profile.roll_num = form.roll_num.data
+		profile.roll_number = form.roll_num.data
 		profile.phone = form.phone.data
 		profile.college = form.college.data
 		profile.gender = form.gender.data

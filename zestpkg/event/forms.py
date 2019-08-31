@@ -8,8 +8,9 @@ from wtforms.widgets import TextArea
 class EventForm(FlaskForm):
 	title = StringField('Event Title', validators=[DataRequired()])
 	event_type = SelectField('Course', validators=[DataRequired(), Optional()], choices=[('Team','Team Event'), ('Solo', 'Solo Event')])
+	image = FileField('Cover Picture', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
 	num_of_member = IntegerField('Number of member', validators=[DataRequired()])
-	detail = StringField('Event Details', widget=TextArea())
+	about = StringField('Event Details', widget=TextArea())
 	submit = SubmitField('Register Event')	
 
 

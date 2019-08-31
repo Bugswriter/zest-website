@@ -1,37 +1,26 @@
 {% extends 'layout.html' %}
 {% block content %}
-<style type="text/css">
-.table {
-  counter-reset: serial-number;  /* Set the serial number counter to 0 */
-}
-
-.table td:first-child:before {
-  counter-increment: serial-number;  /* Increment the serial number counter */
-  content: counter(serial-number);  /* Display the counter */
-}
-
-</style>
-<div class="col-md-7">
-	<table class="table table-striped text-center">
-	  <thead class="thead-dark">
-	    <tr>
-	      <th scope="col">#</th>
-	      <th scope="col">Name</th>
-	      <th scope="col">Type</th>
-	      <th scope="col">Organizer</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	    {% for event in events %}
-	    <tr>
-	      <td scope="row"></td>
-	      <td>{{ event.title }}</td>
-	      <td>{{ event.eventType() }} ({{ event.team_limit }})</td>
-	      <td><a href="/{{ event.getOrganizer().username }}">{{ event.getOrganizer().username }}</td>
-	    </tr>
-	    {% endfor %}
-	    
-	  </tbody>
-	</table>
+<div class="text-center">
+	<h1>All SRMS Events</h1>
+	<hr>
 </div>
+{% for event in events %}
+	<div class="row p-4">
+		<div class="col">
+			<h3 class=""><b>{{ event.title }}</b></h3>
+			<div class="card bg-dark text-white">
+				<img class="card-img" style="filter: brightness(50%);" src="{{ url_for('static', filename='event_pics/'+ event.image) }}" width="850px" height="315px" alt="Card image">
+				<div class="card-img-overlay">
+					<p class="card-text" style="line-height: 2em; max-width: 600px;">{{ event.detail_txt }}</p>
+			    	<p class="card-text"></p>
+				</div>
+				{% if current_user.is_authenticated %}
+					<div class="card-footer" style="background-color: white;">
+						<button class="btn btn-outline-info float-right">Take Participation</button>	
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% endfor %}
 {% endblock %}

@@ -1,61 +1,100 @@
 <!DOCTYPE html>
 <html>
 <head>
-	{% if title %}
-		<title>Zest2O19 | {{title }}</title>
-	{% else %}
-		<title>{{ title }}</title>
-	{% endif %}
+{% if title %}
+	<title>Zest2O19 | {{title }}</title>
+{% else %}
+	<title>{{ title }}</title>
+{% endif %}
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/animate.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/croppie.css') }}" />
+	<script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='css/croppie.js') }}"></script>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarlinks" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-      		<span class="navbar-toggler-icon"></span>
-    	</button>
-    	<div class="collapse navbar-collapse ml-4" id="navbarlinks">
-    		<a class="navbar-brand mr-auto" href="{{ url_for('main.home') }}">Zest2O19</a>
-    		<ul class="navbar-nav  mt-2 mt-lg-0 mr-4">
-    			<li class="nav-item active">
-    				<a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
-    			</li>
-    			<li class="nav-item">
-    				<a class="nav-link" href="/events">Events</a>
-    			</li>
-    			{% if current_user.is_authenticated %}
-					<li class="nav-item">
-	    				<a class="nav-link" href="{{ url_for('users.logout') }}">Logout</a>
-	    			</li>
-    			{% else %}
-	    			<li class="nav-item">
-						<a class="nav-link" href="{{ url_for('users.login') }}">Login</a>
-	    			</li>
-	    			<li class="nav-item">
-	    				<a class="nav-link" href="{{ url_for('users.register') }}">Register</a>
-	    			</li>
-    			{% endif %}
-    		</ul>
-    	</div>
-	</nav>
-	<div class="container-fluid">
-		<div class="row justify-content-center animated flipInX">
-			{% with messages = get_flashed_messages(with_categories=True) %}
-				{% if messages %}
-					{% for category, message in messages %}
-						<div class="col-md-4 mt-3 text-center alert alert-{{ category }}" role="alert">
-							<span>{{ message }}</span>
-						</div>
-					{% endfor %}
-				{% endif %}
-			{% endwith %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarlinks" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse ml-4" id="navbarlinks">
+		<a class="navbar-brand mr-auto" href="{{ url_for('main.home') }}">Zest2O19</a>
+		<ul class="navbar-nav  mt-2 mt-lg-0 mr-4">
+			<li class="nav-item active">
+				<a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+  			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/events">Events</a>
+			</li>
+			{% if current_user.is_authenticated %}
+				<li class="nav-item">
+		  			<a class="nav-link" href="{{ url_for('users.logout') }}">Logout</a>
+		  		</li>
+  			{% else %}
+		  		<li class="nav-item">
+					<a class="nav-link" href="{{ url_for('users.login') }}">Login</a>
+		  		</li>
+	  		<li class="nav-item">
+	  			<a class="nav-link" href="{{ url_for('users.register') }}">Register</a>
+	  		</li>
+  			{% endif %}
+  		</ul>
+  	</div>
+</nav>
+
+<div class="row justify-content-center animated flipInX">
+{% with messages = get_flashed_messages(with_categories=True) %}
+	{% if messages %}
+		{% for category, message in messages %}
+			<div class="col-md-4 mt-3 text-center alert alert-{{ category }}" role="alert">
+				<span>{{ message }}</span>
+			</div>
+		{% endfor %}
+	{% endif %}
+{% endwith %}
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-3">
+			{% block sidebar %}{% endblock sidebar%}
 		</div>
-		<div class="row justify-content-around p-4">
+		<div class="col-6 p-4">
 			{% block content %}{% endblock content%}
 		</div>
+		<div class="col-3 p-4">
+			<div class="text-center">
+				<h1>Your Profile</h1>
+				<hr>
+			</div>
+			<div class="row justify-content-center">
+				<div class="card text-center mt-4" style="width: 18rem; border: 0px	">
+					<div class="p-2">
+						<img class="rounded-circle" width="180px" height="180px" src="{{ url_for('static', filename='profile_pics/8bf6002ac0349cb3.jpg') }}" alt="Card image cap">
+					</div>
+					<div class="card-body">					
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">
+								<h5 class="card-title">Suraj Kushwah</h5>
+								<h6 class="card-subtitle mb-2 text-muted"><small><a href="">@bugswriter</a></small></h6>
+							</li>
+							<li class="list-group-item">Course: B.Tech (CS)</li>
+							<li class="list-group-item">Contant: +91-7417224655</li>
+							<li class="list-group-item">Roll Number: 1701410104</li>
+							<li class="list-group-item">College: SRMS CET Bareilly</li>
+							<li class="list-group-item"><a href="#" class="btn btn-primary">Update Profile</a></li>
+						</ul>
+						
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</div>
+
 </body>
 </html>

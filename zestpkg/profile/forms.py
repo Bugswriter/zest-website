@@ -14,7 +14,7 @@ class ProfileForm(FlaskForm):
 	phone = StringField('Contact Number', validators=[DataRequired()])
 	college = SelectField('College', validators=[DataRequired(), Optional()], choices=[('SRMS CET Bareilly', 'SRMS CET' ), ('Other', 'Other')])
 	gender = SelectField('Gender', validators=[DataRequired(), Optional()], choices = [('M','Male'),('F','Female')])
-	submit = SubmitField('Submit Profile')
+	submit = SubmitField('Submit')
 
 
 
