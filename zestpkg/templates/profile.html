@@ -1,18 +1,72 @@
 {% extends 'layout.html' %}
 {% block content %}
-<div class="col-md-4">
+<style type="text/css">
+	.profile-body{
+		margin-top: -85px;
+	}
+	.avatar{
+		position: relative;
+		top: -75px;
+		z-index: 1;
+		border: 4px solid #efefef;
+		max-width: 150px;
+		max-height: 150px;
+	}
 
-	<div class="card" style="width: 18rem;">
-	  <img class="card-img-top rounded" src="{{ url_for('static', filename='profile_pics/'+user.image) }}" alt="Card image cap">
-	  <div class="card-body">
-	    <h5 class="card-title">{{ user.name }}</h5>
-	    <h6 class="card-subtitle mb-2 text-muted"><a href="/{{ title }}">@{{ title }}</a></h6>
-	    <span class="float-right">
-	    	{{ user.gender }}
-	    </span>
-	    <p class="card-text">{{ user.course }} ({{ user.branch }})</p>
-	    <p class="card-text">{{ user.college }}</p>
-	  </div>
-	</div>
+</style>
+
+<div class="text-center my-4">
+	{% if current_user.username == user.account.username %}
+		<h1>Your Profile Card</h1>
+	{% else %}
+		<h1>Profile Card</h1>
+	{% endif %}
+	<hr>
 </div>
+	<div class="card mx-auto text-center" style="width: 30rem;">
+		<div class="text-center">
+			<img class="card-img-top" src="https://s3.amazonaws.com/99Covers-Facebook-Covers/watermark/2546.jpg" alt="Card image cap">
+			<img class="rounded-circle avatar" src="{{ url_for('static', filename='profile_pics/'+ user.image) }}" alt="Card image cap">
+		</div>
+		<div class="card-body profile-body">
+			<h3 class="card-title">{{ user.name }}</h3>
+			<h6 class="card-subtitle mb-2 text-muted"><a href="/{user.account.username}">@{{ user.account.username }}</a></h6>
+			<table class="table mt-3 profile-details">
+				<tbody>
+					<tr>
+						<td>Course:</td>
+						<td>{{ user.course }} ({{ user.branch }})</td>
+					</tr>
+					{% if current_user.username == user.account.username %}
+						<tr>
+							<td>Contact:</td>
+							<td>{{ user.phone}}</td>
+						</tr>
+					{% endif %}
+					<tr>
+						<td>Gender:</td>
+						<td>
+							{% if user.gender == 'M' %}
+								Male
+							{% else %}
+								Female
+							{% endif %}
+						</td>
+					</tr>
+					<tr>
+						<td>College:</td>
+						<td>{{ user.college}}</td>
+					</tr>
+					<tr>
+						<td>Roll Number:</td>
+						<td>{{ user.roll_number}}</td>
+					</tr>	
+				</tbody>
+			</table>
+			{% if current_user.username == user.account.username %}
+				<a href="/update_profile" class="btn btn-outline-info">Update Profile</a>
+			{% endif %}
+		</div>
+	</div>
+
 {% endblock %}

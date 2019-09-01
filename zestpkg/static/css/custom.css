@@ -1,6 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
+body {
+  background: url('http://hdblackwallpaper.com/wallpaper/2015/07/amazing-black-and-white-wallpapers-24-desktop-background.jpg') no-repeat center center fixed;
+
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
 
 body{
+	
     font-family: 'Open Sans', sans-serif;
 }

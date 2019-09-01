@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, flash, request
+from flask import Blueprint, render_template, redirect, flash, request, abort
 from flask_login import current_user, login_required
 from zestpkg.event.forms import EventForm
 from zestpkg import db

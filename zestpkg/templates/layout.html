@@ -17,7 +17,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarlinks" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
@@ -26,22 +26,25 @@
 		<ul class="navbar-nav  mt-2 mt-lg-0 mr-4">
 			<li class="nav-item active">
 				<a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
-  			</li>
+			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="/events">Events</a>
 			</li>
 			{% if current_user.is_authenticated %}
 				<li class="nav-item">
-		  			<a class="nav-link" href="{{ url_for('users.logout') }}">Logout</a>
-		  		</li>
-  			{% else %}
-		  		<li class="nav-item">
+					<a class="nav-link" href="/{{current_user.username}}">My Profile</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{{ url_for('users.logout') }}">Logout</a>
+				</li>
+			{% else %}
+				<li class="nav-item">
 					<a class="nav-link" href="{{ url_for('users.login') }}">Login</a>
-		  		</li>
-	  		<li class="nav-item">
-	  			<a class="nav-link" href="{{ url_for('users.register') }}">Register</a>
-	  		</li>
-  			{% endif %}
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{{ url_for('users.register') }}">Register</a>
+				</li>
+			{% endif %}
   		</ul>
   	</div>
 </nav>
@@ -63,38 +66,13 @@
 		<div class="col-3">
 			{% block sidebar %}{% endblock sidebar%}
 		</div>
-		<div class="col-6 p-4">
+		<div class="col-6">
 			{% block content %}{% endblock content%}
 		</div>
 		<div class="col-3 p-4">
-			<div class="text-center">
-				<h1>Your Profile</h1>
-				<hr>
-			</div>
-			<div class="row justify-content-center">
-				<div class="card text-center mt-4" style="width: 18rem; border: 0px	">
-					<div class="p-2">
-						<img class="rounded-circle" width="180px" height="180px" src="{{ url_for('static', filename='profile_pics/8bf6002ac0349cb3.jpg') }}" alt="Card image cap">
-					</div>
-					<div class="card-body">					
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item">
-								<h5 class="card-title">Suraj Kushwah</h5>
-								<h6 class="card-subtitle mb-2 text-muted"><small><a href="">@bugswriter</a></small></h6>
-							</li>
-							<li class="list-group-item">Course: B.Tech (CS)</li>
-							<li class="list-group-item">Contant: +91-7417224655</li>
-							<li class="list-group-item">Roll Number: 1701410104</li>
-							<li class="list-group-item">College: SRMS CET Bareilly</li>
-							<li class="list-group-item"><a href="#" class="btn btn-primary">Update Profile</a></li>
-						</ul>
-						
-					</div>
-				</div>
-			</div>
+			
 		</div>
 	</div>
 </div>
-
 </body>
 </html>

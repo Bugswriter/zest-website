@@ -10,7 +10,8 @@ profile = Blueprint('profile', __name__)
 def getProfile(uname):
 	user = User.query.filter_by(username=uname).first()
 	if user is None:
-		abort(403)
+		flash("There is no user with this username", category='danger')
+		abort(404)
 
 	profile = user.profile
 	if not profile:
@@ -84,7 +85,7 @@ def update_profile():
 
 		db.session.commit()
 		flash('Your Profile is Successfully updated!', 'success')
-		return redirect(f'/{username}')
+		return redirect('/events')
 
 	elif request.method == 'GET':
 		name = profile.name.split()
