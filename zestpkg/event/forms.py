@@ -14,3 +14,6 @@ class EventForm(FlaskForm):
 	submit = SubmitField('Register Event')	
 
 
+
+
+

@@ -3,6 +3,8 @@ import random
 from zestpkg import db
 from flask_login import UserMixin
 from zestpkg import login_manager
+from flask import url_for, current_app, redirect
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
 
 @login_manager.user_loader
@@ -21,6 +23,20 @@ class User(db.Model, UserMixin):
 	password = db.Column(db.String(60), nullable=False)
 	profile = db.relationship('Profile', backref='account', lazy=True)
 	verified = db.Column(db.Boolean, nullable=False, default=False)
+
+	def get_reset_token(self, expires_secs=300):
+		s=Serializer(current_app.config['SECRET_KEY'], expires_secs)
+		return s.dumps({'user_id': self.id}).decode('utf-8')
+
+
+	@staticmethod
+	def verify_reset_token(token):
+		s=Serializer(current_app.config['SECRET_KEY'])
+		try:
+			user_id=s.loads(token)['user_id']
+		except:
+			return None
+		return User.query.get(user_id)	
 
 	def __repr__(self):
 		return "User({}, {})".format(self.username, self.email)
