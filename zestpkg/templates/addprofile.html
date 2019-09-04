@@ -1,5 +1,53 @@
 {% extends 'layout.html' %}
 {% block content %}
+<script type="text/javascript">
+
+$(document).ready(function(){
+	$image_crop = $('#cropper').croppie({
+	    enableExif: true,
+	    viewport: {
+	      width:300,
+	      height:300,
+	      type:'circle' 
+	    },
+	    boundary:{
+	      width:300,
+	      height:300
+	    }
+	});
+
+	$('#uploadimage').on('change', function(){
+		var reader = new FileReader();
+		reader.onload = function (event) {
+		$image_crop.croppie('bind', {
+	    	url: event.target.result
+	    }).then(function(){
+	    	console.log('jQuery bind complete');
+	    });
+	}
+		reader.readAsDataURL(this.files[0]);
+		$('#cropimage').modal('show');
+	});
+
+	$('#uploadbtn').click(function(event){
+		$image_crop.croppie('result', {
+		type: 'canvas',
+		size: 'viewport'
+		}).then(function(response){
+			$('#feedback').html(response);
+			$.ajax({
+				url:"/upload_profile",
+				type: "GET",
+				data:{"image": response},
+				success:function(data){
+					$('#cropimage').modal('hide');
+					$('#feedback').html("Success"); 
+				}
+			});
+		})
+	});
+});  
+</script>
 <div class="text-center mt-4 animated bounceInDown">
 	<h2>{{ title }}</h2>
 	<hr>
@@ -95,7 +143,8 @@
 				<div class="form-row">
 					<div class="col form-group">
 						{{ form.image.label(class='form-control-label') }}
-						{{ form.image(class='form-control-file', id='upload') }}
+						{{ form.image(class='form-control-file', id='uploadimage') }}
+						<span class="text-success" id='feedback'></span>
 						<div class="invalid-feedback d-block">
 						{% if form.image.errors %}
 							{% for error in form.image.errors %}
@@ -121,6 +170,31 @@
 				{{ form.submit(class='btn btn-outline-info crop_image') }}
 			</div>
 		</form>
+	</div>
+</div>
+<div class="modal" id="cropimage" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLongTitle">Crop image</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form action="" method="GET">
+					<div class="row">
+						<div class="col-md-8 text-center">
+							<div id="cropper" style="width:350px; margin-top:30px"></div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+			    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" id="uploadbtn">Upload image</button>
+			</div>
+		</div>
 	</div>
 </div>
 {% endblock %}

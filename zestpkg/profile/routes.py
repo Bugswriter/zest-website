@@ -3,7 +3,7 @@ from zestpkg.profile.forms import ProfileForm
 from flask_login import current_user, login_required
 from zestpkg import db
 from zestpkg.models import Profile, User
-from zestpkg.profile.utils import save_picture
+from zestpkg.profile.utils import save_picture, create_image
 
 profile = Blueprint('profile', __name__)
 
@@ -52,9 +52,18 @@ def create_profile():
 
 		return redirect(url_for('main.home'))
 
-
 	return render_template('addprofile.html', form=form, legend='Create profile', title='Create Profile')
 
+
+@profile.route('/upload_profile', methods=['GET', 'POST'])
+def upload_profile_pic():
+	image = request.args.get('image')
+	profile = getProfile(current_user.username)
+	if profile:
+		profile.image = create_image(image)
+		db.session.commit()
+
+	return ""
 
 
 @profile.route('/update_profile', methods=['GET', 'POST'])
