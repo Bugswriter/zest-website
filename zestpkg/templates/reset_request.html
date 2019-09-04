@@ -1,18 +1,25 @@
 {% extends 'layout.html' %}
 {% block content %}
-<h1>Reset Form</h1>
+<div class="text-center mt-4">
+	<h2>Reset password</h2>
+	<hr>
+</div>
 <form method="POST" action="">
 	{{ form.hidden_tag() }}
-	{{ form.email.label }}
-	{{ form.email }}
+	<div class="form-group">
+		{{ form.email.label(class='form-control-label') }}
+		{{ form.email(class='form-control') }}
+	</div>
 	{% if form.email.errors %}
-		{% for error in form.email.errors %}
-			<span>{{ error }}</span>
-		{% endfor %}
+		<div class="invalid-feedback d-block">
+			{% for error in form.email.errors %}
+				<span>{{ error }}</span>
+			{% endfor %}
+		</div>
 	{% endif %}
-	
-	<br>
-	{{ form.submit }}
+	<div class="form-group">
+		{{ form.submit(class='btn btn-success') }}
+	</div>
 </form>
 
 {% endblock %}

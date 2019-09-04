@@ -8,6 +8,7 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
 users = Blueprint('users', __name__)
 
+
 @users.route('/register', methods=['GET', 'POST'])
 def register():
 	if current_user.is_authenticated:
@@ -16,8 +17,8 @@ def register():
 	registerform = RegisterForm()
 	if registerform.validate_on_submit():
 		send_confirmation_link( registerform.username.data, registerform.email.data, registerform.password.data)
-		flash(f"Conformation link is on your email", 'success')
-		return redirect(url_for('users.login'))
+		success = {'title': 'Confirmation link sended', 'heading': 'Confirmation Link sended', 'message': 'A email confirmation link has been sended to email address you used at the time of creating account'}
+		return render_template('success.html', **success)
 	return render_template('register.html', title='Register', form=registerform)
 
 
@@ -44,7 +45,7 @@ def login():
 		return redirect(url_for('main.home'))
 
 	loginform = LoginForm()
-
+	request_form = RequestResetForm()
 	if loginform.validate_on_submit():
 		user = User.query.filter_by(email=loginform.email.data).first()
 		if user and bcrypt.check_password_hash(user.password, loginform.password.data):
@@ -58,7 +59,16 @@ def login():
 		else:
 			flash(f'Login Unsuccessful. Please check email or password', 'danger')
 
-	return render_template('login.html', title='Login', form=loginform)
+
+	if request_form.validate_on_submit():
+		user=User.query.filter_by(email=request_form.email.data).first()
+		send_reset_email(user)
+		success = {}
+		success['heading'] = "Email has been sended"
+		success['message'] = "Check your email, there will be further instruction for reseting your password. Be quick link will expires in 10 min"
+		return render_template('success.html', **success)
+
+	return render_template('login.html', title='Login', form=loginform, request_form=request_form)
 
 
 @users.route('/logout')
@@ -72,11 +82,7 @@ def reset_request():
 	if current_user.is_authenticated:
 		return redirect(url_for('main.home'))
 	form=RequestResetForm()
-	if form.validate_on_submit():
-		user=User.query.filter_by(email=form.email.data).first()
-		send_reset_email(user)
-		flash('An email has been sent with  instructions to reset your password.', 'info')
-		return redirect(url_for('users.login'))
+	
 	return render_template('reset_request.html', title='Reset password', form=form)
 
 @users.route('/reset_password/<token>', methods=['GET', 'POST'])

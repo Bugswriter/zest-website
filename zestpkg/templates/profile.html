@@ -15,17 +15,17 @@
 
 </style>
 
-<div class="text-center my-4">
+<div class="text-center my-4 animated bounceInDown">
 	{% if current_user.username == user.account.username %}
-		<h1>Your Profile Card</h1>
+		<h2>Your Profile Card</h2>
 	{% else %}
-		<h1>Profile Card</h1>
+		<h2>Profile Card</h2>
 	{% endif %}
 	<hr>
 </div>
-	<div class="card mx-auto text-center" style="width: 30rem;">
+	<div class="card mx-auto text-center animated flipInY" style="width: 30rem;">
 		<div class="text-center">
-			<img class="card-img-top" src="https://s3.amazonaws.com/99Covers-Facebook-Covers/watermark/2546.jpg" alt="Card image cap">
+			<img class="card-img-top" src="{{ url_for('static', filename='images/profile_cover.jpg') }}" alt="Card image cap">
 			<img class="rounded-circle avatar" src="{{ url_for('static', filename='profile_pics/'+ user.image) }}" alt="Card image cap">
 		</div>
 		<div class="card-body profile-body">

@@ -1,14 +1,17 @@
 {% extends 'layout.html' %}
 {% block content %}
+<div class="text-center mt-4 animated bounceInDown">
+	<h2>Login</h2>
+	<hr>
+</div>
 <div class="row justify-content-around">
 	<div class="col-8 p-4">
 		<form method="POST" action="">
 			{{ form.hidden_tag() }}
 			<fieldset class="form-group">
-				<legend class="the-legend border-bottom mb-4">Login</legend>
 				<div class="form-group">
-				{{ form.email.label(class="form-control-label") }}
-				{{ form.email(class="form-control form-control-lg") }}
+				{{ form.email.label(class="form-control-label animated bounceInRight") }}
+				{{ form.email(class="form-control form-control-lg animated bounceInRight") }}
 					<div class="invalid-feedback d-block">
 					{% if form.email.errors %}
 						{% for error in form.email.errors %}
@@ -18,8 +21,8 @@
 					</div>
 				</div>
 				<div class="form-group">
-					{{ form.password.label(class="form-control-label") }}
-					{{ form.password(class="form-control form-control-lg") }}
+					{{ form.password.label(class="form-control-label animated bounceInLeft") }}
+					{{ form.password(class="form-control form-control-lg animated bounceInLeft") }}
 				
 				{% if form.password.errors %}
 					<div class="invalid-feedback d-block">
@@ -29,19 +32,55 @@
 					</div>
 				{% endif %}
 				<small class="text-muted">
-					<a href="{{url_for('users.reset_request')}}">Forget password?</a>
+					<a href="#" class="" data-toggle="modal" data-target="#forgetpassword">Forget password?</a>
 				</small>
 				</div>
 				<div class="from-group form-check">
-					{{ form.remember(class="form-check-input") }}
-					{{ form.remember.label(class="form-check-label") }}
+					{{ form.remember(class="form-check-input animated bounceInRight") }}
+					{{ form.remember.label(class="form-check-label animated bounceInRight") }}
 				</div>
 				
 			</fieldset>
 			<div class="form-group">
-				{{ form.submit(class="btn btn-outline-info") }}
+				{{ form.submit(class="btn btn-outline-info animated bounceInLeft") }}
 			</div>
 		</form>
 	</div>
 </div>
+<div class="modal fade" id="forgetpassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLongTitle">Enter email</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form method="POST" action="">
+				<div class="modal-body">
+					<div class="form-group p-3">
+						
+						{{ form.hidden_tag() }}
+						<div class="form-group">
+							{{ request_form.email(class='form-control', placeholder='Enter email address') }}
+						</div>
+						{% if request_form.email.errors %}
+						<div class="invalid-feedback d-block">
+							{% for error in request_form.email.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+						{% endif %}
+						<small>This will send you a request reset password link on your email.</small>
+					</div>
+				</div>
+				<div class="modal-footer">
+				    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					{{ request_form.submit(class='btn btn-primary') }}
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
 {% endblock %}

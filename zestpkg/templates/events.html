@@ -18,19 +18,19 @@
 
 	}
 </style>
-<div class="text-center mt-4">
-	<h1>All SRMS Events</h1>
+<div class="text-center mt-4 animated bounceInDown">
+	<h2>All SRMS Events</h2>
 	<hr>
 </div>
 {% for event in events %}
-	<div class="row p-4">
+	<div class="row p-4 animated zoomIn">
 		<div class="col">
-			<h3 class=""><b>{{ event.title }}</b></h3>
+			<h3 class=""><a href='events/{{ event.id }}' style="color: black;">{{ event.title }}</a></h3>
 			<div class="card bg-dark text-white">
-				<img class="card-img" style="filter: brightness(50%);" src="{{ url_for('static', filename='event_pics/'+ event.image) }}" width="850px" height="315px" alt="Card image">
+				<img class="card-img" style="filter: brightness(80%);" src="{{ url_for('static', filename='event_pics/'+ event.image) }}" width="850px" height="315px" alt="Card image">
 				<div class="card-img-overlay">
 					<p class="card-text float-left" style="line-height: 2em; max-width: 600px;">{{ event.detail_txt }}</p>
-					<span class="float-right border border-info bg-dark mx-4 p-1"> {{ event.getParticipation()|length }} Peoples/Teams</span>
+					
 					<p class="card-footer float-left event-info">
 						{{ event.eventType() }} Event <br>
 						{% if event.eventType() == 'Team' %}
@@ -38,7 +38,8 @@
 						{% else %}
 							<small class="text-success">You don't need a team.</small><br>
 						{% endif %}
-						Day 1 | Time: 3:40pm to 4:30pm
+						<span>Day 1 | Time: 3:40pm to 4:30pm</span><br>
+						<small>{{ event.getParticipation()|length }} participations</small>
 					</p>
 				</div>
 			</div>

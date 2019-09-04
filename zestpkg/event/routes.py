@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, flash, request, abort
 from flask_login import current_user, login_required
 from zestpkg.event.forms import EventForm
 from zestpkg import db
-from zestpkg.models import Event
+from zestpkg.models import Event, Profile
 from zestpkg.event.utils import save_picture, getProfile
 
 event = Blueprint('event', __name__)
@@ -11,6 +11,13 @@ event = Blueprint('event', __name__)
 def show_event():
 	events = Event.query.all()
 	return render_template('events.html', events=events)
+
+
+@event.route('/events/<int:eid>')
+def eventpage(eid):
+	event = Event.query.get_or_404(eid)
+	profile = Profile.query.filter_by(user_id=event.getOrganizer().id).first()
+	return render_template('eventpage.html', event=event, user=profile)
 
 
 @event.route('/addevent', methods=['GET', 'POST'])
@@ -33,7 +40,7 @@ def add_event():
 	return render_template('addevent.html', form=form, title='Register Event')
 
 
-@event.route('/<int:eid>/update', methods=['GET', 'POST'])
+@event.route('/events/<int:eid>/update', methods=['GET', 'POST'])
 @login_required
 def update_event(eid):
 	event = Event.query.get_or_404(eid)
