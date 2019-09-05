@@ -58,6 +58,7 @@ def login():
 
 		else:
 			flash(f'Login Unsuccessful. Please check email or password', 'danger')
+			return render_template('login.html', title='Login', form=loginform, request_form=request_form)
 
 
 	if request_form.validate_on_submit():

@@ -55,7 +55,7 @@
 	</div>	
 </div>
 
-<div class="modal fade" id="createteam" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal" id="createteam" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -64,43 +64,44 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<div class="modal-body">
-				<form action="" method="GET">
+			<form action="/events/{{ event.id }}/create_team" method="GET">
+				<div class="modal-body">
 					<div class="form-group p-3">
-						<input class="form-control" type="text" placeholder="Enter team name" name="">
+						<input class="form-control" type="text" placeholder="Enter team name" name="team_name">
 						<small class="mt-4">This name should be unique and you are allowed to only add {{ event.team_limit }} members in team.</small>
 					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-			    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Create</button>
-			</div>
+					
+				</div>
+				<div class="modal-footer">
+				    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<input type="submit" class="btn btn-primary" value="Create team">
+				</div>
+			</form>
 		</div>
 	</div>
 </div>
 
-<div class="modal fade" id="jointeam" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal" id="jointeam" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLongTitle">Create Team</h5>
+				<h5 class="modal-title" id="exampleModalLongTitle">Join team</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<div class="modal-body">
-				<form action="" method="GET">
+			<form action="/events/{{ event.id }}/join_team" method="GET">
+				<div class="modal-body">
 					<div class="form-group p-3">
-						<input class="m-auto form-control" type="text" placeholder="Enter secret code" name="">
-						<small class="mt-4">If you don't know what secret code is, it is unique alphanumeric secret key which allow anyone to join the party. If you want to join your friends team. You have to ask them for 5 digit secret code or ask him/her to invite you.</small>
+						<input class="m-auto form-control" type="text" placeholder="Enter secret code" name="team_code">
+						<small class="mt-4">If you don't know what secret code is, it is unique alphanumeric secret key which allow anyone to join the party. If you want to join your friends team. </small>
 					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-			    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Create</button>
-			</div>
+				</div>
+				<div class="modal-footer">
+				    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<input type="submit" class="btn btn-primary" value="Join team">
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

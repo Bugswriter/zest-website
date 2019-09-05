@@ -24,6 +24,9 @@ class User(db.Model, UserMixin):
 	profile = db.relationship('Profile', backref='account', lazy=True)
 	verified = db.Column(db.Boolean, nullable=False, default=False)
 
+	def getTeam(self):
+		return Team.query.filter_by(user_id=self.id)
+
 	def get_reset_token(self, expires_secs=300):
 		s=Serializer(current_app.config['SECRET_KEY'], expires_secs)
 		return s.dumps({'user_id': self.id}).decode('utf-8')
@@ -114,7 +117,7 @@ class Participants(db.Model):
 		user = User.query.get(self.user_id)
 		event = Event.query.get(self.event_id)
 
-		return "Participant({}, {})".format(user.username, event.name)
+		return "Participant({}, {})".format(user.username, event.title)
 
 
 
