@@ -67,3 +67,11 @@ def update_event(eid):
 
 		return render_template('addevent.html', form=form, title='Update Event')
 
+
+
+@event.route('/events/<int:eid>/participants')
+def participations(eid):
+	event = Event.query.get_or_404(eid)
+	contestants = event.getParticipants()
+
+	return render_template('participants.html', contestants=contestants)

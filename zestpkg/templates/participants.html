@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="text-center mt-4 animated bounceInDown">
+	<h1>Participants</h1>
+	<hr>
+</div>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Username</th>
+      <th scope="col">Name</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{% for contestant in contestants%}
+    <tr>
+      <th scope="row">1</th>
+      <td><a href="/{{contestant.username}}">{{ contestant.username }}</a></td>
+      <td>{{ contestant.getProfile().name }}</td>
+      <td>{{ contestant.getProfile().college }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock%}
