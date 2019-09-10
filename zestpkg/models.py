@@ -27,6 +27,23 @@ class User(db.Model, UserMixin):
 	def getTeam(self):
 		return Team.query.filter_by(user_id=self.id)
 
+	def getProfile(self):
+		try:
+			return self.profile[0]
+		except:
+			return None
+
+	def getEvents(self):
+		party = Contestant.query.filter_by(user_id=self.id)
+		events = []
+		for i in party:
+			event = Event.query.get_or_404(i.event_id)
+			events.append(event)
+
+		return list(set(events))
+
+
+
 	def get_reset_token(self, expires_secs=300):
 		s=Serializer(current_app.config['SECRET_KEY'], expires_secs)
 		return s.dumps({'user_id': self.id}).decode('utf-8')
@@ -67,7 +84,7 @@ class Event(db.Model):
 	title = db.Column(db.String(50), nullable=False)
 	image = db.Column(db.String(60), nullable=False, default='default.jpg')
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-	participators = db.relationship('Participants', backref='event', lazy=True)
+	participants = db.relationship('Contestant', backref='event', lazy=True)
 	team_limit = db.Column(db.Integer, nullable=False, default=1)
 	time = db.Column(db.String(15), nullable=True)
 	price = db.Column(db.String(30), nullable=True)
@@ -83,18 +100,17 @@ class Event(db.Model):
 		user = User.query.get(self.user_id)
 		return user
 		
-
-	def getParticipation(self):
+	def getParticipants(self):
 		if self.team_limit == 1:
-			party = self.participators
-			participators = []
+			party = self.participants
+			participants = []
 			for member in party: 
 				user = User.query.get_or_404(member.user_id)
-				participators.append(user)
+				participants.append(user)
 
-			return participators
+			return participants
 		else:
-			party = self.participators
+			party = self.participants
 			teams = []
 			for member in party:
 				team = Team.query.get_or_404(member.team_id)
@@ -102,12 +118,11 @@ class Event(db.Model):
 
 			return list(set(teams))
 
-
 	def __repr__(self):
 		return "Event({}, {})".format(self.title, self.eventType())
 
 
-class Participants(db.Model):
+class Contestant(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 	event_id = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=False)
@@ -117,14 +132,14 @@ class Participants(db.Model):
 		user = User.query.get(self.user_id)
 		event = Event.query.get(self.event_id)
 
-		return "Participant({}, {})".format(user.username, event.title)
+		return "Contestant({}, {})".format(user.username, event.title)
 
 
 
 class Team(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	name = db.Column(db.String(30), nullable=False)
-	members = db.relationship('Participants', backref='team', lazy=True)
+	members = db.relationship('Contestant', backref='team', lazy=True)
 	event_id = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=False )
 	team_code = db.Column(db.String(10), nullable=False, default=generate_team_code())
 

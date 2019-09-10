@@ -7,26 +7,24 @@ from zestpkg.profile.utils import save_picture, create_image
 
 profile = Blueprint('profile', __name__)
 
-def getProfile(uname):
-	user = User.query.filter_by(username=uname).first()
-	if user is None:
-		flash("There is no user with this username", category='danger')
-		abort(404)
 
-	profile = user.profile
-	if not profile:
-		return redirect(url_for('main.home'))
-
-	return profile[0]
 
 
 @profile.route('/<string:username>')
 def show_profile(username):
-	profile = getProfile(username)
-	if profile:
-		return render_template('profile.html', user=profile ,title=username)
-	else:
+	user = User.query.filter_by(username=username).first()
+	if user == None:
+		flash('There is no account with this username', category='danger')
 		abort(404)
+
+	profile = user.getProfile()
+	if profile == None and user.id != current_user.id:
+		flash('User does not created any profile yet!', category='info')
+		abort(404)
+
+	return render_template('profile.html', profile=profile ,title=username)
+	
+
 
 
 @profile.route('/create_profile', methods=['GET', 'POST'])
@@ -34,7 +32,7 @@ def show_profile(username):
 def create_profile():
 	profile = Profile.query.filter_by(user_id=current_user.id).first()
 	if profile:
-		flash('You already created one profile. You can only update!', 'info')
+		flash('You already created one profile. You can only update!', category='info')
 		return redirect(url_for('profile.update_profile'))
 
 	form = ProfileForm()
@@ -58,7 +56,7 @@ def create_profile():
 @profile.route('/upload_profile', methods=['GET', 'POST'])
 def upload_profile_pic():
 	image = request.args.get('image')
-	profile = getProfile(current_user.username)
+	profile = current_user.getProfile()
 	if profile:
 		profile.image = create_image(image)
 		db.session.commit()
@@ -74,15 +72,13 @@ def update_profile():
 		flash("You have not created your profile. First create", category='danger')
 		return redirect('profile.create_profile')
 
-	profile = getProfile(current_user.username)
+	profile = current_user.getProfile()
 	form = ProfileForm()
 	if form.validate_on_submit():
 		profile.name = form.first_name.data + ' ' + form.last_name.data
 		print(str(form.image.data))
 		if form.image.data:
 			profile.image = save_picture(form.image.data)
-		else:
-			profile.image = "default.png"
 			
 
 		profile.course = form.course.data

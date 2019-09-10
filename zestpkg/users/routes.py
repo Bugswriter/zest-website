@@ -8,7 +8,6 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
 users = Blueprint('users', __name__)
 
-
 @users.route('/register', methods=['GET', 'POST'])
 def register():
 	if current_user.is_authenticated:
@@ -31,7 +30,7 @@ def confirmation(token):
 		username = s.loads(token)['username']
 		email = s.loads(token)['email']
 		password = hashed_password = bcrypt.generate_password_hash(s.loads(token)['password']).decode('utf-8')
-		user = User(username=username, email=email, password=hashed_password, verified=True)
+		user = User(username=username, email=email, password=hashed_password)
 		db.session.add(user)
 		db.session.commit()
 	except Exception as e:

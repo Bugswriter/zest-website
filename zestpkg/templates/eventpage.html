@@ -6,18 +6,18 @@
 	}
 </style>
 
-<div class="card mt-5">
+<div class="card mt-5 animated fadeIn">
 	<img class="card-img-top" src="{{ url_for('static', filename='event_pics/'+event.image) }}" alt="Card image cap">
 	<div class="card-body">
   		<div class="ml-3">
-    		<h2 class="card-title animated fadeInRight">{{ event.title }}</h2>
-    		<h6 class="card-subtitle mb-2 animated fadeInRight"><a href="/events/{{event.id}}/update" class="text-muted">update event info</a></h6>
-    		<p class="card-text animated fadeInRight" style="line-height: 2em; max-width: 70%;">{{ event.detail_txt }}</p>
+    		<h2 class="card-title ">{{ event.title }}</h2>
+    		<h6 class="card-subtitle mb-2 "><a href="/events/{{event.id}}/update" class="text-muted">update event info</a></h6>
+    		<p class="card-text " style="line-height: 2em; max-width: 70%;">{{ event.detail_txt }}</p>
 		</div>
     	<hr>
     	<div class="row">
 	    	<div class="col ml-3">
-				<h5 class="animated fadeInRight">{{ event.eventType() }} Event</h5>
+				<h5 class="">{{ event.eventType() }} Event</h5>
 				{% if event.eventType() == 'Team' %}
 					<small class="text-info">{{ event.team_limit }} member team is required.</small><br>
 				{% else %}
@@ -25,9 +25,9 @@
 				{% endif %}	
 				<span>Day 1 | Time: 3:40pm to 4:30pm</span>
 			</div>
-			<div class="col-3 mr-5 animat">
+			<div class="col-3 mr-5 row float-right">
 				<img class="rounded-circle" width="75px" height="75px" src="{{ url_for('static', filename='profile_pics/'+user.image) }}">
-				<div class="float-right">
+				<div class="ml-2">
 					<span><a href="#">{{ user.name }}</a></span><br>
 					<small>{{ user.phone }}</small><br>
 					<small class="text-muted">Organizer</small>
@@ -40,12 +40,12 @@
 			<div class="row justify-content-center">
 				<div class="col ml-3 p-3">
 					{% if event.eventType() == 'Solo' %}
-						<button class="btn btn-success animated flash">Take Participation</button>
+						<a href="/events/{{ event.id }}/participate" class="btn btn-success">Take Participation</a>
 					{% else %}
-						<button type="button" class="btn btn-primary animated flash" data-toggle="modal" data-target="#createteam">
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createteam">
 						  Create a new team
 						</button>
-						<button type="button" class="btn btn-outline-info animated flash" data-toggle="modal" data-target="#jointeam">
+						<button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#jointeam">
 							Join team
 						</button>
 					{% endif %}
@@ -70,7 +70,6 @@
 						<input class="form-control" type="text" placeholder="Enter team name" name="team_name">
 						<small class="mt-4">This name should be unique and you are allowed to only add {{ event.team_limit }} members in team.</small>
 					</div>
-					
 				</div>
 				<div class="modal-footer">
 				    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

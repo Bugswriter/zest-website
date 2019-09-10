@@ -34,14 +34,13 @@ $(document).ready(function(){
 		type: 'canvas',
 		size: 'viewport'
 		}).then(function(response){
-			$('#feedback').html(response);
 			$.ajax({
 				url:"/upload_profile",
 				type: "GET",
 				data:{"image": response},
 				success:function(data){
 					$('#cropimage').modal('hide');
-					$('#feedback').html("Success"); 
+					$('#feedback').html("Profile picture updated"); 
 				}
 			});
 		})
