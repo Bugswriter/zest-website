@@ -11,6 +11,7 @@ profile = Blueprint('profile', __name__)
 
 
 @profile.route('/<string:username>')
+@profile.route('/<string:username>/')
 def show_profile(username):
 	user = User.query.filter_by(username=username).first()
 	if user == None:

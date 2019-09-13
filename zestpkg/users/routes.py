@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, flash, request, redirect, url_for, current_app
 from zestpkg.users.forms import RegisterForm, LoginForm, RequestResetForm, ResetPasswordForm
-from flask_login import current_user, login_user, logout_user
+from flask_login import current_user, login_user, logout_user, login_required
 from zestpkg import bcrypt, db
 from zestpkg.models import User
 from zestpkg.users.utils import send_confirmation_link, send_reset_email
@@ -101,3 +101,10 @@ def reset_token(token):
 		flash("your account has been Updated! you are now able to log in", 'success')
 		return redirect(url_for('users.login'))
 	return render_template('reset_token.html', title='Reset Password', form=form)
+
+
+@users.route('/account')
+@login_required
+def account():
+	user = User.query.get_or_404(current_user.id)
+	render_template('account.html', user=user)

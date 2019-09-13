@@ -72,6 +72,9 @@ def update_event(eid):
 @event.route('/events/<int:eid>/participants')
 def participations(eid):
 	event = Event.query.get_or_404(eid)
-	contestants = event.getParticipants()
-
-	return render_template('participants.html', contestants=contestants)
+	if event.eventType() == 'Solo':
+		contestants = event.getParticipants()
+		return render_template('solo_participants.html', contestants=contestants)
+	else:
+		teams = event.getParticipants()
+		return render_template('team_participants.html', teams=teams)

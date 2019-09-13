@@ -20,6 +20,18 @@ def participate(eid):
 	return redirect('/events')
 
 
+@contestant.route('/events/<int:eid>/create_team', methods=['GET'])
+@login_required
+def createTeam(eid):
+	event = Event.query.get_or_404(eid)
+	if request.args.get('team_name'):
+		team_name = request.args.get('team_name')
+		code = create_team(team_name, eid)
+	else:
+		abort(500)
+
+
+
 @contestant.route('/events/<int:eid>/withdraw')
 @login_required
 def withdraw(eid):

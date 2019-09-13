@@ -58,9 +58,7 @@ def createTeam(team_name, eid):
 		participate(eid, team.id)
 		#team creator Joining team
 		participate(eid, team.team_code)
-
 		return team.team_code
-
 	else:
 		flash('Team already exist with this name!')
 		abort(403)
