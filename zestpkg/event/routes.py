@@ -23,7 +23,13 @@ def eventpage(eid):
 @event.route('/addevent', methods=['GET', 'POST'])
 @login_required
 def add_event():
-	#if current_user.verified:
+	if not current_user.verified:
+		abort(500)
+
+	if current_user.getProfile() == None:
+		flash('Create your profile first', category='info')
+		return redirect('/create_profile')
+
 	form = EventForm()
 	if form.validate_on_submit():
 		if form.image.data:
@@ -43,9 +49,13 @@ def add_event():
 @event.route('/events/<int:eid>/update', methods=['GET', 'POST'])
 @login_required
 def update_event(eid):
+	if current_user.getProfile() == None:
+		flash('Create your profile first', category='info')
+		return redirect('/create_profile')
+
 	event = Event.query.get_or_404(eid)
 	if current_user.id != event.user_id:
-		abort(403)
+		abort(500)
 
 	form = EventForm()
 	if form.validate_on_submit():
@@ -74,7 +84,7 @@ def participations(eid):
 	event = Event.query.get_or_404(eid)
 	if event.eventType() == 'Solo':
 		contestants = event.getParticipants()
-		return render_template('solo_participants.html', contestants=contestants)
+		return render_template('participants.html', contestants=contestants)
 	else:
 		teams = event.getParticipants()
 		return render_template('team_participants.html', teams=teams)

@@ -2,17 +2,11 @@
 {% block content %}
 <style type="text/css">
 	.event-info{
-		font-weight: bold;
-		font-size: 1.1em;
+		
 	}
-	.event-info:hover{
-		font-weight: bold;
-		text-decoration: underline;
-		font-size: 1.1em;
-	}
+
 	.card-footer{
-		position:absolute;
-		bottom:0;
+		
 	}
 	.card:hover{
 
@@ -27,11 +21,11 @@
 		<div class="col">
 			<h3 class=""><a href='events/{{ event.id }}' style="color: black;">{{ event.title }}</a></h3>
 			<div class="card bg-dark text-white">
-				<img class="card-img" style="filter: brightness(70%);" src="{{ url_for('static', filename='event_pics/'+ event.image) }}" width="850px" height="315px" alt="Card image">
+				<img class="card-img" style="filter: brightness(70%);" src="{{ url_for('static', filename='event_pics/'+ event.image) }}" width="850px"	 alt="Card image">
 				<div class="card-img-overlay">
-					<p class="card-text float-left" style="line-height: 2em; max-width: 600px;">{{ event.detail_txt }}</p>
+					<p class="card-text float-left event-detail" style="line-height: 2em; max-width: 600px;">{{ event.detail_txt }}</p>
 					
-					<p class="card-footer float-left event-info">
+					<p class="ml-4 float-left event-info">
 						{{ event.eventType() }} Event <br>
 						{% if event.eventType() == 'Team' %}
 							<small class="text-info">{{ event.team_limit }} member team is required.</small><br>

@@ -68,10 +68,10 @@
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-3">
+		<div class="col-lg-3">
 			{% block sidebar %}{% endblock sidebar %}
 		</div>
-		<div class="col-6">
+		<div class="col-lg-6">
 			{% block content %}{% endblock content%}
 			<footer class="my-5 text-center animated bounceInUp">
 				<div class="container">
@@ -79,7 +79,7 @@
 				</div>
 			</footer>
 		</div>
-		<div class="col-3 p-4">
+		<div class="col-lg-3 col-md-12 p-4">
 			{% if current_user.is_authenticated %}
 			{% set events = current_user.getEvents() %}
 			{% if events %}

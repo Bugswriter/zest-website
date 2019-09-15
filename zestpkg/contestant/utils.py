@@ -3,6 +3,12 @@ from zestpkg import db
 from zestpkg.models import Team, Contestant
 
 
+def checkProfile():
+	if not current_user.getProfile():
+		flash("You have to create you profile first!", category='info')
+		return redirect('/create_profile')
+
+
 def verify_team_code(code):
 	team =	Team.query.filter_by(team_code=code).first()
 	if team == None:

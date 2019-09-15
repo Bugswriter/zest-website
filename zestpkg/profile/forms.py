@@ -10,11 +10,16 @@ class ProfileForm(FlaskForm):
 	image = FileField('Profile Picture', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
 	course = SelectField('Course', validators=[DataRequired(), Optional()], choices=[('B.Tech','B.Tech'), ('B.Pharm', 'B.Pharm'), ('MBA', 'MBA')])
 	branch = SelectField('Branch', validators=[Optional()], choices=[('CS', 'Computer Science'), ('ME', 'Mechanical Eng.'), ('EC', 'Electronics'), ('IT', 'Information Technology')])
-	roll_num = IntegerField('Roll Number', validators=[DataRequired()])
+	roll_num = StringField('Registeration Number', validators=[DataRequired()])
 	phone = StringField('Contact Number', validators=[DataRequired()])
 	college = SelectField('College', validators=[DataRequired(), Optional()], choices=[('SRMS CET Bareilly', 'SRMS CET' ), ('Other', 'Other')])
 	gender = SelectField('Gender', validators=[DataRequired(), Optional()], choices = [('M','Male'),('F','Female')])
 	submit = SubmitField('Submit')
+
+	def validate_roll_num(self, roll_num):
+		profile = Profile.query.filter_by(roll_number=roll_num.data).first()
+		if profile:
+			raise ValidationError("That roll number already exist")
 
 
 

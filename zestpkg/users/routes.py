@@ -35,7 +35,7 @@ def confirmation(token):
 		db.session.commit()
 		flash("You account has been created!", category='success')
 	except Exception as e:
-		flash("Sorry you link is expired, try again", category='danger')
+		flash("Sorry your link is expired, try again", category='danger')
 
 	return redirect(url_for('users.login'))
 
@@ -55,6 +55,10 @@ def login():
 			if next_page:
 				return redirect(next_page)
 			else:
+				if current_user.getProfile() == None:
+					flash("Please create your profile card", category='info')
+					return redirect('/create_profile')
+					
 				return redirect(url_for('main.home'))
 
 		else:
