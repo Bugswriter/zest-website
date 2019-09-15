@@ -6,7 +6,7 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 def send_confirmation_link(username, email, password):
 	s=Serializer(current_app.config['SECRET_KEY'], 1800)
 	token= s.dumps({'username': username,'email': email, 'password':password}).decode('utf-8')
-	msg=Message('Verify your Account of HungryNigga',
+	msg=Message('Verify your Account for Comptech register account',
 				sender='akashraj5399@gmail.com',
 				recipients=[email])
 	msg.body='''To Confirm your Account, visit following link:
