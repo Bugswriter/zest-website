@@ -17,13 +17,18 @@ body{
 
 
 
-@media (max-width: 1000px) {
+@media (max-width: 700px) {
     body{
-    	font-size: 3vw;
+    	font-size: 13px;
     }
-    h1,h2,h3,h4,h5,h6{
-    	font-size: 4vw;
+
+    h2{
+    	font-size: 20px;
     }
+    h3{
+    	font-size: 15px;
+    }
+    
     .event-detail{
     	display: none;
     }
