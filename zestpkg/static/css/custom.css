@@ -1,35 +1,91 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
-body {
-  background: url('') no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
-}
 
-
-body{
-	
+body{	
     font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
 }
 
 
-
-
-@media (max-width: 700px) {
-    body{
-    	font-size: 13px;
-    }
-
-    h2{
-    	font-size: 20px;
-    }
-    h3{
-    	font-size: 15px;
-    }
-    
-    .event-detail{
-    	display: none;
-    }
+#profile{
+	width: 30rem;
 }
+
+#profile .profile-body{
+	margin-top: -85px;
+}
+
+#profile .avatar{
+	position: relative;
+	top: -75px;
+	z-index: 1;
+	border: 4px solid #efefef;
+	max-width: 150px;
+	max-height: 150px;	
+}
+
+#events .event-detail{
+	max-width: 70%;
+}
+
+#events .event-info{
+	margin-left: 1%;
+	position: absolute;
+	bottom: 0;
+}
+
+#eventpage{
+
+}
+
+@media (max-width: 720px){
+	body{
+		font-size: 0.9em;
+	}
+	h2{
+		font-size: 1.6em;
+	}
+	h3{
+		font-size: 1.4em;
+	}
+	.btn{
+	}
+	#profile .avatar{
+		max-width: 100px;
+		max-height: 100px;
+		top: -50px;
+	}
+	#profile .profile-body{
+		margin-top: -55px;
+	}
+	#heading{
+		margin: 0px;
+		padding: 0px;
+	}
+	form input{
+		font-size: 15px;
+	}
+
+	#profile{
+		width: auto;
+	}
+
+
+	#events .event-info{
+		margin-left: 5%;
+		position: static;
+	}
+	#events .card-img-overlay{
+		padding: 3%;
+	}
+
+	#events .event-detail{
+		display: none;
+	}
+
+	#eventpage{
+
+	}
+
+}
+

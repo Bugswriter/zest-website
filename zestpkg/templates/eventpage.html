@@ -1,18 +1,13 @@
 {% extends 'layout.html' %}
 {% block content %}
-<style type="text/css">
-	.event-info{
-		font-size: 18px;
-	}
-</style>
 
-<div class="card mt-5 animated fadeIn">
+<div class="card mt-5 animated fadeIn" id="eventpage">
 	<img class="card-img-top" src="{{ url_for('static', filename='event_pics/'+event.image) }}" alt="Card image cap">
 	<div class="card-body">
   		<div class="ml-3">
     		<h2 class="card-title ">{{ event.title }}</h2>
     		<h6 class="card-subtitle mb-2 "><a href="/events/{{event.id}}/update" class="text-muted">update event info</a></h6>
-    		<p class="card-text " style="line-height: 2em; max-width: 70%;">{{ event.detail_txt }}</p>
+    		<p class="card-text	" style="line-height: 2em; max-width: 70%;">{{ event.detail_txt }}</p>
 		</div>
     	<hr>
     	<div class="row">
@@ -25,7 +20,7 @@
 				{% endif %}	
 				<span>Day 1 | Time: 3:40pm to 4:30pm</span>
 			</div>
-			<div class="col-3 mr-5 row float-right">
+			<div class="col-md-3 mr-5 row float-right">
 				<img class="rounded-circle" width="75px" height="75px" src="{{ url_for('static', filename='profile_pics/'+user.image) }}">
 				<div class="ml-2">
 					<span><a href="#">{{ user.name }}</a></span><br>
