@@ -1,57 +1,65 @@
 {% extends 'layout.html' %}
 {% block content %}
-
-<div class="card mt-5 animated fadeIn" id="eventpage">
+<div class="text-center mt-4 animated bounceInDown" id="heading">
+	<h2>{{ event.title }}</h2>
+	{% if current_user.id == event.user_id %}
+		<a href="/events/{{event.id}}/update" class="text-muted">update event info</a>
+	{% endif %}
+	<hr>
+</div>
+<div class="card animated fadeIn" id="eventpage">
 	<img class="card-img-top" src="{{ url_for('static', filename='event_pics/'+event.image) }}" alt="Card image cap">
 	<div class="card-body">
-  		<div class="ml-3">
-    		<h2 class="card-title ">{{ event.title }}</h2>
-    		<h6 class="card-subtitle mb-2 "><a href="/events/{{event.id}}/update" class="text-muted">update event info</a></h6>
-    		<p class="card-text	" style="line-height: 2em; max-width: 70%;">{{ event.detail_txt }}</p>
-		</div>
+		<div>
+    		<p class="card-text">{{ event.detail_txt }}</p>
+	    </div>
     	<hr>
     	<div class="row">
-	    	<div class="col ml-3">
+	    	<div class="col-md-6">
 				<h5 class="">{{ event.eventType() }} Event</h5>
 				{% if event.eventType() == 'Team' %}
 					<small class="text-info">{{ event.team_limit }} member team is required.</small><br>
 				{% else %}
 					<small class="text-success">You don't need a team.</small><br>
 				{% endif %}	
-				<span>Day 1 | Time: 3:40pm to 4:30pm</span>
+				<span>Time: 3:40pm to 4:30pm</span>
 			</div>
-			<div class="col-md-3 mr-5 row float-right">
-				<img class="rounded-circle" width="75px" height="75px" src="{{ url_for('static', filename='profile_pics/'+user.image) }}">
-				<div class="ml-2">
-					<span><a href="#">{{ user.name }}</a></span><br>
-					<small>{{ user.phone }}</small><br>
-					<small class="text-muted">Organizer</small>
+			<div class="col-md-6">
+				<div class="row organizer">
+					<img class="rounded-circle" src="{{ url_for('static', filename='profile_pics/'+user.image) }}">
+					<div class="ml-2">
+						<span><a href="#">{{ user.name }}</a></span><br>
+						<small>{{ user.phone }}</small><br>
+						<small class="text-muted">Organizer</small>
+					</div>
 				</div>
 			</div>
 		</div>
+		<hr>
 		
 		{% if current_user.is_authenticated %}
-			<hr>
-			<div class="row justify-content-center">
-				<div class="col ml-3 p-3">
-					{% if event.eventType() == 'Solo' %}
-						<a href="/events/{{ event.id }}/participate" class="btn btn-success">Take Participation</a>
-					{% else %}
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createteam">
-						  Create a new team
-						</button>
-						<button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#jointeam">
-							Join team
-						</button>
-					{% endif %}
+			<div class="row justify-content-around">
+				{% if event.eventType() == 'Solo' %}
+				<a href="/events/{{ event.id }}/participate" class="btn btn-success">Take Participation</a>
+				{% else %}
+				<div class="col text-center">
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createteam">
+					  Create team
+					</button>
 				</div>
+				<div class="col text-center">
+					<button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#jointeam">
+						Join team
+					</button>
+				</div>
+				{% endif %}
 			</div>
 		{% endif %}
 	</div>	
 </div>
 
 <div class="modal" id="createteam" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered" role="document">
+	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="exampleModalLongTitle">Create Team</h5>
@@ -76,7 +84,7 @@
 </div>
 
 <div class="modal" id="jointeam" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered" role="document">
+	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="exampleModalLongTitle">Join team</h5>

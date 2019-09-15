@@ -35,7 +35,18 @@ body{
 }
 
 #eventpage{
-
+		
+}
+#eventpage .card-img-top{
+	border-radius: 0px;
+}
+#eventpage .card-text{
+	line-height: 1.8em;
+	max-width: 70%;
+}
+#eventpage .organizer img{
+	max-width: 75px;
+	max-height: 75px;
 }
 
 @media (max-width: 720px){
@@ -83,6 +94,18 @@ body{
 	#eventpage{
 
 	}
-
+	#eventpage .card-text{
+		line-height: 1.6em;
+		max-width: 100%;
+	}
+	#eventpage .organizer{
+		margin-top: 4%;
+		padding: 4%;
+		border-top: 1px solid #efefef;
+	}
+	#eventpage .organizer img{
+		max-width: 60px;
+		max-height: 60px;
+	}
 }
 
