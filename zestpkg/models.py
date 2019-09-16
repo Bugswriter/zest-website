@@ -124,9 +124,10 @@ class Event(db.Model):
 
 class Contestant(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)	
 	event_id = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=False)
 	team_id = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=True)
+	paid = db.Column(db.Boolean, nullable=True, default=False)
 
 	def __repr__(self):
 		user = User.query.get(self.user_id)

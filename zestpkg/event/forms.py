@@ -11,6 +11,7 @@ class EventForm(FlaskForm):
 	image = FileField('Cover Picture', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
 	num_of_member = IntegerField('Number of member', validators=[DataRequired()])
 	about = StringField('Event Details', widget=TextArea())
+	price =IntegerField('Price', validators=[])
 	submit = SubmitField('Register Event')	
 
 

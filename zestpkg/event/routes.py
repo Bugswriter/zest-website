@@ -37,7 +37,7 @@ def add_event():
 		else:
 			picture = "default.jpg"
 
-		event = Event(title=form.title.data, image=picture, user_id=current_user.id, team_limit=form.num_of_member.data, detail_txt=form.about.data)
+		event = Event(title=form.title.data, image=picture, user_id=current_user.id, team_limit=form.num_of_member.data, detail_txt=form.about.data, price=form.price.data)
 		db.session.add(event)
 		db.session.commit()
 		flash('Your Event Registered Successfully!', 'success')

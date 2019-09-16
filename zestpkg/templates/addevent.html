@@ -27,21 +27,65 @@
 				</div>
 				<div class="form-row">
 					<div class="col form-group">
-						{{ form.image.label(class='form-control-label') }}
-						{{ form.image(class='form-control-file') }}
+						{{ form.num_of_member.label(class='form-control-label') }}
+						{{ form.num_of_member(class='form-control') }}
+						<div class="invalid-feedback d-block">
+							{% if form.num_of_member.errors %}
+								{% for error in form.num_of_member.errors %}
+									{{ error }}
+								{% endfor %}
+							{% endif %}
+						</div>
 					</div>
+					<div class="col form-group">
+						{{ form.price.label(class='form-control-label') }}
+						{{ form.price(class='form-control') }}
+						<div class="invalid-feedback d-block">
+							{% if form.price.errors %}
+								{% for error in form.price.errors %}
+									{{ error }}
+								{% endfor %}
+							{% endif %}
+						</div>	
+					</div>
+				</div>
+				<div class="form-row">
 					<div class="col form-group">
 						{{ form.event_type.label(class='form-control-label') }}
 						{{ form.event_type(class='form-control') }}
+
+						<div class="invalid-feedback d-block">
+							{% if form.event_type.errors %}
+								{% for error in form.event_type.errors %}
+									{{ error }}
+								{% endfor %}
+							{% endif %}
+						</div>
 					</div>
+					<div class="col form-group">
+						{{ form.image.label(class='form-control-label') }}
+						{{ form.image(class='form-control-file') }}
+						<div class="invalid-feedback d-block">
+							{% if form.image.errors %}
+								{% for error in form.image.errors %}
+									{{ error }}
+								{% endfor %}
+							{% endif %}
+						</div>
+					</div>
+					
 				</div>
-				<div class="form-group">
-					{{ form.num_of_member.label(class='form-control-label') }}
-					{{ form.num_of_member(class='form-control') }}
-				</div>
+				
 				<div class="form-group">
 					{{ form.about.label(class='form-control-label') }}
 					{{ form.about(class='form-control', id='textarea') }}
+					<div class="invalid-feedback d-block">
+						{% if form.about.errors %}
+							{% for error in form.about.errors %}
+								{{ error }}
+								{% endfor %}
+						{% endif %}
+					</div>
 				</div>
 			</fieldset>
 			<div class="form-group">
