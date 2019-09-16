@@ -52,12 +52,12 @@ $(document).ready(function(){
 	<hr>
 </div>
 <div class="row justify-content-around">
-	<div class="col-8">
+	<div class="col-md-8">
 		<form action="" method="POST" enctype="multipart/form-data">
 			{{ form.hidden_tag() }}
 			<fieldset class="form-group">
 				<div class="form-group form-row">
-					<div class="col">
+					<div class="col-md-6">
 						{{ form.first_name.label(class='form-control-label') }}
 						{{ form.first_name(class='form-control') }}
 						<div class="invalid-feedback d-block">
@@ -68,7 +68,7 @@ $(document).ready(function(){
 						{% endif %}
 						</div>
 					</div>
-					<div class="col">
+					<div class="col-md-6">
 						{{ form.last_name.label(class='form-control-label') }}
 						{{ form.last_name(class='form-control') }}
 						<div class="invalid-feedback d-block">
@@ -105,7 +105,7 @@ $(document).ready(function(){
 					</div>
 				</div>
 				<div class="form-row">
-					<div class="col form-group">
+					<div class="col-md-6 form-group">
 						{{ form.roll_num.label(class='form-control-label') }}
 						{{ form.roll_num(class='form-control') }}
 						<div class="invalid-feedback d-block">
@@ -116,7 +116,7 @@ $(document).ready(function(){
 						{% endif %}
 						</div>
 					</div>
-					<div class="col form-group">
+					<div class="col-md-6 form-group">
 						{{ form.phone.label(class='form-control-label') }}
 						{{ form.phone(class='form-control') }}
 						<div class="invalid-feedback d-block">
