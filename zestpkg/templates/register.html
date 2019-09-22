@@ -5,13 +5,13 @@
 	<hr>
 </div>
 <div class="row justify-content-around">
-	<div class="col-lg-8 p-4">
+	<div class="col-md-6 p-4">
 		<form class="animated bounceInRight" action="" method="POST">
 			{{ form.hidden_tag() }}
 			<fieldset class="form-group">
 				<div class="form-group">
 					{{ form.username.label(class='form-control-label') }}
-					{{ form.username(class='form-control form-control') }}
+					{{ form.username(class='form-control form-control-lg') }}
 					<div class="invalid-feedback d-block">
 						{% if form.username.errors %}
 							{% for error in form.username.errors %}
@@ -22,7 +22,7 @@
 				</div>
 				<div class="form-group">
 					{{ form.email.label(class='form-control-label') }}
-					{{ form.email(class='form-control form-control') }}
+					{{ form.email(class='form-control form-control-lg') }}
 					<div class="invalid-feedback d-block">
 						{% if form.email.errors %}
 							{% for error in form.email.errors %}
@@ -33,7 +33,7 @@
 				</div>
 				<div class="form-group">
 					{{ form.password.label(class="form-control-label") }}
-					{{ form.password(class="form-control form-control") }}
+					{{ form.password(class="form-control form-control-lg") }}
 					{% if form.password.errors %}
 						<div class="invalid-feedback d-block">
 						{% for error in form.password.errors %}

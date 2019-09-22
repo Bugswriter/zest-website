@@ -1,15 +1,13 @@
 {% extends 'layout.html' %}
 {% block content %}
-<div class="text-center mt-4 animated bounceInDown" id="heading">
-	<h2>{{ event.title }}</h2>
-	{% if current_user.id == event.user_id %}
-		<a href="/events/{{event.id}}/update" class="text-muted">update event info</a>
-	{% endif %}
-	<hr>
-</div>
-<div class="card animated fadeIn" id="eventpage">
+<div class="card" style="max-width: 800px;" id="eventpage">
 	<img class="card-img-top" src="{{ url_for('static', filename='event_pics/'+event.image) }}" alt="Card image cap">
 	<div class="card-body">
+		<h3>{{ event.title }}</h3>
+		{% if current_user.id == event.user_id %}
+			<a href="/events/{{event.id}}/update" class="text-muted">update event info</a>
+		{% endif %}
+		<hr>
 		<div>
     		<p class="card-text">{{ event.detail_txt }}</p>
 	    </div>
@@ -38,16 +36,18 @@
 		<hr>
 		
 		{% if current_user.is_authenticated %}
-			<div class="row justify-content-around">
+			<div class="row pl-4">
 				{% if event.eventType() == 'Solo' %}
 				<a href="/events/{{ event.id }}/participate" class="btn btn-success">Take Participation</a>
 				{% else %}
-				<div class="col text-center">
+				<div class="col text-center text-info">
+					<p>This is a team event so you have to create a team. Team name must be not absurd and unique.</p>
 					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createteam">
 					  Create team
 					</button>
 				</div>
-				<div class="col text-center">
+				<div class="col text-center text-info">
+					<p>Or on the other hand you can join a team. All you need is a team code. Ask your friends for their team code.</p>
 					<button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#jointeam">
 						Join team
 					</button>

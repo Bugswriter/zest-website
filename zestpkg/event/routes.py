@@ -20,6 +20,12 @@ def eventpage(eid):
 	return render_template('eventpage.html', event=event, user=profile)
 
 
+@event.route('/myevents', methods=['GET', 'POST'])
+@login_required
+def myevents():
+	return render_template('myevents.html', events=current_user.getEvents())
+
+
 @event.route('/addevent', methods=['GET', 'POST'])
 @login_required
 def add_event():
