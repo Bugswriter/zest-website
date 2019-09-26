@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
 
-body{	
+body{
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
 }
@@ -26,6 +26,8 @@ body{
 
 #events .event-detail{
 	max-width: 70%;
+	height: 40%;
+    text-overflow:ellipsis;
 }
 
 #events .event-info{
@@ -47,6 +49,15 @@ body{
 #eventpage .organizer img{
 	max-width: 75px;
 	max-height: 75px;
+}
+
+
+@media (max-width: 1500px){
+	#events .event-detail{
+		max-width: 100%;
+		overflow: hidden;
+
+	}
 }
 
 @media (max-width: 720px){

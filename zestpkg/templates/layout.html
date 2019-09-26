@@ -17,40 +17,56 @@
 </head>
 <body>
 
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarlinks" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-	<div class="collapse navbar-collapse ml-4" id="navbarlinks">
-		<a class="navbar-brand mr-auto" href="{{ url_for('main.home') }}">Zest2O19</a>
-		<ul class="navbar-nav  mt-2 mt-lg-0 mr-4">
-			<li class="nav-item active">
-				<a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="/events">Events</a>
-			</li>
-			{% if current_user.is_authenticated %}
-				<li class="nav-item">
-					<a class="nav-link" href="/{{current_user.username}}">My Profile</a>
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark animated flipInX">
+	<div class="container">
+		<a class="navbar-brand" href="{{ url_for('main.home') }}"><img src="{{ url_for('static', filename='images/zestlogo.png') }}" class="mb-1" width="60px">2k19</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarlinks" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarlinks">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
 				</li>
-				{% if current_user.verified %}
 				<li class="nav-item">
-					<a class="nav-link" href="/addevent">Add Event</a>
+					<a class="nav-link" href="/events">Events</a>
 				</li>
+				{% if current_user.is_authenticated %}
+					<li class="nav-item">
+						
+					</li>
+					<li class="nav-item">
+						
+					</li>
+					{% if current_user.verified %}
+					<li class="nav-item">
+						<a class="nav-link" href="/addevent">Add Event</a>
+					</li>
+					{% endif %}
+					<li class="nav-item">
+						<li class="nav-item dropdown">
+					        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					          {{ current_user.username }} <img width="30px" class="rounded-circle" src="{{ url_for('static', filename='profile_pics/'+current_user.getProfile().image)}}">
+					        </a> 	
+					        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					          <a class="nav-link" href="/{{current_user.username}}">My Profile</a>
+					          <a class="nav-link" href="/myevents">My Events</a>
+					          
+					          <div class="dropdown-divider"></div>
+					          <a class="nav-link" href="{{ url_for('users.logout') }}">Logout</a>	
+					        </div>
+					      </li>
+					</li>
+				{% else %}
+					<li class="nav-item">
+						<a class="nav-link" href="{{ url_for('users.login') }}">Login</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ url_for('users.register') }}">Register</a>
+					</li>
 				{% endif %}
-				<li class="nav-item">
-					<a class="nav-link" href="{{ url_for('users.logout') }}">Logout</a>
-				</li>
-			{% else %}
-				<li class="nav-item">
-					<a class="nav-link" href="{{ url_for('users.login') }}">Login</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{{ url_for('users.register') }}">Register</a>
-				</li>
-			{% endif %}
-  		</ul>
+	  		</ul>
+	  	</div>
   	</div>
 </nav>
 
@@ -68,10 +84,10 @@
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-lg-3">
+		<div class="col-lg-2">
 			{% block sidebar %}{% endblock sidebar %}
 		</div>
-		<div class="col-lg-6">
+		<div class="col-lg-8">
 			{% block content %}{% endblock content%}
 			<footer class="my-5 text-center animated bounceInUp">
 				<div class="container">
@@ -79,25 +95,7 @@
 				</div>
 			</footer>
 		</div>
-		<div class="col-lg-3 col-md-12 p-4">
-			{% if current_user.is_authenticated %}
-			{% set events = current_user.getEvents() %}
-			{% if events %}
-				<div class="container">
-					<div class="card mb-3" style="max-width: 18rem;">
-						<div class="card-header">Your Events</div>	
-						<div class="container">
-							{% for event in events %}
-								<div class="row p-2">
-									<div class="col">{{ event.title }}</div>
-									<div class="col ml-5"><a href="/events/{{event.id}}/withdraw" class="text-danger">[X]</a></div>
-								</div>
-							{% endfor %}
-						</div>
-					</div>
-				</div>
-			{% endif %}
-			{% endif %}
+		<div class="col-lg-2 col-md-12 p-4">
 		</div>
 	</div>
 </div>

@@ -5,8 +5,8 @@
 	<hr>
 </div>
 {% for event in events %}
-	<div class="row p-4 animated zoomIn" id="events">
-		<div class="col-sm-12">
+	<div class="row p-4 justify-content-around animated zoomIn" id="events">
+		<div class="col-lg-8 col-md-12">
 			<h3 class=""><a href='events/{{ event.id }}'">{{ event.title }}</a></h3>
 			<div class="card text-white event-card">
 				<img class="card-img" style="filter: brightness(70%);" src="{{ url_for('static', filename='event_pics/'+ event.image) }}" width="850px"	 alt="Card image">
