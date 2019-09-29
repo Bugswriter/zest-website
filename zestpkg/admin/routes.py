@@ -15,30 +15,11 @@ def AdminPannel():
 	AdminCheck()
 	return render_template('AdminPannel.html', title='AdminPannel')
 
-@admin.route('/admin/login', methods=['GET', 'POST'])
-def AdminLogin():
-	if current_user.is_authenticated:
-		return redirect(url_for('main.home'))
-
-	loginform = LoginForm()
-	request_form = RequestResetForm()
-	if loginform.validate_on_submit():	
-		user = User.query.filter_by(email=loginform.email.data).first()
-		if user and bcrypt.check_password_hash(user.password, loginform.password.data) and user.username=='rakash':
-			login_user(user, remember=loginform.remember.data)
-			return redirect(url_for('admin.AdminPannel'))
-		flash(f'Login Unsuccessful. Please check email or password', 'danger')
-		return render_template('login.html', title='Login', form=loginform, request_form=request_form)
-	else:
-		flash(f'Login Unsuccessful. Please check email or password', 'danger')
-		return render_template('login.html', title='Login', form=loginform, request_form=request_form)
-
-
 @login_required
 @admin.route('/admin/users', methods=['GET', 'POST'])
 def AdminUsers():
 	AdminCheck()
-	users=User.query.all()
+	users = User.query.all()
 	return render_template('AdminUsers.html', title='User View', users=users)
 
 @login_required

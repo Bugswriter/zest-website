@@ -1,8 +1,11 @@
 {% extends 'layout.html' %}
 {% block content %}
 <div class="col-12">
-	
-	<h2>Users Table</h1>
+
+  <div class="text-center mt-4 animated bounceInDown">
+    <h2>Users</h2>
+    <hr>
+  </div>
 
 	<table class="table text-center mt-4 border table-striped">
 		<thead class="thead-dark table-striped">
@@ -16,11 +19,11 @@
   	{% for user in users %}	
 	  		<tr>
 	  			<td>{{user.id}}</td>
-	    		<td><a href="{{url_for('profile.show_profile', username=user.username)}}">{{user.username}}</a></td>
+	    		<td><a href="{{url_for('profile.profile_card', username=user.username)}}">{{user.username}}</a></td>
 	    		<td>{{user.email}}</td>
 	    		<td>{{user.verified}}</td>
           {% if not user.verified %}
-	    		 <td ><a href="{{url_for('admin.UserVerifier', username=user.username)}}">Make Veriefied</a></td>
+	    		   <td ><a href="{{url_for('admin.UserVerifier', username=user.username)}}">Verify this account</a></td>
           {% endif %}
 	  		</tr>  
     {% endfor %}
