@@ -9,9 +9,15 @@ contestant = Blueprint('contestant', __name__)
 @contestant.route('/event/<int:eid>/participate')
 @login_required
 def participate(eid):
+<<<<<<< HEAD
 	if current_user.getProfile() == None:
 		flash('You need to create your Profile Card first!', category='warning')
 		return redirect(url_for('profile.create_profile'))
+=======
+	if not current_user.getProfile():
+		flash("You have to create you profile first!", category='info')
+		return redirect('/create_profile')
+>>>>>>> e22229e5795ba9b018a995faf7a5bbeb25dc13de
 
 	event = Event.query.get_or_404(eid)
 	contestant = Contestant.query.filter_by(user_id=current_user.id, event_id=eid).first()
@@ -27,9 +33,16 @@ def participate(eid):
 @contestant.route('/events/<int:eid>/create_team', methods=['GET'])
 @login_required
 def createTeam(eid):
+<<<<<<< HEAD
 	if current_user.getProfile() == None:
 		flash('You need to create your Profile Card first!', category='warning')
 		return redirect(url_for('profile.create_profile'))
+=======
+	if not current_user.getProfile():
+		flash("You have to create you profile first!", category='info')
+		return redirect('/create_profile')
+
+>>>>>>> e22229e5795ba9b018a995faf7a5bbeb25dc13de
 	event = Event.query.get_or_404(eid)
 	if event.eventType() == 'Solo':
 		flash('You cannot create team in a solo event', category='info')
@@ -48,10 +61,17 @@ def createTeam(eid):
 @contestant.route('/events/<int:eid>/join_team')
 @login_required
 def joinTeam(eid):
+<<<<<<< HEAD
 	if current_user.getProfile() == None:
 		flash('You need to create your Profile Card first!', category='warning')
 		return redirect(url_for('profile.create_profile'))
 		
+=======
+	if not current_user.getProfile():
+		flash("You have to create you profile first!", category='info')
+		return redirect('/create_profile')
+
+>>>>>>> e22229e5795ba9b018a995faf7a5bbeb25dc13de
 	event = Event.query.get_or_404(eid)
 	if event.eventType() == 'Solo':
 		flash('No teams in Solo events', category='warning')
@@ -59,8 +79,8 @@ def joinTeam(eid):
 
 	if request.args.get('team_code'):
 		team = verify_team_code(request.args.get('team_code'))
-		participate(eid, request.args.get('team_code'))
-		flash(f'You are registered in team {team.title}')
+		take_participation(eid, request.args.get('team_code'))
+		flash(f'You are registered in team {team.name}', category='success')
 
 	return redirect('/myevents')
 
@@ -68,9 +88,15 @@ def joinTeam(eid):
 @contestant.route('/events/<int:eid>/withdraw')
 @login_required
 def withdraw(eid):
+<<<<<<< HEAD
 	if current_user.getProfile() == None:
 		flash('You need to create your Profile Card first!', category='warning')
 		return redirect(url_for('profile.create_profile'))
+=======
+	if not current_user.getProfile():
+		flash("You have to create you profile first!", category='info')
+		return redirect('/create_profile')
+>>>>>>> e22229e5795ba9b018a995faf7a5bbeb25dc13de
 
 	event = Event.query.get_or_404(eid)
 	with_draw(eid)

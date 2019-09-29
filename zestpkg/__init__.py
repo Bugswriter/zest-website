@@ -31,8 +31,10 @@ from zestpkg.profile.routes import profile
 from zestpkg.event.routes import event
 from zestpkg.contestant.routes import contestant
 from zestpkg.errors.handlers import errors
+from zestpkg.admin.routes import admin
 
 app.register_blueprint(main)
+app.register_blueprint(admin)
 app.register_blueprint(users)
 app.register_blueprint(profile)
 app.register_blueprint(event)

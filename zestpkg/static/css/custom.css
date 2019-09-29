@@ -7,12 +7,17 @@ body{
 }
 
 #nav-dd a{
+<<<<<<< HEAD
 	color: grey;
 }
 .nav-dd a:hover{
 	color: black;
 }
 
+=======
+	color: black;
+}
+>>>>>>> e22229e5795ba9b018a995faf7a5bbeb25dc13de
 
 #profile{
 	width: 30rem;
