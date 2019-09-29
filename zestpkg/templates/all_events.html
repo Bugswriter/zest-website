@@ -5,12 +5,12 @@
 	<hr>
 </div>
 {% for event in events %}
-	<div class="row p-4 justify-content-around animated zoomIn" id="events">
-		<div class="col-lg-8 col-md-12">
-			<h3 class=""><a href='events/{{ event.id }}'">{{ event.title }}</a></h3>
+	<div class="row p-4 justify-content-center animated zoomIn" id="events">
+		<div class="col-md-12" style="max-width: 850px;">
+			<h3 class=""><a href='/event/{{ event.id }}'>{{ event.title }}</a></h3>
 			<div class="card text-white event-card">
 				<img class="card-img" style="filter: brightness(70%);" src="{{ url_for('static', filename='event_pics/'+ event.image) }}" width="850px"	 alt="Card image">
-				<div class="card-img-overlay">
+				<div class="card-img-overlay" style="max-width: 550px;">
 					<p class="card-text event-detail">{{ event.detail_txt }}</p>
 					
 					<p class="event-info">

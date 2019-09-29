@@ -17,19 +17,19 @@
 </head>
 <body>
 
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark animated flipInX">
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
 	<div class="container">
-		<a class="navbar-brand" href="{{ url_for('main.home') }}"><img src="{{ url_for('static', filename='images/zestlogo.png') }}" class="mb-1" width="60px">2k19</a>
+		<a class="navbar-brand rounded" href="{{ url_for('main.home') }}"><img src="{{ url_for('static', filename='images/zestlogo.png') }}" class="mb-1" width="60px">2k19</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarlinks" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarlinks">
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item active">
-					<a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+					<a class="nav-link" href="{{ url_for('main.home') }}">Home <span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/events">Events</a>
+					<a class="nav-link" href="{{ url_for('event.all_events') }}">Events</a>
 				</li>
 				{% if current_user.is_authenticated %}
 					<li class="nav-item">
@@ -40,22 +40,28 @@
 					</li>
 					{% if current_user.verified %}
 					<li class="nav-item">
-						<a class="nav-link" href="/addevent">Add Event</a>
+						<a class="nav-link" href="{{ url_for('event.add_event') }}">Add Event</a>
 					</li>
 					{% endif %}
 					<li class="nav-item">
 						<li class="nav-item dropdown">
-					        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					          {{ current_user.username }} <img width="30px" class="rounded-circle" src="{{ url_for('static', filename='profile_pics/'+current_user.getProfile().image)}}">
-					        </a> 	
-					        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					          <a class="nav-link" href="/{{current_user.username}}">My Profile</a>
-					          <a class="nav-link" href="/myevents">My Events</a>
+					    	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					    		{% if current_user.getProfile() == None %}
+						    		<img width="30px" class="rounded-circle" src="{{ url_for('static', filename='profile_pics/default.jpg')}}">
+					    		{% else %}
+									<img width="30px" class="rounded-circle" src="{{ url_for('static', filename='profile_pics/'+current_user.getProfile().image)}}">
+								{% endif %}
+					    		
+							<span> {{ current_user.username }}</span>
+							</a> 	
+					        <div class="dropdown-menu" id="nav-dd" aria-labelledby="navbarDropdown">
+					          <a class="nav-link" href="{{ url_for('profile.profile_card', username=current_user.username) }}">My Profile</a>
+					          <a class="nav-link" href="{{ url_for('event.my_events') }}">My Events</a>
 					          
 					          <div class="dropdown-divider"></div>
 					          <a class="nav-link" href="{{ url_for('users.logout') }}">Logout</a>	
 					        </div>
-					      </li>
+						</li>
 					</li>
 				{% else %}
 					<li class="nav-item">

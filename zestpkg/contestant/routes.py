@@ -1,16 +1,18 @@
-from flask import Blueprint, render_template, redirect, flash, request
+from flask import Blueprint, render_template, redirect, flash, request, redirect, url_for
 from zestpkg import db
 from zestpkg.contestant.utils import *
 from zestpkg.models import User, Event, Contestant
 from flask_login import login_required, current_user
-from zestpkg.contestant.utils import checkProfile
 
 contestant = Blueprint('contestant', __name__)
 
-@contestant.route('/events/<int:eid>/participate')
+@contestant.route('/event/<int:eid>/participate')
 @login_required
 def participate(eid):
-	checkProfile()
+	if current_user.getProfile() == None:
+		flash('You need to create your Profile Card first!', category='warning')
+		return redirect(url_for('profile.create_profile'))
+
 	event = Event.query.get_or_404(eid)
 	contestant = Contestant.query.filter_by(user_id=current_user.id, event_id=eid).first()
 	if contestant == None:
@@ -19,13 +21,15 @@ def participate(eid):
 	else:
 		flash(f'You are already regsitered for {event.title} event', category='info')
 
-	return redirect('/myevents')
+	return redirect(url_for('event.my_events'))
 
 
 @contestant.route('/events/<int:eid>/create_team', methods=['GET'])
 @login_required
 def createTeam(eid):
-	checkProfile()
+	if current_user.getProfile() == None:
+		flash('You need to create your Profile Card first!', category='warning')
+		return redirect(url_for('profile.create_profile'))
 	event = Event.query.get_or_404(eid)
 	if event.eventType() == 'Solo':
 		flash('You cannot create team in a solo event', category='info')
@@ -44,7 +48,10 @@ def createTeam(eid):
 @contestant.route('/events/<int:eid>/join_team')
 @login_required
 def joinTeam(eid):
-	checkProfile()
+	if current_user.getProfile() == None:
+		flash('You need to create your Profile Card first!', category='warning')
+		return redirect(url_for('profile.create_profile'))
+		
 	event = Event.query.get_or_404(eid)
 	if event.eventType() == 'Solo':
 		flash('No teams in Solo events', category='warning')
@@ -61,7 +68,10 @@ def joinTeam(eid):
 @contestant.route('/events/<int:eid>/withdraw')
 @login_required
 def withdraw(eid):
-	checkProfile()
+	if current_user.getProfile() == None:
+		flash('You need to create your Profile Card first!', category='warning')
+		return redirect(url_for('profile.create_profile'))
+
 	event = Event.query.get_or_404(eid)
 	with_draw(eid)
 	flash(f'You are removed from {event.title} event', category='info')
