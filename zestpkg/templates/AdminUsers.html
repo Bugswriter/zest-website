@@ -12,18 +12,17 @@
     		<th>ID</th>
     		<th>Username</th>
     		<th>E-Mail</th>
-    		<th>Verified</th>
-    		
-    		<th><th>
+    		<th>Action<th>
   	</thead>
   	{% for user in users %}	
 	  		<tr>
 	  			<td>{{user.id}}</td>
 	    		<td><a href="{{url_for('profile.profile_card', username=user.username)}}">{{user.username}}</a></td>
 	    		<td>{{user.email}}</td>
-	    		<td>{{user.verified}}</td>
-          {% if not user.verified %}
-	    		   <td ><a href="{{url_for('admin.UserVerifier', username=user.username)}}">Verify this account</a></td>
+          {% if user.verified %}
+	    		<td><a href="{{url_for('admin.toggleVerfiy', username=user.username)}}">Unverify</a></td>
+          {% else %}
+              	<td><a href="{{url_for('admin.toggleVerfiy', username=user.username)}}">Verify</a></td>
           {% endif %}
 	  		</tr>  
     {% endfor %}

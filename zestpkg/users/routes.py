@@ -16,7 +16,7 @@ def register():
 	registerform = RegisterForm()
 	if registerform.validate_on_submit():
 		send_confirmation_link( registerform.username.data, registerform.email.data, registerform.password.data)
-		success = {'title': 'Confirmation link sended', 'heading': 'Confirmation Link sended', 'message': 'A email confirmation link has been sended to email address you used at the time of creating account'}
+		success = {'title': 'Confirmation link sent', 'heading': 'Confirmation Link sended', 'message': 'A email confirmation link has been sended to email address you used at the time of creating account'}
 		return render_template('success.html', **success)
 	return render_template('register.html', title='Register', form=registerform)
 
@@ -33,7 +33,7 @@ def confirmation(token):
 		user = User(username=username, email=email, password=hashed_password)
 		db.session.add(user)
 		db.session.commit()
-		flash("You account has been created!", category='success')
+		flash("Your account has been created!", category='success')
 	except Exception as e:
 		flash("Sorry your link is expired, try again", category='danger')
 
@@ -69,8 +69,8 @@ def login():
 		user=User.query.filter_by(email=request_form.email.data).first()
 		send_reset_email(user)
 		success = {}
-		success['heading'] = "Email has been sended"
-		success['message'] = "Check your email, there will be further instruction for reseting your password. Be quick link will expires in 10 min"
+		success['heading'] = "Email has been sent"
+		success['message'] = "Check your Email, there will be further instruction for reseting your password. Be quick link will expires in 10 min"
 		return render_template('success.html', **success)
 
 	return render_template('login.html', title='Login', form=loginform, request_form=request_form)

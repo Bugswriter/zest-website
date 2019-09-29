@@ -23,10 +23,15 @@ def AdminUsers():
 	return render_template('AdminUsers.html', title='User View', users=users)
 
 @login_required
-@admin.route('/admin/users/verified/<string:username>', methods=['GET', 'POST'])
-def UserVerifier(username):
+@admin.route('/admin/user/<string:username>/toggleVerify', methods=['GET', 'POST'])
+def toggleVerfiy(username):
 	AdminCheck()
 	user = User.query.filter_by(username=username).first()
-	user.verified=True
+	if user.verified:
+		user.verified = False
+	else:
+		user.verified = True
+
 	db.session.commit()
+	
 	return redirect(url_for('admin.AdminPannel'))

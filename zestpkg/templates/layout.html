@@ -39,15 +39,15 @@
 					{% endif %}
 					<li class="nav-item">
 						<li class="nav-item dropdown">
-
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								{{ current_user.username }}
+								
 								{% if current_user.getProfile() == None %}
 									<img width="30px" class="rounded-circle" src="{{ url_for('static', filename='profile_pics/default.jpg')}}">
 								{% else %} 
 									<img width="30px" class="rounded-circle" src="{{ url_for('static', filename='profile_pics/'+current_user.getProfile().image)}}">
 								{% endif %}	
-							</a> 	
+								<span> {{ current_user.username }}</span>
+							</a>
 					        <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="nav-dd">
 					          <a class="nav-link" href="/{{current_user.username}}">My Profile</a>
 					          <a class="nav-link" href="{{ url_for('event.my_events') }}">My Events</a>
