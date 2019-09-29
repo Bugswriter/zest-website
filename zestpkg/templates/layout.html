@@ -19,7 +19,9 @@
 
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark animated flipInX">
 	<div class="container">
-		<a class="navbar-brand" href="{{ url_for('main.home') }}"><img src="{{ url_for('static', filename='images/zestlogo.png') }}" class="mb-1" width="60px">2k19</a>
+		<a class="navbar-brand" href="{{ url_for('main.home') }}">
+			<img src="{{ url_for('static', filename='images/zestlogo.png') }}" class="mb-1" width="60px">2k19
+		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarlinks" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -46,9 +48,15 @@
 					<li class="nav-item">
 						<li class="nav-item dropdown">
 					        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					          {{ current_user.username }} <img width="30px" class="rounded-circle" src="{{ url_for('static', filename='profile_pics/'+current_user.getProfile().image)}}">
+					          {{ current_user.username }}
+					          {% if current_user.getProfile() == None %}
+					          	<img width="30px" class="rounded-circle" src="{{ url_for('static', filename='profile_pics/default.jpg')}}">
+					          {% else %} 
+					          	<img width="30px" class="rounded-circle" src="{{ url_for('static', filename='profile_pics/'+current_user.getProfile().image)}}">
+					          {% endif %}	
+
 					        </a> 	
-					        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					        <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="nav-dd">
 					          <a class="nav-link" href="/{{current_user.username}}">My Profile</a>
 					          <a class="nav-link" href="/myevents">My Events</a>
 					          

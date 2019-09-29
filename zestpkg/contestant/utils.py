@@ -1,4 +1,4 @@
-from flask import flash, abort
+from flask import flash, abort, redirect
 from flask_login import current_user
 from zestpkg import db
 from zestpkg.models import Team, Contestant, Event
@@ -54,9 +54,9 @@ def create_team(team_name, eid):
 		db.session.add(team)
 		db.session.commit()
 		team = Team.query.filter_by(name=team_name).first()
-		participate(eid, team.team_code)
+		take_participation(eid, team.team_code) #jo team bana raha hai wo khud ko register kar lega
 		return team
 	else:
-		flash('Team already exist with this name!')
+		flash('Team already exist with this name!', category='warning')
 		abort(403)
 

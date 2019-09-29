@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<div class="text-center mt-4 animated bounceInDown">
+	<h1>Admin Pannel</h1>
+  <ul>
+    <li><a href="{{url_for('admin.AdminUsers')}}">Users</a></li>
+    <li>Events</li>
+    <li>Contestant</li>
+  </ul>
+</div>
+{% endblock%}

@@ -10,7 +10,10 @@ contestant = Blueprint('contestant', __name__)
 @contestant.route('/events/<int:eid>/participate')
 @login_required
 def participate(eid):
-	checkProfile()
+	if not current_user.getProfile():
+		flash("You have to create you profile first!", category='info')
+		return redirect('/create_profile')
+
 	event = Event.query.get_or_404(eid)
 	contestant = Contestant.query.filter_by(user_id=current_user.id, event_id=eid).first()
 	if contestant == None:
@@ -25,7 +28,10 @@ def participate(eid):
 @contestant.route('/events/<int:eid>/create_team', methods=['GET'])
 @login_required
 def createTeam(eid):
-	checkProfile()
+	if not current_user.getProfile():
+		flash("You have to create you profile first!", category='info')
+		return redirect('/create_profile')
+
 	event = Event.query.get_or_404(eid)
 	if event.eventType() == 'Solo':
 		flash('You cannot create team in a solo event', category='info')
@@ -44,7 +50,10 @@ def createTeam(eid):
 @contestant.route('/events/<int:eid>/join_team')
 @login_required
 def joinTeam(eid):
-	checkProfile()
+	if not current_user.getProfile():
+		flash("You have to create you profile first!", category='info')
+		return redirect('/create_profile')
+
 	event = Event.query.get_or_404(eid)
 	if event.eventType() == 'Solo':
 		flash('No teams in Solo events', category='warning')
@@ -52,8 +61,8 @@ def joinTeam(eid):
 
 	if request.args.get('team_code'):
 		team = verify_team_code(request.args.get('team_code'))
-		participate(eid, request.args.get('team_code'))
-		flash(f'You are registered in team {team.title}')
+		take_participation(eid, request.args.get('team_code'))
+		flash(f'You are registered in team {team.name}', category='success')
 
 	return redirect('/myevents')
 
@@ -61,7 +70,10 @@ def joinTeam(eid):
 @contestant.route('/events/<int:eid>/withdraw')
 @login_required
 def withdraw(eid):
-	checkProfile()
+	if not current_user.getProfile():
+		flash("You have to create you profile first!", category='info')
+		return redirect('/create_profile')
+
 	event = Event.query.get_or_404(eid)
 	with_draw(eid)
 	flash(f'You are removed from {event.title} event', category='info')

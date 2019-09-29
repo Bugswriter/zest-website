@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="col-12">
+	
+	<h2>Users Table</h1>
+
+	<table class="table text-center mt-4 border table-striped">
+		<thead class="thead-dark table-striped">
+    		<th>ID</th>
+    		<th>Username</th>
+    		<th>E-Mail</th>
+    		<th>Verified</th>
+    		
+    		<th><th>
+  	</thead>
+  	{% for user in users %}	
+	  		<tr>
+	  			<td>{{user.id}}</td>
+	    		<td><a href="{{url_for('profile.show_profile', username=user.username)}}">{{user.username}}</a></td>
+	    		<td>{{user.email}}</td>
+	    		<td>{{user.verified}}</td>
+          {% if not user.verified %}
+	    		 <td ><a href="{{url_for('admin.UserVerifier', username=user.username)}}">Make Veriefied</a></td>
+          {% endif %}
+	  		</tr>  
+    {% endfor %}
+  	</table>
+</div>
+{% endblock %}
