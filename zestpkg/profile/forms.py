@@ -16,10 +16,6 @@ class ProfileForm(FlaskForm):
 	gender = SelectField('Gender', validators=[DataRequired(), Optional()], choices = [('M','Male'),('F','Female')])
 	submit = SubmitField('Submit')
 
-	def validate_roll_num(self, roll_num):
-		profile = Profile.query.filter_by(roll_number=roll_num.data).first()
-		if profile:
-			raise ValidationError("That roll number already exist")
-
+	
 
 

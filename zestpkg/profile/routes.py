@@ -89,7 +89,7 @@ def update_profile():
 
 		db.session.commit()
 		flash('Your Profile is Successfully updated!', 'success')
-		return redirect('/events')
+		return redirect(url_for('profile.profile_card', username=current_user.username))
 
 	elif request.method == 'GET':
 		name = profile.name.split()
