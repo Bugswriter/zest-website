@@ -60,7 +60,6 @@ def login():
 					return redirect('/create_profile')
 					
 				return redirect(url_for('main.home'))
-
 		else:
 			flash(f'Login Unsuccessful. Please check email or password', 'danger')
 			return render_template('login.html', title='Login', form=loginform, request_form=request_form)
