@@ -23,7 +23,7 @@ def AdminUsers():
 	return render_template('AdminUsers.html', title='User View', users=users)
 
 @login_required
-@admin.route('/admin/user/<string:username>/toggleVerify', methods=['GET', 'POST'])
+@admin.route('/admin/verify/<string:username>/', methods=['GET', 'POST'])
 def toggleVerfiy(username):
 	AdminCheck()
 	user = User.query.filter_by(username=username).first()

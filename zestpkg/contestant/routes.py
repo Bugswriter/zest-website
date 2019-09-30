@@ -48,14 +48,6 @@ def createTeam(eid):
 	return redirect('/myevents')
 
 
-@contestant.route('/team/<int:tid>')
-@login_required
-def teampage(tid):
-	team = Team.query.get_or_404(tid)
-	return render_template('teampage.html', team=team, title=team.name)
-
-
-
 @contestant.route('/events/<int:eid>/join_team')
 @login_required
 def joinTeam(eid):
@@ -65,7 +57,7 @@ def joinTeam(eid):
 	
 	event = Event.query.get_or_404(eid)
 	if event.eventType() == 'Solo':
-		flash('No teams in Solo events', category='warning')
+		flash('No teams in 	Solo events', category='warning')
 		abort(500)
 
 	if request.args.get('team_code'):

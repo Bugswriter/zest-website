@@ -30,6 +30,7 @@ from zestpkg.users.routes import users
 from zestpkg.profile.routes import profile
 from zestpkg.event.routes import event
 from zestpkg.contestant.routes import contestant
+from zestpkg.team.routes import team
 from zestpkg.errors.handlers import errors
 from zestpkg.admin.routes import admin
 
@@ -39,4 +40,5 @@ app.register_blueprint(users)
 app.register_blueprint(profile)
 app.register_blueprint(event)
 app.register_blueprint(contestant)
+app.register_blueprint(team)
 app.register_blueprint(errors)

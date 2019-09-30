@@ -42,7 +42,7 @@
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								
 								{% if current_user.getProfile() == None %}
-									<img width="30px" class="rounded-circle" src="{{ url_for('static', filename='profile_pics/default.jpg')}}">
+									<img width="30px" class="rounded-circle" src="{{ url_for('static', filename='profile_pics/default.png')}}">
 								{% else %} 
 									<img width="30px" class="rounded-circle" src="{{ url_for('static', filename='profile_pics/'+current_user.getProfile().image)}}">
 								{% endif %}	
