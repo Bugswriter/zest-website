@@ -63,10 +63,11 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form action="/events/{{ event.id }}/create_team" method="GET">
+			<form action="{{ url_for('team.createTeam') }}" method="POST">
 				<div class="modal-body">
 					<div class="form-group p-3">
 						<input class="form-control" type="text" placeholder="Enter team name" name="team_name">
+						<input type="hidden" name="event_id" value="{{ event.id }}">
 						<small class="mt-4">This name should be unique and you are allowed to only add {{ event.team_limit }} members in team.</small>
 					</div>
 				</div>
@@ -88,10 +89,11 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form action="/events/{{ event.id }}/join_team" method="GET">
+			<form action="{{ url_for('team.joinTeam') }}" method="POST">
 				<div class="modal-body">
 					<div class="form-group p-3">
 						<input class="m-auto form-control" type="text" placeholder="Enter secret code" name="team_code">
+						<input type="hidden" name="event_id" value="{{event.id}}">
 						<small class="mt-4">If you don't know what secret code is, it is unique alphanumeric secret key which allow anyone to join the party. If you want to join your friends team. </small>
 					</div>
 				</div>

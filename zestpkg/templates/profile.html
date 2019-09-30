@@ -12,59 +12,59 @@
 	{% endif %}
 	<hr>
 </div>
-	<div class="card mx-auto text-center animated flipInY" id="profile">
-		<div class="text-center">
-			<img class="card-img-top" src="{{ url_for('static', filename='images/profile_cover.jpg') }}" alt="Card image cap">
-			{% if profile %}
-			<img class="rounded-circle avatar" src="{{ url_for('static', filename='profile_pics/'+ profile.image) }}" alt="Profile Pic">
-			{% else %}
-			<img class="rounded-circle avatar" src="{{ url_for('static', filename='profile_pics/default.jpg') }}" alt="default profile pic">
-			{% endif %}
-		</div>
-		<div class="card-body profile-body">
-			{% if profile %}	
-				<h3 class="card-title">{{ profile.name }}</h3>
-				<h6 class="card-subtitle mb-2 text-muted"><a href="/{{profile.account.username}}">@{{ profile.account.username }}</a></h6>
-
-				<table class="table mt-3 profile-details">
-					<tbody>
-						<tr>
-							<td>Course:</td>
-							<td>{{ profile.course }} ({{ profile.branch }})</td>
-						</tr>
-						{% if current_user.username == profile.account.username %}
-							<tr>
-								<td>Contact:</td>
-								<td>{{ profile.phone}}</td>
-							</tr>
-						{% endif %}
-						<tr>
-							<td>Gender:</td>
-							<td>
-								{% if profile.gender == 'M' %}
-									Male
-								{% else %}
-									Female
-								{% endif %}
-							</td>
-						</tr>
-						<tr>
-							<td>College:</td>
-							<td>{{ profile.college}}</td>
-						</tr>
-						<tr>
-							<td>Roll Number:</td>
-							<td>{{ profile.roll_number}}</td>
-						</tr>	
-					</tbody>
-				</table>
-				{% if current_user.username == profile.account.username %}
-					<a href="/update_profile" class="btn btn-outline-info">Update Profile</a>
-				{% endif %}
-			{% else %}
-					<a href="/create_profile" class="btn btn-outline-danger my-5">Create Profile</a>
-			{% endif %}
-		</div>
+<div class="card mx-auto text-center animated flipInY" id="profile">
+	<div class="text-center">
+		<img class="card-img-top" src="{{ url_for('static', filename='images/profile_cover.jpg') }}" alt="Card image cap">
+		{% if profile %}
+		<img class="rounded-circle avatar" src="{{ url_for('static', filename='profile_pics/'+ profile.image) }}" alt="Profile Pic">
+		{% else %}
+		<img class="rounded-circle avatar" src="{{ url_for('static', filename='profile_pics/default.jpg') }}" alt="default profile pic">
+		{% endif %}
 	</div>
+	<div class="card-body profile-body">
+		{% if profile %}	
+			<h3 class="card-title">{{ profile.name }}</h3>
+			<h6 class="card-subtitle mb-2 text-muted"><a href="/{{profile.account.username}}">@{{ profile.account.username }}</a></h6>
+
+			<table class="table mt-3 profile-details">
+				<tbody>
+					<tr>
+						<td>Course:</td>
+						<td>{{ profile.course }} ({{ profile.branch }})</td>
+					</tr>
+					{% if current_user.username == profile.account.username %}
+						<tr>
+							<td>Contact:</td>
+							<td>{{ profile.phone}}</td>
+						</tr>
+					{% endif %}
+					<tr>
+						<td>Gender:</td>
+						<td>
+							{% if profile.gender == 'M' %}
+								Male
+							{% else %}
+								Female
+							{% endif %}
+						</td>
+					</tr>
+					<tr>
+						<td>College:</td>
+						<td>{{ profile.college}}</td>
+					</tr>
+					<tr>
+						<td>Roll Number:</td>
+						<td>{{ profile.roll_number}}</td>
+					</tr>	
+				</tbody>
+			</table>
+			{% if current_user.username == profile.account.username %}
+				<a href="/update_profile" class="btn btn-outline-info">Update Profile</a>
+			{% endif %}
+		{% else %}
+				<a href="/create_profile" class="btn btn-outline-danger my-5">Create Profile</a>
+		{% endif %}
+	</div>
+</div>
 
 {% endblock %}

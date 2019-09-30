@@ -1,7 +1,65 @@
 {% extends 'layout.html' %}
 {% block content %}
+<script type="text/javascript">
+	function copyToClip() {
+	  /* Get the text field */
+	  var copyText = document.getElementById("myInput");
+
+	  /* Select the text field */
+	  copyText.select();
+	  copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+	  /* Copy the text inside the text field */
+	  document.execCommand("copy");
+
+	  /* Alert the copied text */
+	  $("#copyBtn").removeClass("btn-outline-secondary").addClass("btn-success");
+	  $("#copyBtn").html('Copied!')
+	 } 
+</script>
 <div class="text-center mt-4 animated bounceInDown">
-	<h2>Team Card</h2>
+	<h3>Team Card</h3>
 	<hr>
+</div>
+<div class="card mx-auto animated flipInY" style="width: 25rem;">
+  <div class="card-body pb-0">
+    <h3 class="card-title">{{ team.name }}</h3>
+    <h6 class="card-subtitle mb-2 text-muted"><small>Team of <a href="{{ url_for('event.event_page', eid=team.event_id) }}">Lan Gaming</a></small></h6>
+    <hr>
+    <div class='teamcode'>
+   	 <div class="input-group">
+		
+		<input type="text" style='max-width: 100px' class="form-control form-control-sm text-center" value="{{ team.team_code }}" id="myInput" readonly="">
+		  <div class="input-group-append">
+		    <button id="copyBtn" class="btn btn-sm btn-outline-secondary" onclick="copyToClip()" type="button">Copy</button>
+		  
+		</div>
+	  </div>
+		<small class="text-success"> This is your team's SECRET CODE!</small>
+	</div>
+
+
+    <table class="table mt-3">
+		<tbody>
+			{% for member in members %}
+			<tr>
+	    		<td>
+	    			<img width="40px" class="rounded-circle" src="{{ url_for('static', filename='profile_pics/'+member.getProfile().image)}}">
+	    		</td>
+	    		<td>
+	    			<span>{{ member.getProfile().name }}</span><br>
+	    			<a href="{{ url_for('profile.profile_card', username=member.username) }}">@{{ member.username}}</a>
+	    		</td>
+	    		<td>
+	    			<span>{{ member.getProfile().course }}</span>
+	    		</td>
+	    	</tr>
+	    	{% endfor %}
+	    	<tr>
+	    		<td colspan="3" class="text-center text-danger"><small>Incomplete team add 1 more members</small></td>
+	    	</tr>
+  		</tbody>
+  	</table>
+  </div>
 </div>
 {% endblock%}
