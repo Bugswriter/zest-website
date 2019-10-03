@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="col-12">
+
+  <div class="text-center mt-4 animated bounceInDown">
+    <h2>Users</h2>
+    <hr>
+  </div>
+
+	<table class="table text-center mt-4 border table-striped">
+		<thead class="thead-dark table-striped">
+    		<th>ID</th>
+    		<th>Username</th>
+    		<th>Time</th>
+  	</thead>
+  	{% for event in events %}	
+	  		<tr>
+	  			<td>{{event.id}}</td>
+	    		<td><a href="{{url_for('event.event_page', eid=event.id)}}">{{event.title}}</a></td>
+	    		<td>{{event.time}}</td>
+          
+	  		</tr>  
+    {% endfor %}
+  	</table>
+</div>
+{% endblock %}

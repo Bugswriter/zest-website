@@ -24,7 +24,7 @@
 <div class="card mx-auto animated flipInY" style="width: 25rem;">
   <div class="card-body pb-0">
     <h3 class="card-title">{{ team.name }}</h3>
-    <h6 class="card-subtitle mb-2 text-muted"><small>Team of <a href="{{ url_for('event.event_page', eid=team.event_id) }}">Lan Gaming</a></small></h6>
+    <h6 class="card-subtitle mb-2 text-muted"><small>Team of <a href="{{ url_for('event.event_page', eid=team.event_id) }}">{{ event.title }}</a></small></h6>
     <hr>
     <div class='teamcode'>
    	 <div class="input-group">
@@ -56,7 +56,7 @@
 	    	</tr>
 	    	{% endfor %}
 	    	<tr>
-	    		<td colspan="3" class="text-center text-danger"><small>Incomplete team add 1 more members</small></td>
+	    		<!-- <td colspan="3" class="text-center text-danger"><small>Incomplete team add 1 more members</small></td> -->
 	    	</tr>
   		</tbody>
   	</table>

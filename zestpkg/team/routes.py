@@ -13,8 +13,9 @@ team = Blueprint('team', __name__)
 def team_card(tid):
 	team = Team.query.get_or_404(tid)
 	members = team.getMember()
+	event = Event.query.get_or_404(team.event_id)
 	if current_user in members:
-		return render_template('team.html', team=team, members=members ,title=team.name)
+		return render_template('team.html', team=team, event=event, members=members ,title=team.name)
 	else:
 		flash('You are not in this team! So access denied', category='warning')
 		abort(500)
@@ -46,6 +47,7 @@ def createTeam():
 			else:
 				contestant = Contestant.query.filter_by(user_id=current_user.id, event_id=eid).first()	
 				if contestant == None:
+					# checking if user already in another team
 					if Team.query.filter_by(name=tname).first() == None:
 						# Checking if team already exist
 						try:
