@@ -38,8 +38,8 @@ def AdminEvents():
 
 
 
-@login_required
 @admin.route('/admin/verify/<string:username>/', methods=['GET', 'POST'])
+@login_required
 def toggleVerfiy(username):
 	AdminCheck()
 	user = User.query.filter_by(username=username).first()
@@ -53,9 +53,11 @@ def toggleVerfiy(username):
 	return redirect(url_for('admin.AdminPannel'))
 
 
-@login_required
+
 @admin.route('/admin/usercreation', methods=['GET', 'POST'])
+@login_required
 def UserCreation():
+	AdminCheck()
 	form = RegisterForm()
 	if form.validate_on_submit():
 		hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
