@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, flash, request, redirect, url_for,
 from zestpkg.users.forms import RegisterForm, LoginForm, RequestResetForm, ResetPasswordForm
 from flask_login import current_user, login_user, logout_user, login_required
 from zestpkg import bcrypt, db
-from zestpkg.models import User
+from zestpkg.models import *
 from zestpkg.users.utils import send_confirmation_link, send_reset_email
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
@@ -61,7 +61,7 @@ def login():
 					
 				return redirect(url_for('main.home'))
 		else:
-			flash(f'Login Unsuccessful. Please check email or password', 'danger')
+			flash(f'Login Unsuccessful. Please check email or password', category='danger')
 			return render_template('login.html', title='Login', form=loginform, request_form=request_form)
 
 
@@ -78,6 +78,7 @@ def login():
 
 @users.route('/logout')
 def logout():
+	flash('You are logged out', category='info' )
 	logout_user()
 	return redirect(url_for('main.home'))
 
@@ -113,3 +114,34 @@ def reset_token(token):
 def account():
 	user = User.query.get_or_404(current_user.id)
 	render_template('account.html', user=user)
+
+
+
+
+@users.route('/account/delete')
+@login_required
+def delete_account():
+	user = User.query.get(current_user.id)
+	profile = Profile.query.filter_by(user_id=current_user.id).first()
+	contestants = Contestant.query.filter_by(user_id=current_user.id)
+	events = Event.query.filter_by(user_id=current_user.id)
+
+	if user != None:
+		db.session.delete(user)
+
+	if profile != None:
+		db.session.delete(profile)
+
+	if contestants != None:
+		for contestant in contestants:
+			db.session.delete(contestant)
+
+	if events != None:
+		for event in events:
+			event.user_id = 1
+
+	db.session.commit()
+	logout_user()
+
+	flash('Your account has been been deleted!', category='success')
+	return redirect(url_for('main.home'))

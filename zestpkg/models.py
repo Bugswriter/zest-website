@@ -21,17 +21,14 @@ class User(db.Model, UserMixin):
 	username = db.Column(db.String(20), unique=True, nullable=False)
 	email = db.Column(db.String(120), unique=True, nullable=False)
 	password = db.Column(db.String(60), nullable=False)
-	profile = db.relationship('Profile', backref='account', lazy=True)
+	profile = db.relationship('Profile', backref='account', uselist=False)
 	verified = db.Column(db.Boolean, nullable=False, default=False)
 
 	def getTeam(self):
 		return Team.query.filter_by(user_id=self.id)
 
 	def getProfile(self):
-		try:
-			return self.profile[0]
-		except:
-			return None
+		return self.profile
 
 	def getEvents(self):
 		party = Contestant.query.filter_by(user_id=self.id)
@@ -82,13 +79,15 @@ class Profile(db.Model):
 class Event(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	title = db.Column(db.String(50), nullable=False)
+	category = db.Column(db.String(20), nullable=False)
+	subcategory = db.Column(db.String(40), nullable=False)
 	image = db.Column(db.String(60), nullable=False, default='default.jpg')
-	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-	participants = db.relationship('Contestant', backref='event', lazy=True)
 	team_limit = db.Column(db.Integer, nullable=False, default=1)
 	time = db.Column(db.String(15), nullable=True)
-	price = db.Column(db.String(30), nullable=True)
-	detail_txt = db.Column(db.Text(60), nullable=True)
+	about = db.Column(db.Text(60), nullable=True)
+	gender = db.Column(db.String(1), nullable=True)
+	participants = db.relationship('Contestant', backref='event', lazy=True)
+	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 	def eventType(self):
 		if self.team_limit == 1:
@@ -97,9 +96,18 @@ class Event(db.Model):
 			return "Team"
 
 	def getOrganizer(self):
-		user = User.query.get(self.user_id)
+		user = User.query.get_or_404(self.user_id)
 		return user
 		
+	def getCategory(self):
+		if self.category == 'zestopen':
+			return "Zest (Open)"
+		elif self.category == 'zestclose':
+			return "Zest (Close)"
+		else:
+			return "Aamod"
+
+
 	def getParticipants(self):
 		if self.team_limit == 1:
 			party = self.participants
@@ -110,11 +118,16 @@ class Event(db.Model):
 
 			return participants
 		else:
+
 			party = self.participants
 			teams = []
 			for member in party:
 				team = Team.query.get_or_404(member.team_id)
-				teams.append(team)
+				event = Event.query.get(team.event_id)
+
+				if len(team.getMember()) == event.team_limit:
+					teams.append(team)
+
 
 			return list(set(teams))
 

@@ -7,11 +7,49 @@ from zestpkg.event.utils import *
 
 event = Blueprint('event', __name__)
 
-@event.route('/events')
-@event.route('/events/')
+@event.route('/events/', methods=['GET'])
 def all_events():
-	events = Event.query.all()
-	return render_template('all_events.html', events=events)
+	page = request.args.get('page', 1, type=int)
+	category = request.args.get('cat')
+	subcat = request.args.get('subcat')
+	events = Event.query.paginate(page=page, per_page=10)
+	events = events.items
+	active = ['','','','']
+	title = 'All Zest Events'
+
+	if category == 'aamod':
+		active[3] = 'active'
+		title = 'Aamod Events'
+		events = Event.query.filter_by(category='aamod')
+
+	elif category == 'zestopen':
+		active[1] = 'active'
+		title = 'Zest Open'
+		events = Event.query.filter_by(category='zestopen')
+		
+	elif category == 'zestclose':
+		active[2] = 'active'
+		title = 'Zest Close'
+		events = Event.query.filter_by(category='zestclose')
+
+	if subcat != None:
+		title = subcat.capitalize() + ' Events'
+		events = Event.query.filter_by(subcategory=subcat)
+
+	if events == None:
+		flash('No events in your filter', category='info')
+		title = 'All Zest Events'
+		events = Event.query.all()
+
+	if 'active' not in active:
+		active[0] = 'active'
+
+	if current_user.is_authenticated:
+		events = [event for event in events if event.gender == None or event.gender == current_user.profile.gender] 
+
+	
+	return render_template('all_events.html', events=events, title=title, active=active)
+
 
 
 @event.route('/event/<int:eid>')
@@ -24,65 +62,7 @@ def event_page(eid):
 @event.route('/event/my', methods=['GET', 'POST'])
 @login_required
 def my_events():
-	return render_template('myevents.html', events=current_user.getEvents())
-
-
-@event.route('/event/add', methods=['GET', 'POST'])
-@login_required
-def add_event():
-	if not current_user.verified:
-		abort(500)
-
-	if current_user.getProfile() == None:
-		flash('Create your profile first', category='info')
-		return redirect(url_for('profile.create_profile'))
-
-	form = EventForm()
-	if form.validate_on_submit():
-		if form.image.data:
-			picture = save_picture(form.image.data)
-		else:
-			picture = "default.jpg"
-
-		event = Event(title=form.title.data, image=picture, user_id=current_user.id, team_limit=form.num_of_member.data, detail_txt=form.about.data, price=form.price.data)
-		db.session.add(event)
-		db.session.commit()
-		flash('Your Event Registered Successfully!', 'success')
-		return redirect('/')
-
-	return render_template('addevent.html', form=form, title='Register Event')
-
-
-@event.route('/event/<int:eid>/update', methods=['GET', 'POST'])
-@login_required
-def update_event(eid):
-	if current_user.getProfile() == None:
-		flash('Create your profile first', category='info')
-		return redirect('/create_profile')
-
-	event = Event.query.get_or_404(eid)
-	if current_user.id != event.user_id:
-		abort(500)
-
-	form = EventForm()
-	if form.validate_on_submit():
-		event.title = form.title.data
-		if form.image.data:
-			event.image = save_picture(form.image.data)
-		
-		event.team_limit = form.num_of_member.data
-		event.detail_txt = form.about.data
-
-		db.session.commit()
-		flash('Your event is updated!', category='success')
-		return redirect('/event')
-
-	elif request.method == 'GET':
-		form.title.data = event.title
-		form.num_of_member.data = event.team_limit
-		form.about.data = event.detail_txt
-
-		return render_template('addevent.html', form=form, title='Update Event')
+	return render_template('myevents.html', events=current_user.getEvents(), title="My Events")
 
 
 

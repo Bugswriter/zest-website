@@ -8,3 +8,11 @@ main = Blueprint('main', __name__)
 def home():
 	return render_template('home.html')
 
+
+'''
+homepage
+about
+rule book
+authorities
+
+'''

@@ -1,15 +1,26 @@
 {% extends 'layout.html' %}
 {% block content %}
 <div class="text-center mt-4 animated bounceInDown">
-	<h2>My Events</h2>
+	<h2>{{ title }}</h2>
 	<hr>
+</div>
+<div class="row justify-content-around">
 	{% if events %}
-	<ul>
+	<div class="card m-3" style="">
+		<div class="card-body">
+	    <h5 class="card-title">Your Registered Events</h5>
+	    <h6 class="card-subtitle mb-2 text-muted">my teams</h6><hr>
+	    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+	    
+	  </div>
+	  <ul class="list-group list-group-flush">
 		{% for event in events %}
-			<li>{{event.title}}</li>
-			<!-- Here we show the list of events  -->
+			<li class="list-group-item">{{ event.title }}</li>
 		{% endfor %}
+
 	</ul>
+
+		</div>
 	{% else %}
 	You are registered in no events
 	<!-- Here if no events are registered -->

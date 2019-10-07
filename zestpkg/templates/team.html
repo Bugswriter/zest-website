@@ -44,14 +44,14 @@
 			{% for member in members %}
 			<tr>
 	    		<td>
-	    			<img width="40px" class="rounded-circle" src="{{ url_for('static', filename='profile_pics/'+member.getProfile().image)}}">
+	    			<img width="40px" class="rounded-circle" src="{{ url_for('static', filename='profile_pics/'+member.profile.image)}}">
 	    		</td>
 	    		<td>
-	    			<span>{{ member.getProfile().name }}</span><br>
+	    			<span>{{ member.profile.name }}</span><br>
 	    			<a href="{{ url_for('profile.profile_card', username=member.username) }}">@{{ member.username}}</a>
 	    		</td>
 	    		<td>
-	    			<span>{{ member.getProfile().course }}</span>
+	    			<span>{{ member.profile.course }}</span>
 	    		</td>
 	    	</tr>
 	    	{% endfor %}

@@ -3,7 +3,7 @@
 <div class="text-center mt-4 animated bounceInDown" id="heading">
 	<h2>{{ event.title }}</h2>
 	{% if current_user.id == event.user_id %}
-		<a href="{{ url_for('event.update_event', eid=event.id) }}" class="text-muted">update event info</a>
+		<a href="#" class="text-muted">update event info</a>
 	{% endif %}
 	<hr>
 </div>
@@ -12,7 +12,7 @@
 		<img class="card-img-top" src="{{ url_for('static', filename='event_pics/'+event.image) }}" alt="Card image cap">
 		<div class="card-body">
 			<div>
-	    		<p class="card-text">{{ event.detail_txt }}</p>
+	    		<p class="card-text">{{ event.about }}</p>
 		    </div>
 	    	<hr>
 	    	<div class="row">

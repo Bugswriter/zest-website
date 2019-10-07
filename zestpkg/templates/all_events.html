@@ -1,20 +1,37 @@
 {% extends 'layout.html' %}
 {% block content %}
 <div class="text-center mt-4 animated bounceInDown" id="heading">
-	<h2>All SRMS Events</h2>
+	<h2>{{ title }}</h2>
 	<hr>
+</div>
+<div class="row justify-content-center animated zoomIn mb-4">
+<ul class="nav nav-tabs  card-header-tabs">
+	  <li class="nav-item">
+        <a class="nav-link {{active[0]}}" href="/events">All Events</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ active[1] }}" href="/events/?cat=zestopen">Zest (Open)</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ active[2] }}" href="/events/?cat=zestclose">Zest (Close)</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ active[3] }}" href="/events/?cat=aamod">Aamod</a>
+      </li>
+    </ul>
 </div>
 {% for event in events %}
 	<div class="row p-4 justify-content-center animated zoomIn" id="events">
 		<div class="col-md-12" style="max-width: 850px;">
-			<h3 class=""><a href="{{ url_for('event.event_page', eid=event.id) }}">{{ event.title }}</a></h3>
+			<h5 class=""><a href="{{ url_for('event.event_page', eid=event.id) }}">{{ event.title }}</a></h5>
+			<p class="card-subtitle mb-2"><a href='/events/?subcat={{event.subcategory}}' class="text-muted">{{ event.subcategory }} related</a></p>
 			<div class="card text-white event-card">
-				<img class="card-img" style="filter: brightness(70%);" src="{{ url_for('static', filename='event_pics/'+ event.image) }}" width="850px"	 alt="Card image">
+				<img class="card-img" style="filter: brightness(50%);" src="{{ url_for('static', filename='event_pics/'+ event.image) }}" width="850px"	 alt="Card image">
 				<div class="card-img-overlay" style="max-width: 550px;">
-					<p class="card-text event-detail">{{ event.detail_txt }}</p>
+					<p class="card-text event-detail">{{ event.about }}</p>
 					
 					<p class="event-info">
-						{{ event.eventType() }} Event <br>
+						{{ event.getCategory() }} Event <br>
 						{% if event.eventType() == 'Team' %}
 							<small class="text-info">{{ event.team_limit }} member team is required.</small><br>
 						{% else %}
@@ -28,4 +45,20 @@
 		</div>
 	</div>
 {% endfor %}
+{% endblock %}
+
+{% block sidebar %}
+	<div class="row p-4 justify-content-center animated zoomIn" id="events">
+
+		<div class="card mt-5" style="width: 18rem;">
+		  <div class="card-header">
+		    Featured
+		  </div>
+		  <ul class="list-group list-group-flush">
+		    <li class="list-group-item">Cras justo odio</li>
+		    <li class="list-group-item">Dapibus ac facilisis in</li>
+		    <li class="list-group-item">Vestibulum at eros</li>
+		  </ul>
+		</div>
+	</div>
 {% endblock %}

@@ -6,7 +6,7 @@ from zestpkg.models import User
 
 
 def AdminCheck():
-	if current_user.is_authenticated and current_user.username == 'bugswriter':
+	if current_user.is_authenticated and current_user.username == 'admin':
 		return True
 	else:
 		abort(403)

@@ -2,18 +2,24 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField, RadioField, TextField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, Optional
 from flask_wtf.file import FileField, FileAllowed
-from zestpkg.models import Event
+from zestpkg.models import Event, User
 from wtforms.widgets import TextArea
 
 class EventForm(FlaskForm):
-	title = StringField('Event Title', validators=[DataRequired()])
-	event_type = SelectField('Course', validators=[DataRequired(), Optional()], choices=[('Team','Team Event'), ('Solo', 'Solo Event')])
+	title = StringField('Event Title', validators=[DataRequired()])	
+	orguname = StringField('Organizer Username', validators=[DataRequired()])
+	category = SelectField('Category', validators=[DataRequired(), Optional()], choices=[('zestopen', 'Zest Open'), ('zestclose', 'Zest Close'),('aamod', 'Aamod')])
+	subcategory = SelectField('Sub Category', validators=[DataRequired(),Optional()], choices=[('sports', 'Sports'),('dance', 'Dance'),('drama','Drama'),('music','Music'),('informals','Informals'),('deco', 'Decoration'),('fine arts', 'Fine Arts'), ('literary','Literary'), ('renaissance','Renaissance')])
 	image = FileField('Cover Picture', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
-	num_of_member = IntegerField('Number of member', validators=[DataRequired()])
+	num_of_member = IntegerField('Number of member',validators=[DataRequired()])
+	time = StringField('Event Time')
 	about = StringField('Event Details', widget=TextArea())
-	price =IntegerField('Price', validators=[])
-	submit = SubmitField('Register Event')	
+	submit = SubmitField('Register Event')
 
+	def validate_orguname(self, orguname):
+		user = User.query.filter_by(username=orguname.data).first()
+		if not user:
+			raise ValidationError("No account with this username")	
 
 
 

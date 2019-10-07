@@ -32,24 +32,19 @@
 					<a class="nav-link" href="{{ url_for('event.all_events') }}">Events</a>
 				</li>
 				{% if current_user.is_authenticated %}
-					{% if current_user.verified %}
-					<li class="nav-item">
-						<a class="nav-link" href="{{ url_for('event.add_event') }}">Add Event</a>
-					</li>
-					{% endif %}
 					<li class="nav-item">
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								
-								{% if current_user.getProfile() == None %}
+								{% if current_user.profile == None %}
 									<img width="30px" class="rounded-circle" src="{{ url_for('static', filename='profile_pics/default.png')}}">
 								{% else %} 
-									<img width="30px" class="rounded-circle" src="{{ url_for('static', filename='profile_pics/'+current_user.getProfile().image)}}">
+									<img width="30px" class="rounded-circle" src="{{ url_for('static', filename='profile_pics/'+current_user.profile.image)}}">
 								{% endif %}	
 								<span> {{ current_user.username }}</span>
 							</a>
 					        <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="nav-dd">
-					          <a class="nav-link" href="/{{current_user.username}}">My Profile</a>
+					          <a class="nav-link" href="{{ url_for('profile.profile_card', username=current_user.username) }}">My Profile</a>
 					          <a class="nav-link" href="{{ url_for('event.my_events') }}">My Events</a>
 					          
 					          <div class="dropdown-divider"></div>
@@ -69,12 +64,16 @@
 	  	</div>
   	</div>
 </nav>
-
+<script type="text/javascript">
+	setTimeout(function(){
+	  $('#flashmessage').hide('slow');
+	}, 4000);
+</script>
 <div class="row justify-content-center animated flipInX">
 {% with messages = get_flashed_messages(with_categories=True) %}
 	{% if messages %}
 		{% for category, message in messages %}
-			<div class="col-md-4 mt-3 text-center alert alert-{{ category }}" role="alert">
+			<div class="col-md-4 mt-3 text-center alert alert-{{ category }}" id='flashmessage' role="alert">
 				<span>{{ message }}</span>
 			</div>
 		{% endfor %}
@@ -85,7 +84,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-lg-2">
-			{% block sidebar %}{% endblock sidebar %}
+			
 		</div>
 		<div class="col-lg-8">
 			{% block content %}{% endblock content%}
@@ -96,6 +95,7 @@
 			</footer>
 		</div>
 		<div class="col-lg-2 col-md-12 p-4">
+				
 		</div>
 	</div>
 </div>

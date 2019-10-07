@@ -25,7 +25,19 @@
 						{% endif %}
 					</div>
 				</div>
+
 				<div class="form-row">
+					<div class="col form-group">
+						{{ form.orguname.label(class='form-control-label') }}
+						{{ form.orguname(class='form-control') }}
+						<div class="invalid-feedback d-block">
+							{% if form.orguname.errors %}
+								{% for error in form.orguname.errors %}
+									{{ error }}
+								{% endfor %}
+							{% endif %}
+						</div>
+					</div>
 					<div class="col form-group">
 						{{ form.num_of_member.label(class='form-control-label') }}
 						{{ form.num_of_member(class='form-control') }}
@@ -37,26 +49,27 @@
 							{% endif %}
 						</div>
 					</div>
-					<div class="col form-group">
-						{{ form.price.label(class='form-control-label') }}
-						{{ form.price(class='form-control') }}
-						<div class="invalid-feedback d-block">
-							{% if form.price.errors %}
-								{% for error in form.price.errors %}
-									{{ error }}
-								{% endfor %}
-							{% endif %}
-						</div>	
-					</div>
 				</div>
 				<div class="form-row">
 					<div class="col form-group">
-						{{ form.event_type.label(class='form-control-label') }}
-						{{ form.event_type(class='form-control') }}
+						{{ form.category.label(class='form-control-label') }}
+						{{ form.category(class='form-control') }}
 
 						<div class="invalid-feedback d-block">
-							{% if form.event_type.errors %}
-								{% for error in form.event_type.errors %}
+							{% if form.category.errors %}
+								{% for error in form.category.errors %}
+									{{ error }}
+								{% endfor %}
+							{% endif %}
+						</div>
+					</div>
+					<div class="col form-group">
+						{{ form.subcategory.label(class='form-control-label') }}
+						{{ form.subcategory(class='form-control') }}
+
+						<div class="invalid-feedback d-block">
+							{% if form.subcategory.errors %}
+								{% for error in form.subcategory.errors %}
 									{{ error }}
 								{% endfor %}
 							{% endif %}
@@ -73,7 +86,6 @@
 							{% endif %}
 						</div>
 					</div>
-					
 				</div>
 				
 				<div class="form-group">

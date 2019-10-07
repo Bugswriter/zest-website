@@ -8,20 +8,18 @@ from zestpkg.profile.utils import save_picture, create_image
 profile = Blueprint('profile', __name__)
 
 
-@profile.route('/<string:username>')
-@profile.route('/<string:username>/')
+@profile.route('/user/<string:username>/')
 def profile_card(username):
 	user = User.query.filter_by(username=username).first()
 	if user == None:
 		flash('There is no account with this username', category='danger')
 		abort(404)
 
-	profile = user.getProfile()
-	if profile == None and user.id != current_user.id:
-		flash('User does not created any profile yet!', category='info')
+	if user.profile == None:
+		flash('User does not created his profile card yet!', category='info')
 		abort(404)
 
-	return render_template('profile.html', profile=profile ,title=username)
+	return render_template('profile.html', profile=user.profile ,title=username)
 	
 
 
@@ -29,8 +27,7 @@ def profile_card(username):
 @profile.route('/create_profile', methods=['GET', 'POST'])
 @login_required
 def create_profile():
-	profile = Profile.query.filter_by(user_id=current_user.id).first()
-	if profile:
+	if current_user.profile == None:
 		flash('You already created one profile. You can only update!', category='info')
 		return redirect(url_for('profile.update_profile'))
 
@@ -55,7 +52,7 @@ def create_profile():
 @profile.route('/upload_profile', methods=['GET', 'POST'])
 def upload_profile_pic():
 	image = request.args.get('image')
-	profile = current_user.getProfile()
+	profile = current_user.profile
 	if profile:
 		profile.image = create_image(image)
 		db.session.commit()
@@ -71,7 +68,7 @@ def update_profile():
 		flash("You have not created your profile. First create", category='danger')
 		return redirect('profile.create_profile')
 
-	profile = current_user.getProfile()
+	profile = current_user.profile
 	form = ProfileForm()
 	if form.validate_on_submit():
 		profile.name = form.first_name.data + ' ' + form.last_name.data
