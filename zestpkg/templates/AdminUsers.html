@@ -14,7 +14,7 @@
     		<th>E-Mail</th>
     		<th>Action<th>
   	</thead>
-  	{% for user in users %}	
+  	{% for user in users.items %}	
 	  		<tr>
 	  			<td>{{user.id}}</td>
 	    		<td><a href="{{url_for('profile.profile_card', username=user.username)}}">{{user.username}}</a></td>
@@ -27,5 +27,24 @@
 	  		</tr>  
     {% endfor %}
   	</table>
+    <nav>
+      <ul class="pagination">
+      {% for page_num in users.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+          {% if users.page == page_num %}
+            <li class="page-item active"><a class="page-link" href="{{ url_for('admin.AdminUsers', page=page_num) }}">  {{ page_num }}</a></li>
+          {% else %}
+            {% if page_num == 1 %}
+              <li class="page-item"><a class="page-link" href="{{ url_for('admin.AdminUsers', page=page_num) }}">First</a></li>
+            {% elif page_num == last_page %}
+              <li class="page-item"><a class="page-link" href="{{ url_for('admin.AdminUsers', page=page_num) }}">Last</a></li>
+            {% else %} 
+              <li class="page-item"><a class="page-link" href="{{ url_for('admin.AdminUsers', page=page_num) }}">{{ page_num }}</a></li>
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+      </ul>
+    </nav>
 </div>
 {% endblock %}

@@ -29,9 +29,10 @@ def AdminPannel():
 @login_required
 def AdminUsers():
 	AdminCheck()
-	users = User.query.all()
-	
-	return render_template('AdminUsers.html', title='User View', users=users)
+	page = request.args.get('page', 1, type=int)
+	users = User.query.paginate(page=page ,per_page=3)
+	last = ceil(users.total/3)	
+	return render_template('AdminUsers.html', title='User View', users=users, last_page=last)
 
 
 @admin.route('/admin/usercreation', methods=['GET', 'POST'])
