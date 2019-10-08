@@ -6,23 +6,48 @@
     <h2>Events</h2>
     <hr>
   </div>
-
 	<table class="table text-center mt-4 border table-striped">
 		<thead class="thead-dark table-striped">
     		<th>Title</th>
     		<th>Category</th>
         <th>Action</th>
+        <th>Delete</th>
   	</thead>
-  	{% for event in events %}	
+  	{% for event in events.items %}	
 	  		<tr>
 	    		<td><a href="{{url_for('event.event_page', eid=event.id)}}">{{event.title}}</a></td>
 	    		<td>{{ event.getCategory() }}</td>
           <td>
             <a href="#" class='btn btn-outline-info'>Update</a>
-            <a href="#" class='btn btn-danger ml-3 '>Delete</a>
-            </td>
+          </td>
+          <td>
+            <a href="#" class='btn btn-outline-danger ml-3 rounded-circle'>✘</a>
+          </td>
 	  		</tr>  
     {% endfor %}
   	</table>
+    <nav>
+    <ul class="pagination">
+    {% for page_num in events.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+      {% if page_num %}
+        {% if events.page == page_num %}
+          <li class="page-item active"><a class="page-link" href="{{ url_for('admin.AdminEvents', page=page_num) }}">  {{ page_num }}</a></li>
+        {% else %}
+          {% if page_num == 1 %}
+            <li class="page-item"><a class="page-link" href="{{ url_for('admin.AdminEvents', page=page_num) }}">First</a></li>
+          {% elif page_num == last_page %}
+            <li class="page-item"><a class="page-link" href="{{ url_for('admin.AdminEvents', page=page_num) }}">Last</a></li>
+          {% else %}
+             <li class="page-item"><a class="page-link" href="{{ url_for('admin.AdminEvents', page=page_num) }}">{{ page_num }}</a></li>
+          {% endif %}
+        {% endif %}
+      {% else %}
+
+      {% endif %}
+    {% endfor %}
+    </ul>
+  </nav>
+    <nav>
+  </nav>
 </div>
 {% endblock %}

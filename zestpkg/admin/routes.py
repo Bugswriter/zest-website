@@ -8,6 +8,7 @@ from zestpkg.admin.utils import AdminCheck
 from zestpkg.users.forms import RegisterForm
 from zestpkg.event.forms import EventForm
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from math import ceil
 
 
 admin = Blueprint('admin', __name__)
@@ -56,8 +57,10 @@ def UserCreation():
 @login_required
 def AdminEvents():
 	AdminCheck()
-	events = Event.query.all()
-	return render_template('AdminEvents.html', title='Events View', events=events)
+	page = request.args.get('page', 1, type=int)
+	events = Event.query.paginate(page=page ,per_page=10)
+	last = ceil(events.total/10)
+	return render_template('AdminEvents.html', title='Events View', events=events, last_page=last)
 
 @admin.route('/admin/event/add', methods=['GET', 'POST'])
 @login_required

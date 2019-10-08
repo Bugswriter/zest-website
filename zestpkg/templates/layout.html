@@ -1,103 +1,88 @@
 <!DOCTYPE html>
 <html>
 <head>
-{% if title %}
-	<title>Zest2O19 | {{title }}</title>
-{% else %}
-	<title>{{ title }}</title>
-{% endif %}
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/animate.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom.css') }}">
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/croppie.css') }}" />
-	<script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
-	<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-	<script src="{{ url_for('static', filename='css/croppie.js') }}"></script>
+  {% if title %}
+    <title>Zest2O19 | {{title }}</title>
+  {% else %}
+    <title>{{ title }}</title>
+  {% endif %}
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/animate.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/layout.css') }}" />
+  <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/croppie.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </head>
 <body>
+  <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand rounded" href="{{ url_for('main.home') }}"><img src="{{ url_for('static', filename='images/zestlogo.png') }}" class="mb-1" width="60px">2019</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarlinks" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarlinks">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{{ url_for('main.home') }}">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('event.all_events') }}">Events</a>
+          </li>
+          {% if current_user.is_authenticated %}
+            <li class="nav-item">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {% if current_user.profile == None %}
+                    <img width="30px" class="rounded-circle" src="{{ url_for('static', filename='profile_pics/default.png')}}">
+                  {% else %} 
+                    <img width="30px" class="rounded-circle" src="{{ url_for('static', filename='profile_pics/'+current_user.profile.image)}}">
+                  {% endif %} 
+                  <span> {{ current_user.username }}</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="nav-dd">
+                  <a class="nav-link" href="{{ url_for('profile.profile_card', username=current_user.username) }}">My Profile</a>
+                  <a class="nav-link" href="{{ url_for('event.my_events') }}">My Events</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="nav-link" href="{{ url_for('users.logout') }}">Logout</a>   
+                </div>
+              </li>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('users.login') }}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('users.register') }}">Register</a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>    
 
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-	<div class="container">
-		<a class="navbar-brand rounded" href="{{ url_for('main.home') }}"><img src="{{ url_for('static', filename='images/zestlogo.png') }}" class="mb-1" width="60px">2019</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarlinks" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarlinks">
-			<ul class="navbar-nav ml-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="{{ url_for('main.home') }}">Home <span class="sr-only">(current)</span></a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{{ url_for('event.all_events') }}">Events</a>
-				</li>
-				{% if current_user.is_authenticated %}
-					<li class="nav-item">
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								
-								{% if current_user.profile == None %}
-									<img width="30px" class="rounded-circle" src="{{ url_for('static', filename='profile_pics/default.png')}}">
-								{% else %} 
-									<img width="30px" class="rounded-circle" src="{{ url_for('static', filename='profile_pics/'+current_user.profile.image)}}">
-								{% endif %}	
-								<span> {{ current_user.username }}</span>
-							</a>
-					        <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="nav-dd">
-					          <a class="nav-link" href="{{ url_for('profile.profile_card', username=current_user.username) }}">My Profile</a>
-					          <a class="nav-link" href="{{ url_for('event.my_events') }}">My Events</a>
-					          
-					          <div class="dropdown-divider"></div>
-					          <a class="nav-link" href="{{ url_for('users.logout') }}">Logout</a>	
-					        </div>
-						</li>
-					</li>
-				{% else %}
-					<li class="nav-item">
-						<a class="nav-link" href="{{ url_for('users.login') }}">Login</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="{{ url_for('users.register') }}">Register</a>
-					</li>
-				{% endif %}
-	  		</ul>
-	  	</div>
-  	</div>
-</nav>
-<script type="text/javascript">
-	setTimeout(function(){
-	  $('#flashmessage').hide('slow');
-	}, 4000);
-</script>
-<div class="row justify-content-center animated flipInX">
-{% with messages = get_flashed_messages(with_categories=True) %}
-	{% if messages %}
-		{% for category, message in messages %}
-			<div class="col-md-4 mt-3 text-center alert alert-{{ category }}" id='flashmessage' role="alert">
-				<span>{{ message }}</span>
-			</div>
-		{% endfor %}
-	{% endif %}
-{% endwith %}
-</div>
+  <div class="row justify-content-center animated flipInX">
+    {% with messages = get_flashed_messages(with_categories=True) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="col-md-4 mt-3 text-center alert alert-{{ category }}" id='flashmessage' role="alert">
+            <span>{{ message }}</span>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </div>
 
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-lg-2">
-			
-		</div>
-		<div class="col-lg-8">
-			{% block content %}{% endblock content%}
-			<footer class="my-5 text-center animated bounceInUp">
-				<div class="container">
-					<span class="text-muted">made with &#10084; by <a href="https://github.com/bugswriter/" class="text-danger">@bugswriter</a> - &copy; 2019-2020 </span>
-				</div>
-			</footer>
-		</div>
-		<div class="col-lg-2 col-md-12 p-4">
-				
-		</div>
-	</div>
-</div>
+  <div class="container">
+    {% block content %}{% endblock content%}
+    <footer class="my-5 text-center animated bounceInUp">
+      <div class="container">
+        <span class="text-muted">made with &#10084; by <a href="https://github.com/bugswriter/" class="text-danger">@bugswriter</a> - &copy; 2019-2020 </span>
+      </div>
+    </footer>
+  </div>
 </body>
 </html>
