@@ -22,6 +22,7 @@ class User(db.Model, UserMixin):
 	email = db.Column(db.String(120), unique=True, nullable=False)
 	password = db.Column(db.String(60), nullable=False)
 	profile = db.relationship('Profile', backref='account', uselist=False)
+	event = db.relationship('Event', backref='author', uselist=False)
 	verified = db.Column(db.Boolean, nullable=False, default=False)
 
 	def getTeam(self):

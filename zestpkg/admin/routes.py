@@ -141,48 +141,32 @@ def add_event():
 def update_event(eid):
 	AdminCheck()
 	event = Event.query.get_or_404(eid)
-	if current_user.username != 'admin' or current_user.id != event.user_id:
-		flash("You are not allowed on this page!", category='danger')
-		abort(500)
-
-	if current_user.getProfile() == None:
-		flash('Create your profile first', category='info')
-		return redirect('/create_profile')
-
 	form = EventForm()
-
-
 	if form.validate_on_submit():
-		if user is not None:
-			oid = user.id
-		else:
-			flash('Event form validate orguname filter not working', category='danger')
-			abort(500)
-
-		event.title = form.title.data
 		if form.image.data:
 			event.image = save_picture(form.image.data)
+		user=User.query.filter_by(username=form.orguname.data).first()		
 		
+		event.title = form.title.data
+		event.user_id=user.id
 		event.team_limit = form.num_of_member.data
-		event.user_id = oid
 		event.category = form.category.data
 		event.subcategory = form.subcategory.data
 		event.about = form.about.data
 
 		db.session.commit()
 		flash('Your event is updated!', category='success')
-		return redirect('/event')
+		return redirect(url_for('event.event_page', eid=eid))
 
 	elif request.method == 'GET':
 		form.title.data = event.title
-		user = User.query.get_or_404(event.user_id)
-		form.orguname.data = user.username
+		form.orguname.data = event.author.username
 		form.num_of_member.data = event.team_limit
 		event.category = form.category.data
 		event.subcategory = form.subcategory.data
 		form.about.data = event.about
 
-		return render_template('addevent.html', form=form, title='Update Event')
+	return render_template('addevent.html', form=form, title='Update Event')
 
 
 

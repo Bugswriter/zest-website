@@ -18,7 +18,7 @@
 	    		<td><a href="{{url_for('event.event_page', eid=event.id)}}">{{event.title}}</a></td>
 	    		<td>{{ event.getCategory() }}</td>
           <td>
-            <a href="#" class='btn btn-outline-info'>Update</a>
+            <a href="{{url_for('admin.update_event', eid=event.id)}}" class='btn btn-outline-info'>Update</a>
           </td>
           <td>
             <a href="{{ url_for('admin.delete_event', eid=event.id) }}" class='btn btn-outline-danger ml-3 rounded-circle'>✘</a>
