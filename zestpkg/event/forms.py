@@ -18,7 +18,7 @@ class EventForm(FlaskForm):
 
 	def validate_orguname(self, orguname):
 		user = User.query.filter_by(username=orguname.data).first()
-		if not user:
+		if user is None:
 			raise ValidationError("No account with this username")	
 
 
