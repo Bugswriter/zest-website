@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="text-center mt-4 animated bounceInDown">
+	<h2>Your Account</h2>
+	<hr>
+</div>
+<div class="row mt-5 p-3">
+	<div class="col-md-5 p-4">
+		<img class="img-thumbnail float-right mr-4 rounded-circle" width="200px" src="{{ url_for('static', filename='profile_pics/'+user.profile.image) }}">
+	</div>
+	<div class="col-md-7">
+		<h3 class="text-info">{{ user.email }}</h3><hr>
+		<form method="POST" action="" class="animated bounceInRight" style="max-width: 300px;">
+			{{ form.hidden_tag() }}
+			<fieldset class="form-group">
+				<div class="form-group">
+				{{ form.current_password.label(class="form-control-label") }}
+				{{ form.current_password(class="form-control form-control-md cp-input") }}
+					<div class="invalid-feedback d-block">
+					{% if form.current_password.errors %}
+						{% for error in form.current_password.errors %}
+							{{ error }}
+						{% endfor %}
+					{% endif %}
+					</div>
+				</div>
+				<div class="form-group">
+				{{ form.new_password.label(class="form-control-label") }}
+				{{ form.new_password(class="form-control form-control-md cp-input") }}
+					<div class="invalid-feedback d-block">
+					{% if form.new_password.errors %}
+						{% for error in form.new_password.errors %}
+							{{ error }}
+						{% endfor %}
+					{% endif %}
+					</div>
+				</div>
+				<div class="form-group">
+				{{ form.confirm_new_password.label(class="form-control-label") }}
+				{{ form.confirm_new_password(class="form-control form-control-md cp-input") }}
+					<div class="invalid-feedback d-block">
+					{% if form.confirm_new_password.errors %}
+						{% for error in form.confirm_new_password.errors %}
+							{{ error }}
+						{% endfor %}
+					{% endif %}
+					</div>
+				</div>
+			</fieldset>
+			<div class="form-group">
+				{{ form.submit(class="btn btn-outline-info") }}
+			</div>
+		</form>	
+		<a href="" class="btn btn-danger">Delete Account</a>
+	</div>
+</div>
+
+
+{% endblock%}
