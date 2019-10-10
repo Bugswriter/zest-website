@@ -51,7 +51,10 @@ def create_profile():
 
 @profile.route('/upload_profile', methods=['GET', 'POST'])
 def upload_profile_pic():
-	image = request.args.get('image')
+	image = request.form.get('image')
+	if image == None:
+		flash('No image data is given.', category='danger')
+		abort(500)
 	profile = current_user.profile
 	if profile:
 		profile.image = create_image(image)

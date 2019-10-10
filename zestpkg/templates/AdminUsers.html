@@ -44,7 +44,7 @@
     {% endfor %}
   	</table>
     <nav>
-      <ul class="pagination">
+      <ul class="pagination justify-content-center">
       {% for page_num in users.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
         {% if page_num %}
           {% if users.page == page_num %}

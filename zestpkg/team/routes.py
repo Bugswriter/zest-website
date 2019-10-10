@@ -24,7 +24,7 @@ def team_card(tid):
 @team.route('/team/create_team', methods=['POST', 'GET'])
 @login_required
 def createTeam():
-	if current_user.getProfile() == None:
+	if current_user.profile == None:
 		# Checking profile
 		flash('You need to create your Profile Card first!', category='info')
 		return redirect(url_for('profile.create_profile'))
@@ -33,6 +33,7 @@ def createTeam():
 		# Checking request method is POST 
 		tname = request.form.get('team_name')
 		eid = request.form.get('event_id')
+		
 		if tname == None or eid == None:
 			# Checking form data exist
 			flash('Wrong form data for creating team', category='danger')

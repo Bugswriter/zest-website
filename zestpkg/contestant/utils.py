@@ -13,8 +13,7 @@ def joinParty(eid, code=None):
 			if event.gender == "M":
 				flash('This event is only for Boys, check your profile', category="info")
 			else:
-				flash('This event is only for Boys, check your profile', category="info")
-			
+				flash('This event is only for Girls, check your profile', category="info")
 			abort(500)
 
 	if code == None: 

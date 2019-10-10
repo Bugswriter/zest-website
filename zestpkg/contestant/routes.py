@@ -9,7 +9,7 @@ contestant = Blueprint('contestant', __name__)
 @contestant.route('/event/<int:eid>/participate')
 @login_required
 def participate(eid):
-	if current_user.getProfile() == None:
+	if current_user.profile == None:
 		flash('You need to create your Profile Card first!', category='warning')
 		return redirect(url_for('profile.create_profile'))
 

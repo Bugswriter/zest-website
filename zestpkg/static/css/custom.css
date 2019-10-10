@@ -76,6 +76,7 @@ h6{ font-size: 18px; }
 @media (max-width: 1500px){
 	body, p, li, span{
 	    font-family: 'Open Sans', sans-serif;
+	    font-size: 14px;
 	}
 
 	h1{ font-size: 33px; }
@@ -90,16 +91,13 @@ h6{ font-size: 18px; }
 		overflow: hidden;
 
 	}
-	#eventnavbar{
-		font-size: 14px;
-	}
 }
 
 @media (max-width: 720px){
 
 	body, p, li, span{
 	    font-family: 'Open Sans', sans-serif;
-	    font-size: 0.8em;
+	    font-size: 12px;
 	}
 
 	h1 { font-size: 22px; }

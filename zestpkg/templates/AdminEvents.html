@@ -26,8 +26,8 @@
 	  		</tr>  
     {% endfor %}
   	</table>
-    <nav class="border">
-    <ul class="pagination">
+    <nav>
+    <ul class="pagination justify-content-center">
     {% for page_num in events.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
 
       {% if page_num %}
@@ -46,8 +46,6 @@
 
     {% endfor %}
     </ul>
-  </nav>
-    <nav>
   </nav>
 </div>
 {% endblock %}
