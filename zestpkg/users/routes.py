@@ -55,9 +55,9 @@ def login():
 			if next_page:
 				return redirect(next_page)
 			else:
-				if current_user.getProfile() == None:
+				if current_user.profile == None:
 					flash("Please create your profile card", category='info')
-					return redirect('/create_profile')
+					return redirect(url_for('profile.create_profile'))
 					
 				return redirect(url_for('main.home'))
 		else:

@@ -20,17 +20,24 @@ admin = Blueprint('admin', __name__)
 @login_required
 def AdminPannel():
 	AdminCheck()
-	return render_template('AdminPannel.html', title='AdminPannel')
+	number = {}
+	number['user'] = db.session.query(User).count()
+	number['event'] = db.session.query(Event).count()
+	number['team'] = db.session.query(Team).count()
+	number['contestant'] = db.session.query(Contestant).count()
+
+	return render_template('AdminPannel.html', title='AdminPannel', **number)
 
 
-#admin user related
+'''
+	 Admin User related
+'''
 
 @admin.route('/admin/users', methods=['GET', 'POST'])
 @login_required
 def AdminUsers():
 	AdminCheck()
 	users = User.query.all()
-	
 	return render_template('AdminUsers.html', title='User View', users=users)
 
 
@@ -39,7 +46,7 @@ def AdminUsers():
 def UserCreation():
 	AdminCheck()
 	form = RegisterForm()
-	if form.validate_on_submit():
+	if form.validate_on_submit():	
 		hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
 		user = User(username=form.username.data, email=form.email.data, password=hashed_password)
 		db.session.add(user)
@@ -47,6 +54,36 @@ def UserCreation():
 		flash("Account has been created for "+form.email.data, category='success')
 		return redirect(url_for('admin.UserCreation'))
 	return render_template('register.html', title='Admin user registeration', form=form)
+
+@admin.route('/admin/user/<int:uid>/delete')
+@login_required
+def delete_account(uid):
+	AdminCheck()
+	user = User.query.get(uid)
+	name = user.profile.name
+	profile = Profile.query.filter_by(user_id=uid).first()
+	contestants = Contestant.query.filter_by(user_id=uid)
+	events = Event.query.filter_by(user_id=uid)
+
+	if user != None:
+		db.session.delete(user)
+
+	if profile != None:
+		db.session.delete(profile)
+
+	if contestants != None:
+		for contestant in contestants:
+			db.session.delete(contestant)
+
+	if events != None:
+		for event in events:
+			event.user_id = 1
+
+	db.session.commit()
+
+	flash(f'{name} account has been been deleted!', category='success')
+	return redirect(url_for('admin.AdminUsers'))
+
 
 
 #admin event related
@@ -99,6 +136,7 @@ def add_event():
 @admin.route('/admin/event/<int:eid>/update', methods=['GET', 'POST'])
 @login_required
 def update_event(eid):
+	AdminCheck()
 	event = Event.query.get_or_404(eid)
 	if current_user.username != 'admin' or current_user.id != event.user_id:
 		flash("You are not allowed on this page!", category='danger')
@@ -145,6 +183,17 @@ def update_event(eid):
 
 
 
+@admin.route('/admin/event/<int:eid>/delete')
+@login_required
+def delete_event(eid):
+	AdminCheck()
+	event = Event.query.get_or_404(eid)
+	db.session.delete(event)
+	db.session.commit()
+	flash('Your event has been deleted', category='success')
+	return redirect(url_for('event.all_events'))
+
+
 
 @admin.route('/admin/verify/<string:username>/', methods=['GET', 'POST'])
 @login_required
@@ -158,7 +207,7 @@ def toggleVerfiy(username):
 
 	db.session.commit()
 	
-	return redirect(url_for('admin.AdminPannel'))
+	return redirect(url_for('admin.AdminUsers'))
 
 
 

@@ -44,7 +44,7 @@ def all_events():
 	if 'active' not in active:
 		active[0] = 'active'
 
-	if current_user.is_authenticated:
+	if current_user.is_authenticated and current_user.profile != None:
 		events = [event for event in events if event.gender == None or event.gender == current_user.profile.gender] 
 
 	
@@ -76,14 +76,3 @@ def participant_list(eid):
 	else:
 		teams = event.getParticipants()
 		return render_template('teamlist.html', teams=teams)
-
-
-
-@event.route('/event/<int:eid>/delete')
-@login_required
-def delete_event(eid):
-	event = Event.query.get_or_404(eid)
-	db.session.delete(event)
-	db.session.commit()
-	flash('Your event has been deleted', category='success')
-	return redirect(url_for('event.eventpage'))

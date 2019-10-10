@@ -3,28 +3,43 @@
 <div class="col-12">
 
   <div class="text-center mt-4 animated bounceInDown">
-    <h2>Users</h2>
+    <h2>User Table</h2>
     <hr>
   </div>
-
 	<table class="table text-center mt-4 border table-striped">
 		<thead class="thead-dark table-striped">
-    		<th>ID</th>
-    		<th>Username</th>
+    		<th>PID</th>
+    		<th>Name</th>
     		<th>E-Mail</th>
-    		<th>Action<th>
+    		<th>Verify</th>
+        <th>Delete</th>
   	</thead>
   	{% for user in users %}	
-	  		<tr>
+        {% if user.profile %}
+	  		  <tr>
+        {% else %}
+          <tr class="table-danger">
+        {% endif %}
 	  			<td>{{user.id}}</td>
-	    		<td><a href="{{url_for('profile.profile_card', username=user.username)}}">{{user.username}}</a></td>
+	    		<td>
+            {% if user.profile %}
+              <a href="{{url_for('profile.profile_card', username=user.username)}}">{{user.profile.name}}</a>
+            {% else %}
+              <a href="{{url_for('profile.profile_card', username=user.username)}}">{{ user.username }}</a>
+            {% endif %}
+          </td>
 	    		<td>{{user.email}}</td>
-          {% if user.verified %}
-	    		<td><a href="{{url_for('admin.toggleVerfiy', username=user.username)}}">Unverify</a></td>
-          {% else %}
-              	<td><a href="{{url_for('admin.toggleVerfiy', username=user.username)}}">Verify</a></td>
-          {% endif %}
-	  		</tr>  
+	    		<td>
+            {% if user.verified %}
+              <a class='btn btn-success' href="{{url_for('admin.toggleVerfiy', username=user.username)}}">✔️</a> 
+            {% else %}          
+              <a class='btn btn-secondary' href="{{url_for('admin.toggleVerfiy', username=user.username)}}">✔️</a>
+            {% endif %}
+          </td>
+          <td>
+            <a href="{{ url_for('admin.delete_account', uid=user.id) }}" class='btn btn-outline-danger ml-3 rounded-circle'>✘</a>
+          </td>
+	  		</tr>
     {% endfor %}
   	</table>
 </div>

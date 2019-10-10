@@ -1,10 +1,19 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
 
-body{
+body, p, li, span{
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
 }
+
+
+h1{ font-size: 33px; }
+h2{ font-size: 30px; }
+h3{ font-size: 27px; }
+h4{ font-size: 24px; }
+h5{ font-size: 21px; }
+h6{ font-size: 18px; }
+
 
 #nav-dd a{
 	color: grey;
@@ -14,9 +23,14 @@ body{
 	color: black;
 }
 
+
+
+
 #profile{
 	width: 30rem;
 }
+
+
 
 #profile .profile-body{
 	margin-top: -85px;
@@ -60,24 +74,43 @@ body{
 
 
 @media (max-width: 1500px){
+	body, p, li, span{
+	    font-family: 'Open Sans', sans-serif;
+	}
+
+	h1{ font-size: 33px; }
+	h2{ font-size: 30px; }
+	h3{ font-size: 27px; }
+	h4{ font-size: 24px; }
+	h5{ font-size: 21px; }
+	h6{ font-size: 18px; }
+
 	#events .event-detail{
 		max-width: 100%;
 		overflow: hidden;
 
 	}
+	#eventnavbar{
+		font-size: 14px;
+	}
 }
 
 @media (max-width: 720px){
-	body{
-		font-size: 0.9em;
+
+	body, p, li, span{
+	    font-family: 'Open Sans', sans-serif;
+	    font-size: 0.8em;
 	}
-	h2{
-		font-size: 1.6em;
-	}
-	h3{
-		font-size: 1.4em;
-	}
-	.btn{
+
+	h1 { font-size: 22px; }
+	h2 { font-size: 20px; }
+	h3 { font-size: 18px; }
+	h4 { font-size: 16px; }
+	h5 { font-size: 14px; }
+	h6 { font-size: 12px; }
+
+	#eventnavbar{
+		font-size: 12px;
 	}
 	
 	#profile .avatar{

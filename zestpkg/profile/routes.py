@@ -15,7 +15,7 @@ def profile_card(username):
 		flash('There is no account with this username', category='danger')
 		abort(404)
 
-	if user.profile == None:
+	if user.profile == None and user != current_user:
 		flash('User does not created his profile card yet!', category='info')
 		abort(404)
 
@@ -27,7 +27,7 @@ def profile_card(username):
 @profile.route('/create_profile', methods=['GET', 'POST'])
 @login_required
 def create_profile():
-	if current_user.profile == None:
+	if current_user.profile != None:
 		flash('You already created one profile. You can only update!', category='info')
 		return redirect(url_for('profile.update_profile'))
 

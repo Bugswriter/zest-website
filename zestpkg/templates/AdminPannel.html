@@ -1,12 +1,22 @@
 {% extends 'layout.html' %}
 {% block content %}
-
 <div class="text-center mt-4 animated bounceInDown">
-	<h1>Admin Pannel</h1>
-  <ul>
-    <li><a href="{{ url_for('admin.AdminUsers')}}">Users</a></li>
-    <li>Events</li>
-    <li>Contestant</li>
-  </ul>
+	<h1>Admin Panel</h1>
+	<h6 class="text-muted">with great power comes great responsibility</h6>
+	<hr>
+</div>
+<div class="row justify-content-center mt-4 text-center">
+	<div class="card" style="width: 18rem;">
+	  <div class="card-body">
+	    <h5 class="card-title mb-4">Zest2019 Database</h5>
+	 <ul class="list-group">
+	  <li class="list-group-item"><a href="{{ url_for('admin.AdminUsers')}}">User</a> ({{ user }})</li>
+	  <li class="list-group-item"><a href="{{ url_for('admin.AdminEvents')}}">Event</a> ({{ event }})</li>
+	  <li class="list-group-item"><a href="{{ url_for('admin.AdminUsers')}}">Team</a> ({{ team }})</li>
+	  <li class="list-group-item"><a href="{{ url_for('admin.AdminUsers')}}">Contestant</a> ({{ contestant }})</li>
+	</ul>
+	  </div>
+	</div>
+	
 </div>
 {% endblock%}

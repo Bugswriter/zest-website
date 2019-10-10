@@ -5,7 +5,7 @@
 	<hr>
 </div>
 <div class="row justify-content-center animated zoomIn mb-4">
-<ul class="nav nav-tabs  card-header-tabs">
+<ul class="nav nav-tabs  card-header-tabs" id="eventnavbar">
 	  <li class="nav-item">
         <a class="nav-link {{active[0]}}" href="/events">All Events</a>
       </li>
@@ -21,10 +21,25 @@
     </ul>
 </div>
 {% for event in events %}
+	<h1>This is the string</h1>
+	<h2>This is the string</h2>
+	<h3>This is the string</h3>
+	<h4>This is the string</h4>
+	<h5>This is the string</h5>
+	<h6>This is the string</h6>
 	<div class="row p-4 justify-content-center animated zoomIn" id="events">
 		<div class="col-md-12" style="max-width: 850px;">
-			<h5 class=""><a href="{{ url_for('event.event_page', eid=event.id) }}">{{ event.title }}</a></h5>
-			<p class="card-subtitle mb-2"><a href='/events/?subcat={{event.subcategory}}' class="text-muted">{{ event.subcategory }} related</a></p>
+			<h5 class="">
+				<a href="{{ url_for('event.event_page', eid=event.id) }}">{{ event.title }}</a>
+				<small>(<a href='/events/?subcat={{event.subcategory}}' class="text-info">#{{ event.subcategory }}</a>)</small>
+			</h5>
+			{% if event.gender == 'M' %}
+				<p class="text-muted">boys only</p>
+			{% elif event.gender == 'F' %}
+				<p class="text-muted">girls only</p>
+			{% else %}
+				<p class="text-muted">boys & girls both</p>
+			{% endif %}
 			<div class="card text-white event-card">
 				<img class="card-img" style="filter: brightness(50%);" src="{{ url_for('static', filename='event_pics/'+ event.image) }}" width="850px"	 alt="Card image">
 				<div class="card-img-overlay" style="max-width: 550px;">
