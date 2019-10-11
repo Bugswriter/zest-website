@@ -13,6 +13,13 @@ def participate(eid):
 		flash('You need to create your Profile Card first!', category='warning')
 		return redirect(url_for('profile.create_profile'))
 
+	user_gender = current_user.profile.gender
+	if event.gender != None and event.gender != user_gender:
+		if event.gender == "M":
+			flash('This event is only for Boys, check your profile', category="info")
+		else:
+			flash('This event is only for Girls, check your profile', category="info")
+		abort(500)
 
 	event = Event.query.get_or_404(eid)
 	contestant = Contestant.query.filter_by(user_id=current_user.id, event_id=eid).first()

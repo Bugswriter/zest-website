@@ -33,11 +33,7 @@ def create_profile():
 
 	form = ProfileForm()
 	if form.validate_on_submit():
-		if form.image.data:
-			picture = save_picture(form.image.data)
-		else:
-			picture = "default.jpg"
-
+		picture = "default.jpg"
 		name = form.first_name.data + " " + form.last_name.data
 		profile = Profile(name=name, image=picture, course=form.course.data, branch=form.branch.data, roll_number=form.roll_num.data, phone=form.phone.data, college=form.college.data, gender=form.gender.data,  user_id=current_user.id)
 		db.session.add(profile)

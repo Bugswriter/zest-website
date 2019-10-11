@@ -29,7 +29,7 @@
 					<div class="row organizer">
 						<img class="rounded-circle" src="{{ url_for('static', filename='profile_pics/'+user.image) }}">
 						<div class="ml-2">
-							<span><a href="#">{{ user.name }}</a></span><br>
+							<span><a href="{{ url_for('profile.profile_card', username=user.account.username) }}">{{ user.name }}</a></span><br>
 							<small>{{ user.phone }}</small><br>
 							<small class="text-muted">Organizer</small>
 						</div>

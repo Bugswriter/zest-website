@@ -110,9 +110,11 @@ def reset_token(token):
 	return render_template('reset_token.html', title='Reset Password', form=form)
 
 
-@users.route('/change_password', methods=['GET', 'POST'])
+
+
+@users.route('/account', methods=['GET', 'POST'])
 @login_required
-def change_password():
+def account():
 	form = ChangePassword()
 	if form.validate_on_submit():
 		if bcrypt.check_password_hash(current_user.password, form.current_password.data):
@@ -122,15 +124,7 @@ def change_password():
 			flash('Your password updated successfully', category='success')
 		else:
 			flash('Incorrect current password', category='info')
-		
-	return redirect(url_for('users.account'))
 
-
-
-@users.route('/account')
-@login_required
-def account():
-	form = ChangePassword()
 	user = User.query.get_or_404(current_user.id)
 	return render_template('account.html', user=user, form=form)
 
