@@ -38,8 +38,8 @@ def AdminPannel():
 def AdminUsers():
 	AdminCheck()
 	page = request.args.get('page', 1, type=int)
-	users = User.query.paginate(page=page ,per_page=3)
-	last = ceil(users.total/3)	
+	users = User.query.paginate(page=page ,per_page=20)
+	last = ceil(users.total/20)	
 	return render_template('AdminUsers.html', title='User View', users=users, last_page=last)
 
 
