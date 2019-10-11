@@ -1,7 +1,38 @@
 {% extends 'layout.html' %}
 {% block content %}
-<div class="text-center mt-4 animated bounceInDown">
-	<h1>Homepage</h1>
-	<hr>
+<style type="text/css">
+	#chairman p {
+		line-height: 2em;
+	}
+</style>
+<div class="row justify-content-center">
+  <img class="img-thumbnail" src="{{ url_for('static', filename='images/poster.jpg') }}">
 </div>
+<div class="row justify-content-center m-3 p-3">
+	<div class="col-md-4">
+		<img class='img-thumbnail mx-auto' src="{{ url_for('static', filename='images/chairman_devmurti.jpg') }}">
+	</div>
+	<div class="col-md-8" id='chairman'>
+		<h3><u>About SRMS Trust</u></h3>
+		<p>Shri Ram Murti Smarak Trust, a public charitable Trust (Reg.) was established in the year 1990, to commemorate & Cherish memory of veteran freedom fighter, true Gandhian, ex-parliamentarian, ex-minister U.P., Late Ram Murti Ji. The primary objective of the Trust is to provide and promote education and research in the field of Engineering & Technology, Medicine, Humanities, Science and Management.</p>
+	</div>
+</div>
+<hr>
+<div class="row justify-content-center m-3 p-3">
+	<div class="col-md-8" id='chairman'>
+		<h3><u>History of Tyro</u></h3>
+		<p>Shri Ram Murti Smarak Trust, a public charitable Trust (Reg.) was established in the year 1990, to commemorate & Cherish memory of veteran freedom fighter, true Gandhian, ex-parliamentarian, ex-minister U.P., Late Ram Murti Ji. The primary objective of the Trust is to provide and promote education and research in the field of Engineering & Technology, Medicine, Humanities, Science and Management.</p>
+	</div>
+	<div class="col-md-4">
+		<img class='img-thumbnail float-right' src="{{ url_for('static', filename='images/srmslogo2.png') }}">
+	</div>
+</div>
+<hr>
+<div class="row text-center m-4 p-4">
+	<div class="col" id='chairman'>
+		<h3 class="m-4">Last Year Zest and Aamod highlights</h3>
+		<iframe width="760" height="460" src="https://www.youtube.com/embed/DnhKbZlvlkU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	</div>
+</div>
+
 {% endblock%}

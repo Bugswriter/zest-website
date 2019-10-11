@@ -18,9 +18,23 @@
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </head>
 <body>
-  <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+  <header class="text-center row justify-content-center p-3">
+    <div class="col">
+     <img class="rounded-circle" height="100px" width="100px" src="{{ url_for('static', filename='images/logo.png') }}">
+     </div>
+     <div class="col-8">
+       <h1 style="color:#B21117;"><b>Shri Ram Murti Smarak College of Engineering Bareilly</b></h1>
+       <h5>Presents Zest & Aamod - a cultural and sports fest</h5>
+        <a href="https://www.srms.ac.in/">www.srms.ac.in</a>
+     </div>
+     <div class="col">
+       <img src="{{ url_for('static', filename='images/profile_cover.png') }}" class="" width="200px">
+     </div>
+  </header>
+  <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark  ">
     <div class="container">
-      <a class="navbar-brand rounded" href="{{ url_for('main.home') }}"><img src="{{ url_for('static', filename='images/zestlogo.png') }}" class="mb-1" width="60px">2019</a>
+
+      <a class="navbar-brand rounded" href="{{ url_for('main.home') }}"><img src="{{ url_for('static', filename='images/zestlogo.png') }}" class="mb-1" width="60px">aamod</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarlinks" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -76,14 +90,15 @@
       {% endif %}
     {% endwith %}
   </div>
-
-  <div class="container">
-      {% block content %}{% endblock content%}
-    <footer class="my-5 text-center animated bounceInUp">
-      <div class="container">
-        <span class="text-muted">made with &#10084; by <a href="https://github.com/bugswriter/" class="text-danger">@bugswriter</a> - &copy; 2019-2020 </span>
-      </div>
-    </footer>
+  <div class="row">
+    <div class="container">
+        {% block content %}{% endblock content%}
+      <footer class="my-5 text-center animated bounceInUp">
+        <div class="container">
+          <span class="text-muted">made with &#10084; by <a href="https://github.com/bugswriter/" class="text-danger">@bugswriter</a> - &copy; 2019-2020 </span>
+        </div>
+      </footer>
+    </div>
   </div>
 </body>
 </html>

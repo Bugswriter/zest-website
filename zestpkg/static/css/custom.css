@@ -23,7 +23,15 @@ h6{ font-size: 20px; }
 	color: black;
 }
 
-
+#pidbox{
+	margin-left: 25%;
+	border: 1px solid black;
+	border-radius: 10px;
+	max-width: 200px;
+	padding: 5px;
+	background: #B21117;
+	color: white;
+}
 
 
 #profile{
