@@ -9,6 +9,7 @@
 	<table class="table text-center mt-4 border table-striped">
 		<thead class="thead-dark table-striped">
     		<th>Title</th>
+        <th>Gender</th>
     		<th>Category</th>
         <th>Action</th>
         <th>Delete</th>
@@ -16,6 +17,13 @@
   	{% for event in events.items %}	
 	  		<tr>
 	    		<td><a href="{{url_for('event.event_page', eid=event.id)}}">{{event.title}}</a></td>
+          {% if event.gender == 'M' %}
+            <td>Boys</td>
+          {% elif event.gender == 'F' %}
+            <td>Girls</td>
+          {% else %}
+            <td>Both</td>
+          {% endif %}
 	    		<td>{{ event.getCategory() }}</td>
           <td>
             <a href="{{url_for('admin.update_event', eid=event.id)}}" class='btn btn-outline-info'>Update</a>
@@ -26,8 +34,8 @@
 	  		</tr>  
     {% endfor %}
   	</table>
-    <nav class="border">
-    <ul class="pagination">
+    <nav>
+    <ul class="pagination justify-content-center">
     {% for page_num in events.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
 
       {% if page_num %}
@@ -46,8 +54,6 @@
 
     {% endfor %}
     </ul>
-  </nav>
-    <nav>
   </nav>
 </div>
 {% endblock %}

@@ -24,7 +24,7 @@ def team_card(tid):
 @team.route('/team/create_team', methods=['POST', 'GET'])
 @login_required
 def createTeam():
-	if current_user.getProfile() == None:
+	if current_user.profile == None:
 		# Checking profile
 		flash('You need to create your Profile Card first!', category='info')
 		return redirect(url_for('profile.create_profile'))
@@ -33,41 +33,53 @@ def createTeam():
 		# Checking request method is POST 
 		tname = request.form.get('team_name')
 		eid = request.form.get('event_id')
+		
 		if tname == None or eid == None:
 			# Checking form data exist
 			flash('Wrong form data for creating team', category='danger')
 			abort(500)
-		else:
-			# Checking event exist
-			event = Event.query.get_or_404(eid)
-			if event.eventType() == 'Solo':
-				# checking event is not solo
-				flash('You cannot create team in solo event', category='warning')
-				abort(500)
+		
+
+		# Checking event exist
+		event = Event.query.get_or_404(eid)
+		if event.eventType() == 'Solo':
+			# checking event is not solo
+			flash('You cannot create team in solo event', category='warning')
+			abort(500)
+
+		user_gender = current_user.profile.gender
+		if event.gender != None and event.gender != user_gender:
+			if event.gender == "M":
+				flash('This event is only for Boys, check your profile', category="info")
 			else:
-				contestant = Contestant.query.filter_by(user_id=current_user.id, event_id=eid).first()	
-				if contestant == None:
-					# checking if user already in another team
-					if Team.query.filter_by(name=tname).first() == None:
-						# Checking if team already exist
-						try:
-							# Creating team
-							team = Team(name=tname, event_id=eid)
-							db.session.add(team)
-							db.session.commit()
-							team = Team.query.filter_by(name=tname).first()
-							joinParty(eid, team.team_code)
-							flash(f'Your team is added for {event.title} event successffully', category='success')
-							
-							return redirect(url_for('team.team_card', tid=team.id))
+				flash('This event is only for Girls, check your profile', category="info")
+			abort(500)
+	
+		contestant = Contestant.query.filter_by(user_id=current_user.id, event_id=eid).first()	
+		if contestant != None:
+			# checking if user already in another team
+			flash(f'You are already in a team of {event.title}!', category='warning')
+			return redirect(url_for('team.team_card', tid=contestant.team_id))
 
-						except:
-							flash('Database Error in creating team', category='danger')
-							abort(403)
-				else:
-					flash(f'You are already in a team of {event.title}!', category='warning')
-					return redirect(url_for('team.team_card', tid=contestant.team_id))
+		
+		if Team.query.filter_by(name=tname).first() == None:
+			# Checking if team already exist
+			try:
+				# Creating team
+				team = Team(name=tname, event_id=eid)
+				db.session.add(team)
+				db.session.commit()
+				team = Team.query.filter_by(name=tname).first()
+				joinParty(eid, team.team_code)
+				flash(f'Your team is added for {event.title} event successffully', category='success')
+				return redirect(url_for('team.team_card', tid=team.id))
 
+			except:
+				flash('Database Error in creating team', category='danger')
+				abort(403)
+		else:
+			flash(f'{tname} is taken, try any different team name', category='warning')
+			return redirect(url_for('event.event_page', eid=eid))
 	
 	else:
 		flash('Wrong method for accessing this page', category='warning')
@@ -92,33 +104,41 @@ def joinTeam():
 			# Checking if post data exist
 			flash('Wrong form data for joining team', category='danger')
 			abort(500)
-		else:
-			event = Event.query.get_or_404(eid)
-			if event.eventType() == 'Solo':
-				# if event is Solo
-				flash('You are trying to join a team in Solo event?? wtf', category='danger')
-				abort(500)
+	
+		event = Event.query.get_or_404(eid)
+		if event.eventType() == 'Solo':
+			# if event is Solo
+			flash('You are trying to join a team in Solo event', category='danger')
+			abort(500)
+
+		user_gender = current_user.profile.gender
+		if event.gender != None and event.gender != user_gender:
+			if event.gender == "M":
+				flash('This event is only for Boys, check your profile', category="info")
 			else:
-				team =	Team.query.filter_by(team_code=tcode).first()
-				if team == None:
-					# Team code validation check
-					flash('You Team Code is wrong check twice!', category='danger')
-					return redirect(url_for('event.event_page', eid=event.id))
-				else:
-					if Contestant.query.filter_by(user_id=current_user.id, event_id=eid).first() == None:
-						try:
-							# Making a contestant in that team
-							joinParty(event.id, tcode)
-							flash('Successfully Join the team', category='success')
+				flash('This event is only for Girls, check your profile', category="info")
 
-							return redirect(url_for('team.team_card', tid=team.id))
-						except:
-							flash('Database error something wrong try later!', category='danger')
-							abort(403)
-					else:
-						flash('You are already a member of this team!', category='success')
+			abort(500)
+		
+		team =	Team.query.filter_by(team_code=tcode).first()
+		if team == None:
+			# Team code validation check
+			flash('Your Team Code is wrong check twice!', category='danger')
+			return redirect(url_for('event.event_page', eid=event.id))
+		
+		if Contestant.query.filter_by(user_id=current_user.id, event_id=eid).first() == None:
+			try:
+				# Making a contestant in that team
+				joinParty(event.id, tcode)
+				flash('Successfully Join the team', category='success')
 
-						return redirect(url_for('team.team_card', tid=team.id))
+				return redirect(url_for('team.team_card', tid=team.id))
+			except:
+				flash('Database error something wrong try later!', category='danger')
+				abort(403)
+		else:
+			flash('You are already a member of this team!', category='success')
+			return redirect(url_for('team.team_card', tid=team.id))
 
 	else:
 		flash('No data for joining team', category='warning')

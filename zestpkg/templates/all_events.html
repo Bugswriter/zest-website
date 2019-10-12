@@ -20,20 +20,20 @@
       </li>
     </ul>
 </div>
-{% for event in events %}
+{% for event in events.items %}
 	<div class="row p-4 justify-content-center animated zoomIn" id="events">
 		<div class="col-md-12" style="max-width: 850px;">
-			<h5 class="">
+			<h5>
 				<a href="{{ url_for('event.event_page', eid=event.id) }}">{{ event.title }}</a>
+				{% if event.gender == 'M' %}
+					<small class="text-muted">for boys only</small>
+				{% elif event.gender == 'F' %}
+					<small class="text-muted">for girls only</small>
+				{% else %}
+					<small class="text-muted">for boys & girls both</small>
+				{% endif %}
 				<small>(<a href='/events/?subcat={{event.subcategory}}' class="text-info">#{{ event.subcategory }}</a>)</small>
 			</h5>
-			{% if event.gender == 'M' %}
-				<p class="text-muted">boys only</p>
-			{% elif event.gender == 'F' %}
-				<p class="text-muted">girls only</p>
-			{% else %}
-				<p class="text-muted">boys & girls both</p>
-			{% endif %}
 			<div class="card text-white event-card">
 				<img class="card-img" style="filter: brightness(50%);" src="{{ url_for('static', filename='event_pics/'+ event.image) }}" width="850px"	 alt="Card image">
 				<div class="card-img-overlay" style="max-width: 550px;">
@@ -54,6 +54,26 @@
 		</div>
 	</div>
 {% endfor %}
+    <nav class="">
+    <ul class="pagination justify-content-center">
+    {% for page_num in events.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+
+      {% if page_num %}
+        {% if events.page == page_num %}
+          <li class="page-item  active"><a class="page-link" href="{{ url_for('event.all_events', page=page_num) }}">{{ page_num }}</a></li>
+        {% else %}
+          {% if page_num == 1 %}
+            <li class="page-item"><a class="page-link" href="{{ url_for('event.all_events', page=page_num) }}">First</a></li>
+          {% elif page_num == last_page %}
+            <li class="page-item"><a class="page-link" href="{{ url_for('event.all_events', page=page_num) }}">Last</a></li>
+          {% else %} 
+            <li class="page-item"><a class="page-link" href="{{ url_for('event.all_events', page=page_num) }}">{{page_num}}</a></li>
+          {% endif %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+    </ul>
+  </nav>
 {% endblock %}
 
 {% block sidebar %}

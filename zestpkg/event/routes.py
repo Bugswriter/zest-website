@@ -4,37 +4,38 @@ from zestpkg.event.forms import EventForm
 from zestpkg import db
 from zestpkg.models import Event, Profile, Team, Contestant
 from zestpkg.event.utils import *
+from math import ceil
 
 event = Blueprint('event', __name__)
 
 @event.route('/events/', methods=['GET'])
 def all_events():
 	page = request.args.get('page', 1, type=int)
+	pagelimit = 10
 	category = request.args.get('cat')
 	subcat = request.args.get('subcat')
-	events = Event.query.paginate(page=page, per_page=10)
-	events = events.items
+	events = Event.query.paginate(page=page, per_page=pagelimit)
 	active = ['','','','']
 	title = 'All Zest Events'
 
 	if category == 'aamod':
 		active[3] = 'active'
 		title = 'Aamod Events'
-		events = Event.query.filter_by(category='aamod')
+		events = Event.query.filter_by(category='aamod').paginate(page=page, per_page=10)
 
 	elif category == 'zestopen':
 		active[1] = 'active'
 		title = 'Zest Open'
-		events = Event.query.filter_by(category='zestopen')
+		events = Event.query.filter_by(category='zestopen').paginate(page=page, per_page=10)
 		
 	elif category == 'zestclose':
 		active[2] = 'active'
 		title = 'Zest Close'
-		events = Event.query.filter_by(category='zestclose')
+		events = Event.query.filter_by(category='zestclose').paginate(page=page, per_page=10)
 
 	if subcat != None:
 		title = subcat.capitalize() + ' Events'
-		events = Event.query.filter_by(subcategory=subcat)
+		events = Event.query.filter_by(subcategory=subcat).paginate(page=page, per_page=10)
 
 	if events == None:
 		flash('No events in your filter', category='info')
@@ -44,11 +45,10 @@ def all_events():
 	if 'active' not in active:
 		active[0] = 'active'
 
-	if current_user.is_authenticated and current_user.profile != None:
-		events = [event for event in events if event.gender == None or event.gender == current_user.profile.gender] 
+	last = ceil(events.total/pagelimit)
 
 	
-	return render_template('all_events.html', events=events, title=title, active=active)
+	return render_template('all_events.html', events=events, title=title, active=active, last_page=last)
 
 
 

@@ -14,7 +14,7 @@
 </div>
 <div class="card mx-auto text-center animated flipInY" id="profile">
 	<div class="text-center">
-		<img class="card-img-top" src="{{ url_for('static', filename='images/profile_cover.jpg') }}" alt="Card image cap">
+		<img class="card-img-top" src="{{ url_for('static', filename='images/profile_cover.png') }}" alt="Card image cap">
 		{% if profile %}
 		<img class="rounded-circle avatar" src="{{ url_for('static', filename='profile_pics/'+ profile.image) }}" alt="Profile Pic">
 		{% else %}

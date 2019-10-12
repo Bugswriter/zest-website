@@ -38,8 +38,8 @@ def AdminPannel():
 def AdminUsers():
 	AdminCheck()
 	page = request.args.get('page', 1, type=int)
-	users = User.query.paginate(page=page ,per_page=3)
-	last = ceil(users.total/3)	
+	users = User.query.paginate(page=page ,per_page=20)
+	last = ceil(users.total/20)	
 	return render_template('AdminUsers.html', title='User View', users=users, last_page=last)
 
 
@@ -88,9 +88,9 @@ def delete_account(uid):
 	return redirect(url_for('admin.AdminUsers'))
 
 
-
-#admin event related
-
+'''
+admin event related
+'''
 
 
 @admin.route('/admin/events')
@@ -162,8 +162,8 @@ def update_event(eid):
 		form.title.data = event.title
 		form.orguname.data = event.author.username
 		form.num_of_member.data = event.team_limit
-		event.category = form.category.data
-		event.subcategory = form.subcategory.data
+		form.category.data = event.category
+		form.subcategory.data = event.subcategory
 		form.about.data = event.about
 
 	return render_template('addevent.html', form=form, title='Update Event')

@@ -41,57 +41,57 @@ for profile in profiles:
 dummy_detail = 'Felis potenti suspendisse. Commodo venenatis dictum aliquet torquent a, tempor luctus luctus viverra. Convallis elit integer torquent dictum lorem Sociosqu litora. Imperdiet.'
 
 
-events = [Event(title='Badminton for Boys (single)',category='aamod', subcategory='sports', team_limit='1', about=dummy_detail, gender='M', user_id='1'),
+events = [Event(title='Badminton (single)',category='aamod', subcategory='sports', team_limit='1', about=dummy_detail, gender='M', user_id='1'),
 
-		Event(title='Badminton for Girls (single)',category='aamod', subcategory='sports', team_limit='1', about=dummy_detail, gender='F', user_id='1'),
+		Event(title='Badminton (single)',category='aamod', subcategory='sports', team_limit='1', about=dummy_detail, gender='F', user_id='1'),
 
-		Event(title='Badminton for Boys (doubles)',category='aamod', subcategory='sports', team_limit='2', about=dummy_detail, gender='M', user_id='1'),
+		Event(title='Badminton (doubles)',category='aamod', subcategory='sports', team_limit='2', about=dummy_detail, gender='M', user_id='1'),
 
-		Event(title='Badminton for Girls (doubles)',category='aamod', subcategory='sports', team_limit='2', about=dummy_detail, gender='F', user_id='1'),
+		Event(title='Badminton (doubles)',category='aamod', subcategory='sports', team_limit='2', about=dummy_detail, gender='F', user_id='1'),
 
-		Event(title='Table Tennis for Boys (single)',category='aamod', subcategory='sports', team_limit='1', about=dummy_detail, gender='M', user_id='1'),
+		Event(title='Table Tennis (single)',category='aamod', subcategory='sports', team_limit='1', about=dummy_detail, gender='M', user_id='1'),
 
-		Event(title='Table Tennis for Girls (single)',category='aamod', subcategory='sports', team_limit='1', about=dummy_detail, gender='F', user_id='1'),
+		Event(title='Table Tennis (single)',category='aamod', subcategory='sports', team_limit='1', about=dummy_detail, gender='F', user_id='1'),
 
-		Event(title='Table Tennis for Boys (doubles)',category='aamod', subcategory='sports', team_limit='2', about=dummy_detail, gender='M', user_id='1'),
+		Event(title='Table Tennis (doubles)',category='aamod', subcategory='sports', team_limit='2', about=dummy_detail, gender='M', user_id='1'),
 
-		Event(title='Table Tennis for Girls (doubles)',category='aamod', subcategory='sports', team_limit='2', about=dummy_detail, gender='G', user_id='1'),
+		Event(title='Table Tennis (doubles)',category='aamod', subcategory='sports', team_limit='2', about=dummy_detail, gender='G', user_id='1'),
 
-		Event(title='Chess for Boys',category='aamod', subcategory='sports', team_limit='1', about=dummy_detail, gender='M', user_id='1'),
+		Event(title='Chess',category='aamod', subcategory='sports', team_limit='1', about=dummy_detail, gender='M', user_id='1'),
 
-		Event(title='Chess for Girls',category='aamod', subcategory='sports', team_limit='1', about=dummy_detail, gender='F', user_id='1'),
+		Event(title='Chess',category='aamod', subcategory='sports', team_limit='1', about=dummy_detail, gender='F', user_id='1'),
 
-		Event(title='Basketball for Boys',category='aamod', subcategory='sports', team_limit='5', about=dummy_detail, gender='M', user_id='1'),
+		Event(title='Basketball',category='aamod', subcategory='sports', team_limit='5', about=dummy_detail, gender='M', user_id='1'),
 
-		Event(title='Basketball for Girls',category='aamod', subcategory='sports', team_limit='5', about=dummy_detail, gender='F', user_id='1'),
+		Event(title='Basketball',category='aamod', subcategory='sports', team_limit='5', about=dummy_detail, gender='F', user_id='1'),
 
-		Event(title='Volley Ball for Boys',category='aamod', subcategory='sports', team_limit='6', about=dummy_detail, gender='M', user_id='1'),
+		Event(title='Volley Ball',category='aamod', subcategory='sports', team_limit='6', about=dummy_detail, gender='M', user_id='1'),
 
-		Event(title='Volley Ball for Girls',category='aamod', subcategory='sports', team_limit='6', about=dummy_detail, gender='F', user_id='1'),
+		Event(title='Volley Ball',category='aamod', subcategory='sports', team_limit='6', about=dummy_detail, gender='F', user_id='1'),
 
-		Event(title='Football only for Boys',category='aamod', subcategory='sports', team_limit='11', about=dummy_detail, gender='M', user_id='1'),
+		Event(title='Football only',category='aamod', subcategory='sports', team_limit='11', about=dummy_detail, gender='M', user_id='1'),
 
 		Event(title='Cricket',category='aamod', subcategory='sports', team_limit='11', about=dummy_detail, gender='M', user_id='1'),
 
-		Event(title='Kho Kho for Boys',category='aamod', subcategory='sports', team_limit='9', about=dummy_detail, gender='M', user_id='1'),
+		Event(title='Kho Kho',category='aamod', subcategory='sports', team_limit='9', about=dummy_detail, gender='M', user_id='1'),
 
-		Event(title='Kho Kho for Girls',category='aamod', subcategory='sports', team_limit='9', about=dummy_detail, gender='F', user_id='1'),
+		Event(title='Kho Kho',category='aamod', subcategory='sports', team_limit='9', about=dummy_detail, gender='F', user_id='1'),
 
-		Event(title='Race 100m for Boys',category='aamod', subcategory='atheletics', team_limit='1', about=dummy_detail, gender='M', user_id='1'),
+		Event(title='Race 100m',category='aamod', subcategory='atheletics', team_limit='1', about=dummy_detail, gender='M', user_id='1'),
 
-		Event(title='Race 100m for Girls',category='aamod', subcategory='atheletics', team_limit='1', about=dummy_detail, gender='F', user_id='1'),
+		Event(title='Race 100m',category='aamod', subcategory='atheletics', team_limit='1', about=dummy_detail, gender='F', user_id='1'),
 
-		Event(title='Race 200m for Boys',category='aamod', subcategory='atheletics', team_limit='1', about=dummy_detail,  gender='M', user_id='1'),
+		Event(title='Race 200m',category='aamod', subcategory='atheletics', team_limit='1', about=dummy_detail,  gender='M', user_id='1'),
 
-		Event(title='Race 200m for Girls',category='aamod', subcategory='atheletics', team_limit='1', about=dummy_detail,  gender='F', user_id='1'),
+		Event(title='Race 200m',category='aamod', subcategory='atheletics', team_limit='1', about=dummy_detail,  gender='F', user_id='1'),
 
-		Event(title='Relay race for Boys',category='aamod', subcategory='atheletics', team_limit='4', about=dummy_detail, gender='M', user_id='1'),
+		Event(title='Relay race',category='aamod', subcategory='atheletics', team_limit='4', about=dummy_detail, gender='M', user_id='1'),
 
-		Event(title='Relay race 400m for Girls',category='aamod', subcategory='atheletics', team_limit='4', about=dummy_detail, gender='F', user_id='1'),
+		Event(title='Relay race 400m',category='aamod', subcategory='atheletics', team_limit='4', about=dummy_detail, gender='F', user_id='1'),
 
-		Event(title='Relay race for Boys',category='aamod', subcategory='atheletics', team_limit='4', about=dummy_detail, gender='M', user_id='1'),
+		Event(title='Relay race',category='aamod', subcategory='atheletics', team_limit='4', about=dummy_detail, gender='M', user_id='1'),
 
-		Event(title='Relay race 400m for Girls',category='aamod', subcategory='atheletics', team_limit='4', about=dummy_detail, gender='F', user_id='1'),
+		Event(title='Relay race 400m',category='aamod', subcategory='atheletics', team_limit='4', about=dummy_detail, gender='F', user_id='1'),
 
 		Event(title='Race 400m',category='aamod', subcategory='atheletics', team_limit='1', about=dummy_detail, user_id='1'),
 
@@ -119,7 +119,7 @@ events = [Event(title='Badminton for Boys (single)',category='aamod', subcategor
 
 		Event(title='Shot put Girls',category='aamod', subcategory='atheletics', team_limit='1', about=dummy_detail, gender='F', user_id='1'),
 
-		Event(title='Squash only for Boys' ,category='aamod', subcategory='atheletics', team_limit='1', about=dummy_detail, gender='M', user_id='1'),
+		Event(title='Squash only' ,category='aamod', subcategory='atheletics', team_limit='1', about=dummy_detail, gender='M', user_id='1'),
 
 		#zest events 
 

@@ -6,16 +6,7 @@ from zestpkg.models import Team, Contestant, Event
 
 
 def joinParty(eid, code=None):
-	event = Event.query.get_or_404(eid) #checking event exist or not
-	user_gender = current_user.getProfile().gender
-	if event.gender != 'MF':
-		if event.gender != user_gender:
-			if event.gender == "M":
-				flash('This event is only for Boys, check your profile', category="info")
-			else:
-				flash('This event is only for Boys, check your profile', category="info")
-			
-			abort(500)
+	event = Event.query.get_or_404(eid) #checking event exist or not again
 
 	if code == None: 
 		p = Contestant(user_id=current_user.id, event_id=eid)
@@ -26,7 +17,6 @@ def joinParty(eid, code=None):
 			abort(403)
 
 		p = Contestant(user_id=current_user.id, event_id=eid, team_id=team.id)
-		
 	db.session.add(p)
 	db.session.commit()	
 	

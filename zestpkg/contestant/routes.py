@@ -9,12 +9,20 @@ contestant = Blueprint('contestant', __name__)
 @contestant.route('/event/<int:eid>/participate')
 @login_required
 def participate(eid):
-	if current_user.getProfile() == None:
+	if current_user.profile == None:
 		flash('You need to create your Profile Card first!', category='warning')
 		return redirect(url_for('profile.create_profile'))
 
-
 	event = Event.query.get_or_404(eid)
+	user_gender = current_user.profile.gender
+	if event.gender != None and event.gender != user_gender:
+		if event.gender == "M":
+			flash('This event is only for Boys, check your profile', category="info")
+		else:
+			flash('This event is only for Girls, check your profile', category="info")
+		abort(500)
+
+	
 	contestant = Contestant.query.filter_by(user_id=current_user.id, event_id=eid).first()
 	if contestant == None:
 		joinParty(eid)

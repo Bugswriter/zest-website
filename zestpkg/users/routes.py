@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, flash, request, redirect, url_for, current_app
-from zestpkg.users.forms import RegisterForm, LoginForm, RequestResetForm, ResetPasswordForm
+from zestpkg.users.forms import RegisterForm, LoginForm, RequestResetForm, ResetPasswordForm, ChangePassword
 from flask_login import current_user, login_user, logout_user, login_required
 from zestpkg import bcrypt, db
 from zestpkg.models import *
@@ -87,9 +87,10 @@ def logout():
 def reset_request():
 	if current_user.is_authenticated:
 		return redirect(url_for('main.home'))
-	form=RequestResetForm()
+	form = RequestResetForm()
 	
 	return render_template('reset_request.html', title='Reset password', form=form)
+
 
 @users.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_token(token):
@@ -104,16 +105,28 @@ def reset_token(token):
 		hashed_password=bcrypt.generate_password_hash(form.password.data).decode('utf-8')
 		user.password=hashed_password
 		db.session.commit()
-		flash("your account has been Updated! you are now able to log in", 'success')
+		flash("Your account has been Updated! You are now able to log in", 'success')
 		return redirect(url_for('users.login'))
 	return render_template('reset_token.html', title='Reset Password', form=form)
 
 
-@users.route('/account')
+
+
+@users.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():
+	form = ChangePassword()
+	if form.validate_on_submit():
+		if bcrypt.check_password_hash(current_user.password, form.current_password.data):
+			hashed_password=bcrypt.generate_password_hash(form.new_password.data).decode('utf-8')
+			current_user.password = hashed_password
+			db.session.commit()
+			flash('Your password updated successfully', category='success')
+		else:
+			flash('Incorrect current password', category='info')
+
 	user = User.query.get_or_404(current_user.id)
-	render_template('account.html', user=user)
+	return render_template('account.html', user=user, form=form)
 
 
 

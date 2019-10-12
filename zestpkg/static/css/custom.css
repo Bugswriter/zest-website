@@ -7,12 +7,12 @@ body, p, li, span{
 }
 
 
-h1{ font-size: 33px; }
-h2{ font-size: 30px; }
-h3{ font-size: 27px; }
+h1{ font-size: 34px; }
+h2{ font-size: 32px; }
+h3{ font-size: 28px; }
 h4{ font-size: 24px; }
-h5{ font-size: 21px; }
-h6{ font-size: 18px; }
+h5{ font-size: 22px; }
+h6{ font-size: 20px; }
 
 
 #nav-dd a{
@@ -23,7 +23,15 @@ h6{ font-size: 18px; }
 	color: black;
 }
 
-
+#pidbox{
+	margin-left: 25%;
+	border: 1px solid black;
+	border-radius: 10px;
+	max-width: 200px;
+	padding: 5px;
+	background: #B21117;
+	color: white;
+}
 
 
 #profile{
@@ -76,6 +84,7 @@ h6{ font-size: 18px; }
 @media (max-width: 1500px){
 	body, p, li, span{
 	    font-family: 'Open Sans', sans-serif;
+	    font-size: 14px;
 	}
 
 	h1{ font-size: 33px; }
@@ -90,16 +99,13 @@ h6{ font-size: 18px; }
 		overflow: hidden;
 
 	}
-	#eventnavbar{
-		font-size: 14px;
-	}
 }
 
 @media (max-width: 720px){
 
 	body, p, li, span{
 	    font-family: 'Open Sans', sans-serif;
-	    font-size: 0.8em;
+	    font-size: 12px;
 	}
 
 	h1 { font-size: 22px; }
