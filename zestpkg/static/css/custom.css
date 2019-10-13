@@ -1,18 +1,40 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
-
+@import url('https://fonts.googleapis.com/css?family=Alfa+Slab+One|Fascinate+Inline|Modak|Pacifico|Quicksand|Luckiest+Guy&display=swap');
 
 body, p, li, span{
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
 }
 
+h1{ 
+	font-size: 34px; 
+    font-family: 'Fascinate Inline', cursive;
+}
+h2{ 
+	font-size: 32px; 
+    font-family: 'Fascinate Inline', cursive;
+}
+h3{ 
+	font-size: 28px; 
+    font-family: 'Fascinate Inline', cursive;
+}
+h4{ 
+	font-size: 24px; 
+    font-family: 'Fascinate Inline', cursive;
+}
+h5{ 
+	font-size: 22px; 
 
-h1{ font-size: 34px; }
-h2{ font-size: 32px; }
-h3{ font-size: 28px; }
-h4{ font-size: 24px; }
-h5{ font-size: 22px; }
-h6{ font-size: 20px; }
+}
+h6{ 
+	font-size: 20px; 
+}
+
+#brand{
+    font-family: 'Fascinate Inline', cursive;
+}
+#eventtitle{
+    font-family: 'Luckiest Guy', cursive;
+}
 
 
 #nav-dd a{
