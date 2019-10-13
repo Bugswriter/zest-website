@@ -1,0 +1,188 @@
+/** 
+	Cube homepage 
+**/
+
+.sb-description{
+	background: rgba(0,0,0,0.5); 
+	color: white;
+}
+.sb-description h3 {
+	font-size: 20px;
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+}
+
+.sb-description h3 a {
+	color: white;
+	text-shadow: 0 1px 1px rgba(255,255,255,0.5);
+}
+
+.nav-arrows {
+	display: none;
+}
+
+.nav-arrows a {
+	width: 42px;
+	height: 42px;
+	background: rgba(0,0,0,0.5) url(https://tympanus.net/Development/Slicebox/images/nav.png) no-repeat top left;
+	position: absolute;
+	top: 50%;
+	left: 2px;
+	text-indent: -9000px;
+	cursor: pointer;
+	margin-top: -21px;
+	opacity: 0.9;
+	border-radius: 50%;
+	box-shadow: 0 1px 1px rgba(255,255,255,0.8);
+}
+
+.nav-arrows a:first-child{
+	left: auto;
+	right: 2px;
+	background-position: top right;
+}
+
+.nav-arrows a:hover {
+	opacity: 1;
+}
+
+.nav-dots {
+	text-align: center;
+	position: absolute;
+	bottom: -5px;
+	height: 30px;
+	width: 100%;
+	left: 0;
+	display: none;
+}
+
+.nav-dots span {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	margin: 3px;
+	background: #B21117;
+	cursor: pointer;
+	box-shadow: 
+		0 1px 1px rgba(255,255,255,0.6), 
+		inset 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.nav-dots span.nav-dot-current {
+	box-shadow: 
+		0 1px 1px rgba(255,255,255,0.6), 
+		inset 0 1px 1px rgba(0,0,0,0.1), 
+		inset 0 0 0 3px #B21117,
+		inset 0 0 0 8px #fff;
+}
+
+#shadow {
+	width: 100%;
+	height: 168px;
+	position: relative;
+	margin-top: -110px;
+	background: transparent url(https://tympanus.net/Development/Slicebox/images/shadow.png) no-repeat bottom center;
+	background-size: 100% 100%; /* stretches it */
+	z-index: -1;
+	display: none;
+}
+
+
+
+/** 
+	About SRMS Trust Windy CSS
+**/
+
+.windy-demo {
+	width: 300px;
+	margin: 40px auto;
+	color: black;
+}
+
+.windy-demo ul.wi-container {
+	width: 300px;
+	height: 400px;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.windy-demo li img {
+	display: block;
+}
+
+.windy-demo h5 {
+	padding: 0 10px;
+	line-height: 1em;
+	margin: 0;
+	text-align: center;
+}
+
+.windy-demo ul.wi-container:before,
+.windy-demo ul.wi-container:after{
+	content: '';
+	position: absolute;
+	z-index: -2;
+	bottom: 15px;
+	left:  10px;
+	width: 50%;
+	height: 20%;
+	box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+	-webkit-transform: rotate(-3deg);
+	-moz-transform: rotate(-3deg);
+	-ms-transform: rotate(-3deg);
+	-o-transform: rotate(-3deg);
+	transform: rotate(-3deg);
+}
+
+.windy-demo ul.wi-container:after {
+	right: 10px;
+	left: auto;
+	-webkit-transform: rotate(3deg);
+	-moz-transform: rotate(3deg);
+	-ms-transform: rotate(3deg);
+	-o-transform: rotate(3deg);
+	transform: rotate(3deg);
+}
+
+.windy-demo ul.wi-container li {
+	padding: 0;
+	border: 10px solid #DDD;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+
+.windy-demo nav {
+	position: relative;
+	width: 100px;
+	margin: 0 auto;
+}
+
+.windy-demo nav span {
+	width: 42px;
+	height: 42px;
+	margin: 0 4px;
+	float: left;
+	background: url(https://tympanus.net/Development/Windy/images/nav.png) no-repeat 100% 0;
+	text-indent: -9000px;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.windy-demo nav span:first-child {
+	background-position: 0 0;
+}
+
+.windy-demo nav span:active {
+	background-position: 100% 2px;
+}
+
+.windy-demo nav span:first-child:active {
+	background-position: 0 2px;
+}

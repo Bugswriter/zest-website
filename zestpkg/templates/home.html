@@ -1,106 +1,5 @@
 {% extends 'layout.html' %}
 {% block content %}
-<style type="text/css">
-.windy-demo {
-	width: 400px;
-	margin: 40px auto;
-	color: #aaa;
-}
-
-.windy-demo ul.wi-container {
-	border-radius: 5px;
-}
-
-.windy-demo ul.wi-container::before, 
-.windy-demo ul.wi-container::after {
-	content: '';
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	background: white;
-	left: 0;
-	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
-	border-radius: 5px;
-}
-
-.windy-demo ul.wi-container::before {
-	top: 10px;
-	z-index: -2;
-	box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
-}
-
-.windy-demo ul.wi-container::after {
-	top: 7px;
-	z-index: -1;
-}
-
-.windy-demo h4 {
-	color: #666;
-	font-size: 14px;
-	padding: 8px 0 5px;
-	margin: 5px 0;
-	border-bottom: 1px solid #f0f0f0;
-}
-
-.windy-demo p {
-	font-size: 12px;
-	font-weight: bold;
-	padding: 0;
-	margin: 0;
-}
-
-.windy-demo ul.wi-container li {
-	border-radius: 5px;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-}
-
-.windy-demo li img {
-	display: block;
-	margin: 0 auto;
-	max-width: 100%;
-	box-shadow: 0 0 1px 1px rgba(255,255,255,0.6), 0 0 0 4px rgba(0,0,0,0.1);
-}
-
-.windy-demo nav {
-	position: relative;
-	width: 96px;
-	margin: 0 auto;
-}
-
-.windy-demo nav span {
-	width: 40px;
-	height: 40px;
-	margin: 0 4px;
-	float: left;
-	background: url(https://tympanus.net/Development/Windy/images/nav.png) no-repeat 100% 0;
-	text-indent: -9000px;
-	cursor: pointer;
-	border-radius: 50%;
-	box-shadow: 0 2px 3px rgba(0,0,0,0.5);
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-}
-
-.windy-demo nav span:first-child {
-	background-position: 0 0;
-}
-
-.windy-demo nav span:active {
-	box-shadow: 0 1px 1px rgba(0,0,0,0.3);
-	background-position: 100% 2px;
-}
-
-.windy-demo nav span:first-child:active {
-	background-position: 0 2px;
-}
-</style>
 <div class="row justify-content-center">
 	<div class="col-md-12">
 		<ul id="sb-slider" class="sb-slider">
@@ -148,22 +47,34 @@
 
 		<div id="shadow"></div>
 		<div id="nav-arrows" class="nav-arrows">
-			<a href="#">Next</a>
-			<a href="#">Previous</a>
+			<a href="#" class="border">Next</a>
+			<a href="#" class="border">Previous</a>
 		</div>
 	</div>
 </div>
 <div class="row justify-content-center m-3 p-3">
 	<div class="col-md-4 windy-demo">
 		<ul id='wi-el' class="wi-container">
-			<li><img src="{{url_for('static', filename='images/chairman_devmurti.jpg')}}" alt="image1"/><h4>Dev Murti</h4>
-			<p>Chairman of SRMS Trust</p></li>
-			<li><img src="{{url_for('static', filename='images/chairman_devmurti.jpg')}}" alt="image1"/><h4></h4>
-			<p></p></li>
-			<li><img src="{{url_for('static', filename='images/chairman_devmurti.jpg')}}" alt="image1"/><h4></h4>
-			<p></p></li>
-			<li><img src="{{url_for('static', filename='images/chairman_devmurti.jpg')}}" alt="image1"/><h4></h4>
-			<p></p></li>
+			<li>
+				<img class="img-thumbnail" src="{{url_for('static', filename='images/srmstrust/one.jpg')}}" alt="image1"/>
+				<h5>Shri Dev Murti</h5>
+			</li>
+			<li>
+				<img class="img-thumbnail" src="{{url_for('static', filename='images/srmstrust/two.jpg')}}" alt="image1"/>
+				<h5>Mr. Aditya Murti</h5>
+			</li>
+			<li>
+				<img class="img-thumbnail" src="{{url_for('static', filename='images/srmstrust/three.jpg')}}" alt="image1"/>
+				<h5>Er. Subhash Mehra</h5>
+			</li>
+			<li>
+				<img class="img-thumbnail" src="{{url_for('static', filename='images/srmstrust/four.jpg')}}" alt="image1"/>
+				<h5>Prof. (Dr.) Prabhakar Gupta</h5>
+			</li>
+			<li>
+				<img class="img-thumbnail" src="{{ url_for('static', filename='images/srmstrust/five.jpg') }}" alt="image1">
+				<h5>Mr. Ashish Kumar</h5>
+			</li>
 		</ul>
 		<nav>
 			<span id="nav-prev">prev</span>
@@ -171,15 +82,23 @@
 		</nav>
 	</div>
 	<div class="col-md-8" id='chairman'>
-		<h3><u>About SRMS Trust</u></h3>
-		<p>Shri Ram Murti Smarak Trust, a public charitable Trust (Reg.) was established in the year 1990, to commemorate & Cherish memory of veteran freedom fighter, true Gandhian, ex-parliamentarian, ex-minister U.P., Late Ram Murti Ji. The primary objective of the Trust is to provide and promote education and research in the field of Engineering & Technology, Medicine, Humanities, Science and Management.</p>
+		<h3 class="animated bounceInUp">About SRMS Trust</h3><hr>
+		<p>The memories of veteran freedom fighter, true Gandhian, ex-parliamentarian & ex minister of UP State, <b>Shri Ram Murti Ji</b>, were the inspiration for setting up the, Shri Ram Murti Smarak Trust in the year 1990.</p>
+
+		<p>The vision and mission of the Trust are to use all its resources for upliftment of mankind, by service to humanity. With the inspiration of Late <b>Shri Ram Murti Ji</b> and with the untiring zeal and enthusiasm of <b>Shri Dev Murti</b>, Shri Ram Murti Smarak College of Engg. & Tech. was established in 1996.The college today offers courses in Engineering, Pharmacy, Management and Computer Applications.</p>
+
+		<p>The SRMS Trust has also furthered a noble cause by establishing Shri Ram Murti Smarak Institute of Medical Sciences, which includes a 700-bed Multi Super Specialty; Tertiary Care hospital and Trauma Centre a Medical and a Nursing College. The campus of medical college and hospital is spread over an area of 30 acres and is located at 13.2 Kms. on the Bareilly-Nainital Highway, Bareilly (U.P).</p>
 	</div>
 </div>
-<hr>
+
 <div class="row justify-content-center m-3 p-3">
 	<div class="col-md-8" id='chairman'>
-		<h3><u>History of Tyro</u></h3>
-		<p>Shri Ram Murti Smarak Trust, a public charitable Trust (Reg.) was established in the year 1990, to commemorate & Cherish memory of veteran freedom fighter, true Gandhian, ex-parliamentarian, ex-minister U.P., Late Ram Murti Ji. The primary objective of the Trust is to provide and promote education and research in the field of Engineering & Technology, Medicine, Humanities, Science and Management.</p>
+		<h3>About Tyro</h3><hr>
+		<p><i>“TYRO – A BEGINNER, established in 1997,a panel of students comprising the very best amongst the best. The sole aim of Tyro is to bring about diversity of art, culture, academics and sports on a common platform.”</i> It is dedicated to bring joy and jubilation by nurturing budding talent.
+
+		<p>Tyro comes into full swing for the organization of a mega event – 'ZEST' & ‘AAMOD’. This is the platform wherein young and creative minds get to exhibit their talent through various competitions.</p>
+
+		<p>It’s time to extract the series of creativity from the best brains...So, herein, we extend our invitation to all, to be a part of this grand event.</p>
 	</div>
 	<div class="col-md-4">
 		<img class='img-thumbnail float-right' src="{{ url_for('static', filename='images/srmslogo2.png') }}">

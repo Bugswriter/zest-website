@@ -1,5 +1,5 @@
+
 $(document).ready(function() {
-  
     setTimeout(function(){
   	$('#flashmessage').hide('slow');
     }, 4000);
@@ -17,6 +17,9 @@ $(document).ready(function() {
 		}
     });
 
+    $("#uploadimagebtn").click(function() {
+	    $("input[id='uploadimage']").click();
+	});
 
     $('#uploadimage').on('change', function(){
 		var reader = new FileReader();
@@ -42,7 +45,7 @@ $(document).ready(function() {
 				data:{"image": response},
 				success:function(data){
 				    $('#cropimage').modal('hide');
-				    $('#feedback').html("Profile picture updated"); 
+				    $('#feedback').html("Profile picture updated! Please referesh page"); 
 				}
 		    });
 		});	
@@ -102,7 +105,17 @@ $(document).ready(function() {
 	$(function() {
 
 		var $el = $( '#wi-el' ),
-			windy = $el.windy(),
+			windy = $el.windy( {
+				// rotation and translation boundaries for the items transitions
+				boundaries : {
+					rotateX : { min : 40 , max : 90 },
+					rotateY : { min : -15 , max : 45 },
+					rotateZ : { min : -10 , max : 10 },
+					translateX : { min : -400 , max : 400 },
+					translateY : { min : -400 , max : 400 },
+					translateZ : { min : 350 , max : 550 }
+				}
+			} ),
 			allownavnext = false,
 			allownavprev = false;
 
@@ -136,7 +149,7 @@ $(document).ready(function() {
 				}, 150 );
 			}
 		}
-		
+
 		function navprev() {
 			if( allownavprev ) {
 				windy.prev();
