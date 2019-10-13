@@ -160,7 +160,7 @@ $(document).ready(function() {
 
 	});
 
-	new ElastiStack( document.getElementById( 'elasticstack' ) );
+	
 
 	/** code by webdevtrick ( https://webdevtrick.com ) **/
     [...document.querySelectorAll('.single-column')].map(column => {
@@ -168,6 +168,8 @@ $(document).ready(function() {
       column.style.setProperty('height', '200%');
       column.innerHTML = column.innerHTML + column.innerHTML;
     });
+    
+    new ElastiStack( document.getElementById( 'elasticstack' ) );
 
 });
 
