@@ -20,8 +20,8 @@
 	    		</td>
 	    		<td>{{ c.event.title }}</td>
 	          	<td>
-	          		{% if c.getTeam() %}
-	          		<a href="{{ url_for('team.team_card', tid=c.getTeam().id) }}">{{ c.getTeam().name }}</a>
+	          		{% if c.team %}
+	          		<a href="{{ url_for('team.team_card', tid=c.team.id) }}">{{ c.team.name }}</a>
 	          		{% else %}
 	          		-
 	          		{% endif %}

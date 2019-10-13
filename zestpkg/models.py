@@ -148,14 +148,6 @@ class Contestant(db.Model):
 	event_id = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=False)
 	team_id = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=True)
 
-	def getTeam(self):
-		if self.team_id == None:
-			return None
-		else:
-			team = Team.query.get_or_404(self.team_id)
-			return team
-
-
 	def __repr__(self):
 		user = User.query.get(self.user_id)
 		event = Event.query.get(self.event_id)
