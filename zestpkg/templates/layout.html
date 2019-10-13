@@ -25,7 +25,7 @@
      <div class="col-8">
        <h1 style="color:#B21117;"><b>Shri Ram Murti Smarak College of Engineering Bareilly</b></h1>
        <h5>Presents Zest & Aamod - a cultural and sports fest</h5>
-        <a href="https://www.srms.ac.in/">www.srms.ac.in</a>
+        <a href="https://www.srms.ac.in/">SRMS official website</a>
      </div>
      <div class="col">
        <img src="{{ url_for('static', filename='images/profile_cover.png') }}" class="" width="200px">
@@ -55,7 +55,7 @@
                   {% else %} 
                     <img width="30px" class="rounded-circle" src="{{ url_for('static', filename='profile_pics/'+current_user.profile.image)}}">
                   {% endif %} 
-                  <span> {{ current_user.username }}</span>
+                  <span> {{ current_user.username }} <b class="text-info">PID: {{ current_user.id }}</b> </span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="nav-dd">
                   <a class="nav-link" href="{{ url_for('profile.profile_card', username=current_user.username) }}">My Profile</a>

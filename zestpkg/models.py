@@ -26,7 +26,14 @@ class User(db.Model, UserMixin):
 	verified = db.Column(db.Boolean, nullable=False, default=False)
 
 	def getTeam(self):
-		return Team.query.filter_by(user_id=self.id)
+		party = Contestant.query.filter_by(user_id=self.id)
+		team = []
+		for i in party:
+			if i.team_id != None:
+				x = Team.query.get(i.team_id)
+				team.append(x)
+				
+		return list(set(team))
 
 	def getProfile(self):
 		return self.profile
@@ -39,6 +46,8 @@ class User(db.Model, UserMixin):
 			events.append(event)
 
 		return list(set(events))
+
+
 
 
 

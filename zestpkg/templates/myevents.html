@@ -6,19 +6,32 @@
 </div>
 <div class="row justify-content-around">
 	{% if events %}
-	<div class="card m-3" style="max-width: 200px">
-		<div class="card-body">
-	    <h5 class="card-title">Your Registered Events</h5>
-	    <h6 class="card-subtitle mb-2 text-muted">my teams</h6><hr>	    
+	<div class="card m-3" style="max-width: 40rem;">
+	   <div class="card-body"> 
 	  </div>
-	  <ul class="list-group list-group-flush">
-		{% for event in events %}
-			<li class="list-group-item">{{ event.title }}</li>
-		{% endfor %}
+	  <table class="table">
+		  <thead class="thead-dark">
+		    <tr>
+		      <th scope="col">#</th>
+		      <th scope="col">Event ID</th>
+		      <th scope="col">Team ID</th>
+		      <th scope="col">Withdraw</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	{% for event in events %}
+			    <tr>
+			      <th scope="row"></th>
+			      <td><a href="{{ url_for('event.event_page', eid=event.id) }}">{{ event.title }}</td>
+			      <td>Otto</td>
+			      <td><a href="#" class='btn btn-outline-danger ml-3 rounded-circle'>✘</a></td>
+			    </tr>
+			{% endfor %}
+		   
+		  </tbody>
+		</table>
 
-	</ul>
-
-		</div>
+	</div>
 	{% else %}
 	You are registered in no events
 	<!-- Here if no events are registered -->

@@ -62,6 +62,9 @@ def event_page(eid):
 @event.route('/event/my', methods=['GET', 'POST'])
 @login_required
 def my_events():
+	x = current_user.getTeam()
+	for i in x:
+		print(i)
 	return render_template('myevents.html', events=current_user.getEvents(), title="My Events")
 
 
