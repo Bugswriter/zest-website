@@ -53,7 +53,8 @@ def createTeam():
 				flash('This event is only for Boys, check your profile', category="info")
 			else:
 				flash('This event is only for Girls, check your profile', category="info")
-			abort(500)
+			
+			return redirect(url_for('event.event_page', eid=event.id))
 	
 		contestant = Contestant.query.filter_by(user_id=current_user.id, event_id=eid).first()	
 		if contestant != None:
@@ -118,7 +119,8 @@ def joinTeam():
 			else:
 				flash('This event is only for Girls, check your profile', category="info")
 
-			abort(500)
+			return redirect(url_for('event.event_page', eid=event.id))
+
 		
 		team =	Team.query.filter_by(team_code=tcode).first()
 		if team == None:

@@ -36,7 +36,7 @@
 	<div class="row p-4 justify-content-center animated zoomIn" id="events">
 		<section class="col-md-12" style="max-width: 850px;">
 			<h5>
-				<a href="{{ url_for('event.event_page', eid=event.id) }}">{{ event.title }}</a>
+				<a href="{{ url_for('event.event_page', eid=event.id) }}" id="eventtitle">{{ event.title }}</a>
 				{% if event.gender == 'M' %}
 					<small class="text-muted">for boys only</small>
 				{% elif event.gender == 'F' %}

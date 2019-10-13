@@ -3,39 +3,41 @@
 <div class="col-12">
 
   <div class="text-center mt-4 animated bounceInDown">
-    <h2>Teams</h2>
+    <h2>Contestants</h2>
     <hr>
   </div>
 	<table class="table text-center mt-4 border table-striped">
 		<thead class="thead-dark table-striped">
-    		<th>Name</th>
+    		<th>User</th>
         	<th>Event</th>
-    		<th>Members</th>
-	        <th>Secret Code</th>
+    		<th>Team</th>
 	        <th>Delete</th>
-  	</thead>
-  	{% for team in teams.items %}	
+  		</thead>
+  		{% for c in contestants.items %}	
 	  		<tr>
-		    	<td><a href="{{url_for('team.team_card', tid=team.id)}}">{{ team.name }}</a></td>
-		    	<td><a href="{{url_for('event.event_page', eid=team.getEvent().id)}}">{{ team.getEvent().title }}</a></td>
-	          {% if team.getNumOfMember() == team.getEvent().team_limit %}
-	            <td>{{team.getNumOfMember()}}</td>
-	          {% else %}
-	            <td class="text-danger">{{ team.getNumOfMember() }}</td>
-	          {% endif %}
-	    	  <td>{{ team.team_code }}</td>   
-	          <td>
-	            <a href="#" class='btn btn-outline-danger ml-3 rounded-circle'>✘</a>
-	          </td>
+	    		<td>
+	    			<a href="{{url_for('profile.profile_card', username=c.user.username)}}">{{ c.user.profile.name }}</a>
+	    		</td>
+	    		<td>{{ c.event.title }}</td>
+	          	<td>
+	          		{% if c.team %}
+	          		<a href="{{ url_for('team.team_card', tid=c.team.id) }}">{{ c.team.name }}</a>
+	          		{% else %}
+	          		-
+	          		{% endif %}
+	          	</td>
+          		<td>
+					<a href="#" class='btn btn-outline-danger ml-3 rounded-circle'>✘</a>
+          		</td>
 	  		</tr>  
     {% endfor %}
   	</table>
     <nav>
     <ul class="pagination justify-content-center">
-    {% for page_num in teams.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    {% for page_num in contestants.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
 
       {% if page_num %}
-        {% if teams.page == page_num %}
+        {% if contestants.page == page_num %}
           <li class="page-item active"><a class="page-link" href="{{ url_for('admin.AdminEvents', page=page_num) }}">{{ page_num }}</a></li>
         {% else %}
           {% if page_num == 1 %}
