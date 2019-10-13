@@ -1,17 +1,6 @@
 {% extends 'layout.html' %}
 {% block content %}
 
-
-<script type="text/javascript">
-	$("#events").tiltedpage_scroll({
-	    sectionContainer: "> section",     // In case you don't want to use <section> tag, you can define your won CSS selector here
-	    angle: 50,                         // You can define the angle of the tilted section here. Change this to false if you want to disable the tilted effect. The default value is 50 degrees.
-	    opacity: true,                     // You can toggle the opacity effect with this option. The default value is true
-	    scale: true,                       // You can toggle the scaling effect here as well. The default value is true.
-	    outAnimation: true                 // In case you do not want the out animation, you can toggle this to false. The defaul value is true.
-  	});
-</script>
-
 <div class="text-center mt-4 animated bounceInDown" id="heading">
 	<h2>{{ title }}</h2>
 	<hr>
@@ -22,13 +11,13 @@
         <a class="nav-link {{active[0]}}" href="/events">All Events</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ active[1] }}" href="/events/?cat=zestopen">Zest (Open)</a>
+        <a class="nav-link {{ active[1] }}" href="/events/?cat=zestopen">Open Events</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ active[2] }}" href="/events/?cat=zestclose">Zest (Close)</a>
+        <a class="nav-link {{ active[2] }}" href="/events/?cat=zestclose">Zest Events</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ active[3] }}" href="/events/?cat=aamod">Aamod</a>
+        <a class="nav-link {{ active[3] }}" href="/events/?cat=aamod">Aamod Events</a>
       </li>
     </ul>
 </div>
@@ -86,20 +75,4 @@
     {% endfor %}
     </ul>
   </nav>
-{% endblock %}
-
-{% block sidebar %}
-	<div class="row p-4 justify-content-center animated zoomIn" id="events">
-
-		<div class="card mt-5" style="width: 18rem;">
-		  <div class="card-header">
-		    Featured
-		  </div>
-		  <ul class="list-group list-group-flush">
-		    <li class="list-group-item">Cras justo odio</li>
-		    <li class="list-group-item">Dapibus ac facilisis in</li>
-		    <li class="list-group-item">Vestibulum at eros</li>
-		  </ul>
-		</div>
-	</div>
 {% endblock %}

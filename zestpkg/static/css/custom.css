@@ -32,8 +32,13 @@ h6{
 
 #mainheader h2{
 	font-family: 'Playfair Display', serif;
+	font-weight: bolder;
 }
 
+#mainheader h5{
+	font-family: 'Pacifico', cursive;
+	color: #696969;
+}
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
     color: white; /*Sets the text hover color on navbar*/
