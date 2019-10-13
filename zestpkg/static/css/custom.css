@@ -40,6 +40,16 @@ h6{
 	color: #696969;
 }
 
+#elasticstack{
+	font-family: 'Pacifico', cursive;
+}
+#theme{
+	font-family: 'Pacifico', cursive;
+	color: #E25822;
+	text-decoration: underline;
+	line-height: 2em;
+}
+
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
     color: white; /*Sets the text hover color on navbar*/
 }
@@ -82,6 +92,15 @@ h6{
 	color: #DFF280;
     font-family: 'Pacifico', cursive;
 }
+
+.clickbox{
+	font-family: 'Pacifico', cursive;
+	height: 150px;
+	width: 150px;
+	text-align: center;
+	vertical-align: center;
+}
+
 
 #eventtitle{
 

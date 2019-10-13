@@ -8,6 +8,7 @@
 }
 .sb-description h3 {
 	font-size: 20px;
+	color: white;
 	text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
 }
 
@@ -15,6 +16,7 @@
 	color: white;
 	text-shadow: 0 1px 1px rgba(255,255,255,0.5);
 }
+
 
 .nav-arrows {
 	display: none;

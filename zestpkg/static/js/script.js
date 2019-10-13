@@ -1,7 +1,6 @@
-
 $(document).ready(function() {
     setTimeout(function(){
-  	$('#flashmessage').hide('slow');
+  		$('#flashmessage').hide('slow');
     }, 4000);
 
     $image_crop = $('#cropper').croppie({
@@ -161,7 +160,9 @@ $(document).ready(function() {
 
 	});
 
-	    /** code by webdevtrick ( https://webdevtrick.com ) **/
+	new ElastiStack( document.getElementById( 'elasticstack' ) );
+
+	/** code by webdevtrick ( https://webdevtrick.com ) **/
     [...document.querySelectorAll('.single-column')].map(column => {
       column.style.setProperty('--animation', 'slide');
       column.style.setProperty('height', '200%');

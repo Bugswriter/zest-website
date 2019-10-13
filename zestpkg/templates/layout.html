@@ -9,11 +9,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/animate.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   
   <!-- Jquery plugins CSS -->
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/croppie.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/slicebox.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/windy.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/normalize.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/component.css') }}">
 
   <!-- My Custom CSS -->
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom.css') }}">
@@ -25,8 +28,9 @@
   <script src="{{ url_for('static', filename='js/modernizr.custom.79639.js') }}"></script>
   <script src="{{ url_for('static', filename='js/jquery.slicebox.js') }}"></script>
   <script src="{{ url_for('static', filename='js/jquery.windy.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/croppie.js') }}"></script>  
-  <script src="{{ url_for('static', filename='js/slideshow.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/croppie.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/draggabilly.pkgd.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/elastiStack.js') }}"></script>
 
   <!-- bootstrap and my JS -->
   <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
@@ -41,7 +45,8 @@
      <div class="col-8">
        <h2 style="color:#B21117;">SHRI RAM MURTI SMARAK COLLEGE OF ENGINEERING BAREILLY</h2>
        <h5>Tyro presents Zest & Aamod - a cultural and sports fest</h5>
-        <a href="https://www.srms.ac.in/">SRMS official website</a>
+       <a href="https://instagram.com/tyro.srms" target="_blank" class="fa fa-instagram"> Tyro Instagram</a> |
+       <a href="https://srms.ac.in" target="_blank" class="fa fa-browser">SRMS Official Website</a>
      </div>
      <div class="col">
        <img src="{{ url_for('static', filename='images/profile_cover.png') }}" class="animated bounceInUp" width="200px">
@@ -57,10 +62,10 @@
       <div class="collapse navbar-collapse" id="navbarlinks">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="{{ url_for('main.home') }}">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="{{ url_for('main.home') }}"><i class='fa fa-home'> </i> Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('event.all_events') }}">Events</a>
+            <a class="nav-link" href="{{ url_for('event.all_events') }}"><i class="fa fa-calendar"> </i> Events</a>
           </li>
           {% if current_user.is_authenticated %}
             <li class="nav-item">
