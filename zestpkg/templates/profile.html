@@ -1,5 +1,5 @@
 {% extends 'layout.html' %}
-{% block content %}
+{% block content %}	
 <div class="text-center my-4 animated bounceInDown">
 	{% if profile %}
 		{% if current_user.username == profile.account.username %}
@@ -16,7 +16,7 @@
 	<div class="text-center">
 		<img class="card-img-top" src="{{ url_for('static', filename='images/profile_cover.png') }}" alt="Card image cap">
 		{% if profile %}
-		<img class="rounded-circle avatar" src="{{ url_for('static', filename='profile_pics/'+ profile.image) }}" alt="Profile Pic">
+			<img class="rounded-circle avatar" src="{{ url_for('static', filename='profile_pics/'+ profile.image) }}" alt="Profile Pic">
 		{% else %}
 		<img class="rounded-circle avatar" src="{{ url_for('static', filename='profile_pics/default.jpg') }}" alt="default profile pic">
 		{% endif %}
@@ -59,9 +59,16 @@
 					</tr>	
 				</tbody>
 			</table>
+			<div class="row">
 			{% if current_user.username == profile.account.username %}
-				<a href="/update_profile" class="btn btn-outline-info">Update Profile</a>
+				<div class="col-md-6">
+					<a href="/update_profile" class="btn btn-primary ml-4">Update Profile</a>
+				</div>
+				<div class="col-md-6">
+					<button class="btn btn-secondary mr-4">Update Picture</button>
+				</div>
 			{% endif %}
+			</div>
 		{% else %}
 				<a href="/create_profile" class="btn btn-outline-danger my-5">Create Profile</a>
 		{% endif %}
