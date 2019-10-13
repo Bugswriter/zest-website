@@ -47,4 +47,107 @@ $(document).ready(function() {
 		    });
 		});	
     });
+
+
+    $(function() {
+		var Page = (function() {
+
+			var $navArrows = $( '#nav-arrows' ).hide(),
+				$shadow = $( '#shadow' ).hide(),
+				slicebox = $( '#sb-slider' ).slicebox( {
+					onReady : function() {
+
+						$navArrows.show();
+						$shadow.show();
+
+					},
+					orientation : 'r',
+					cuboidsRandom : true,
+					autoplay: true,
+					disperseFactor : 30
+				} ),
+				
+				init = function() {
+
+					initEvents();
+					
+				},
+				initEvents = function() {
+
+					// add navigation events
+					$navArrows.children( ':first' ).on( 'click', function() {
+
+						slicebox.next();
+						return false;
+
+					} );
+
+					$navArrows.children( ':last' ).on( 'click', function() {
+						
+						slicebox.previous();
+						return false;
+
+					} );
+
+				};
+
+				return { init : init };
+
+		})();
+
+		Page.init();
+
+	});
+
+	$(function() {
+
+		var $el = $( '#wi-el' ),
+			windy = $el.windy(),
+			allownavnext = false,
+			allownavprev = false;
+
+		$( '#nav-prev' ).on( 'mousedown', function( event ) {
+
+			allownavprev = true;
+			navprev();
+		
+		} ).on( 'mouseup mouseleave', function( event ) {
+
+			allownavprev = false;
+		
+		} );
+
+		$( '#nav-next' ).on( 'mousedown', function( event ) {
+
+			allownavnext = true;
+			navnext();
+		
+		} ).on( 'mouseup mouseleave', function( event ) {
+
+			allownavnext = false;
+		
+		} );
+
+		function navnext() {
+			if( allownavnext ) {
+				windy.next();
+				setTimeout( function() {	
+					navnext();
+				}, 150 );
+			}
+		}
+		
+		function navprev() {
+			if( allownavprev ) {
+				windy.prev();
+				setTimeout( function() {	
+					navprev();
+				}, 150 );
+			}
+		}
+
+	});
+
 });
+
+

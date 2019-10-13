@@ -1,5 +1,17 @@
 {% extends 'layout.html' %}
 {% block content %}
+
+
+<script type="text/javascript">
+	$("#events").tiltedpage_scroll({
+	    sectionContainer: "> section",     // In case you don't want to use <section> tag, you can define your won CSS selector here
+	    angle: 50,                         // You can define the angle of the tilted section here. Change this to false if you want to disable the tilted effect. The default value is 50 degrees.
+	    opacity: true,                     // You can toggle the opacity effect with this option. The default value is true
+	    scale: true,                       // You can toggle the scaling effect here as well. The default value is true.
+	    outAnimation: true                 // In case you do not want the out animation, you can toggle this to false. The defaul value is true.
+  	});
+</script>
+
 <div class="text-center mt-4 animated bounceInDown" id="heading">
 	<h2>{{ title }}</h2>
 	<hr>
@@ -22,7 +34,7 @@
 </div>
 {% for event in events.items %}
 	<div class="row p-4 justify-content-center animated zoomIn" id="events">
-		<div class="col-md-12" style="max-width: 850px;">
+		<section class="col-md-12" style="max-width: 850px;">
 			<h5>
 				<a href="{{ url_for('event.event_page', eid=event.id) }}">{{ event.title }}</a>
 				{% if event.gender == 'M' %}
@@ -51,7 +63,7 @@
 					</p>
 				</div>
 			</div>
-		</div>
+		</section>
 	</div>
 {% endfor %}
     <nav class="">
