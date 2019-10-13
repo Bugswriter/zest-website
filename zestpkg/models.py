@@ -22,7 +22,7 @@ class User(db.Model, UserMixin):
 	email = db.Column(db.String(120), unique=True, nullable=False)
 	password = db.Column(db.String(60), nullable=False)
 	profile = db.relationship('Profile', backref='account', uselist=False)
-	event = db.relationship('Event', backref='author', uselist=False)
+	participations = db.relationship('Contestant', backref='user')
 	verified = db.Column(db.Boolean, nullable=False, default=False)
 
 	def getTeam(self):
@@ -46,9 +46,6 @@ class User(db.Model, UserMixin):
 			events.append(event)
 
 		return list(set(events))
-
-
-
 
 
 	def get_reset_token(self, expires_secs=300):
@@ -150,7 +147,14 @@ class Contestant(db.Model):
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)	
 	event_id = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=False)
 	team_id = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=True)
-	paid = db.Column(db.Boolean, nullable=True, default=False)
+
+	def getTeam(self):
+		if self.team_id == None:
+			return None
+		else:
+			team = Team.query.get_or_404(self.team_id)
+			return team
+
 
 	def __repr__(self):
 		user = User.query.get(self.user_id)
