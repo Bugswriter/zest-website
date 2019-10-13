@@ -37,8 +37,8 @@
 
 	</div>
 	{% else %}
-		<h3>You are registered in no events</h3>
-		<a class="btn btn-outline-success" href="{{ url_for('event.all_events') }}">Browse Events</button>
+		<p>You are registered in no events</p>
+		<a class="btn btn-outline-success" href="{{ url_for('event.all_events') }}">Browse Events</a>
 	{% endif %}
 </div>
 {% endblock%}

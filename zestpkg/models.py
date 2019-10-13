@@ -180,6 +180,14 @@ class Team(db.Model):
 
 		return members
 
+	def getEvent(self):
+		event = Event.query.get_or_404(self.event_id)
+		return event
+
+	def getNumOfMember(self):
+		party = self.members
+		return len(party)
+
 
 	def __repr__(self):
 		return "Team({}, {})".format(self.name, self.team_code)

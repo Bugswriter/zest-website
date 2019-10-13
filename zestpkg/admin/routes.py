@@ -43,7 +43,6 @@ def AdminUsers():
 	return render_template('AdminUsers.html', title='User View', users=users, last_page=last)
 
 
-
 @admin.route('/admin/usercreation', methods=['GET', 'POST'])
 @login_required
 def UserCreation():
@@ -57,6 +56,7 @@ def UserCreation():
 		flash("Account has been created for "+form.email.data, category='success')
 		return redirect(url_for('admin.UserCreation'))
 	return render_template('register.html', title='Admin user registeration', form=form)
+
 
 @admin.route('/admin/user/<int:uid>/delete')
 @login_required
@@ -101,6 +101,7 @@ def AdminEvents():
 	events = Event.query.paginate(page=page ,per_page=10)
 	last = ceil(events.total/10)
 	return render_template('AdminEvents.html', title='Events View', events=events, last_page=last)
+
 
 @admin.route('/admin/event/add', methods=['GET', 'POST'])
 @login_required
@@ -197,6 +198,23 @@ def toggleVerfiy(username):
 	return redirect(url_for('admin.AdminUsers'))
 
 
+'''
+Admin Team related
+'''
+@admin.route('/admin/teams')
+@login_required
+def AdminTeams():
+	page = request.args.get('page', 1, type=int)
+	teams = Team.query.paginate(page=page ,per_page=10)
+	last = ceil(teams.total/10)
+	return render_template('AdminTeams.html', title='Team View', teams=teams, last_page=last)
 
 
-	
+
+@admin.route('/admin/contestants')
+@login_required
+def AdminContestants():
+	page = request.args.get('page', 1, type=int)
+	contestants = Contestant.query.paginate(page=page ,per_page=10)
+	last = ceil(contestants.total/10)
+	return render_template('AdminContestants.html', title='Contestants View', contestants=contestants, last_page=last)
