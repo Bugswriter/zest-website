@@ -14,7 +14,7 @@ def team_card(tid):
 	team = Team.query.get_or_404(tid)
 	members = team.getMember()
 	event = Event.query.get_or_404(team.event_id)
-	if current_user in members:
+	if current_user in members or current_user.username == 'admin':
 		return render_template('team.html', team=team, event=event, members=members ,title=team.name)
 	else:
 		flash('You are not in this team! So access denied', category='warning')
