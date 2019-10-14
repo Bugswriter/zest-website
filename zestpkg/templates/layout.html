@@ -24,7 +24,7 @@
 
   <!-- Jquery and it's fancy plugins -->
   <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="{{ url_for('static', filename='js/popper.min.js')}}"></script>
   <script src="{{ url_for('static', filename='js/modernizr.custom.46884.js') }}"></script>
   <script src="{{ url_for('static', filename='js/modernizr.custom.79639.js') }}"></script>
   <script src="{{ url_for('static', filename='js/jquery.slicebox.js') }}"></script>
@@ -41,27 +41,27 @@
 <body>
   <header id="mainheader" class="text-center row justify-content-center p-3">
     <div class="col">
-     <img class="rounded-circle" height="100px" width="100px" src="{{ url_for('static', filename='images/logo.png') }}">
+     <img class="rounded-circle animated fadeInLeft slower infinite" height="100px" width="100px" src="{{ url_for('static', filename='images/logo.png') }}">
      </div>
-     <div class="col-8">
-       <h2 style="color:#B21117;">SHRI RAM MURTI SMARAK COLLEGE OF ENGINEERING BAREILLY</h2>
-       <h5>Tyro presents Zest & Aamod - a cultural and sports fest</h5>
+     <div data-tilt class="col-8">
+       <h2 class="animated infinite pulse slower" style="color:#B21117;">SHRI RAM MURTI SMARAK COLLEGE OF ENGINEERING BAREILLY</h2>
+       <h5 class="subhead">Tyro presents Zest & Aamod - a cultural and sports fest</h5>
        <a href="https://instagram.com/tyro.srms" target="_blank" class="fa fa-instagram"> Tyro Instagram</a> |
        <a href="https://srms.ac.in" target="_blank" class="fa fa-browser">SRMS Official Website</a>
      </div>
      <div class="col">
-       <img src="{{ url_for('static', filename='images/profile_cover.png') }}" class="animated bounceInUp" width="200px">
+       <img src="{{ url_for('static', filename='images/srmslogo.png') }}" class="animated fadeInRight slower infinite">
      </div>
   </header>
   <nav class="navbar navbar-default sticky-top navbar-expand-lg">
     <div class="container">
 
-      <a class="navbar-brand rounded" id="brand" href="{{ url_for('main.home') }}">Zest&<span>Aamod</span></a>
+      <a class="navbar-brand rounded animated tada slow infinite" id="brand" href="{{ url_for('main.home') }}">Zest&<span>Aamod</span></a>
       <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarlinks" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarlinks">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto animated fadeInRight">
           <li class="nav-item active">
             <a class="nav-link" href="{{ url_for('main.home') }}"><i class='fa fa-home'> </i> Home <span class="sr-only">(current)</span></a>
           </li>
@@ -73,9 +73,9 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {% if current_user.profile == None %}
-                    <img width="30px" class="rounded-circle" src="{{ url_for('static', filename='profile_pics/default.jpg')}}">
+                    <img width="30px" class="rounded-circle animated infinite swing slower" src="{{ url_for('static', filename='profile_pics/default.jpg')}}">
                   {% else %} 
-                    <img width="30px" class="rounded-circle" src="{{ url_for('static', filename='profile_pics/'+current_user.profile.image)}}">
+                    <img width="30px" class="rounded-circle animated infinite swing slower" src="{{ url_for('static', filename='profile_pics/'+current_user.profile.image)}}">
                   {% endif %} 
                   <span> {{ current_user.username }} <b class="text-info">PID: {{ current_user.id }}</b> </span>
                 </a>
@@ -84,16 +84,16 @@
                   <a class="nav-link" href="{{ url_for('event.my_events') }}">My Events</a>
                   <a class="nav-link" href="{{ url_for('users.account') }}">My Account</a>
                   <div class="dropdown-divider"></div>
-                  <a class="nav-link" href="{{ url_for('users.logout') }}">Logout</a>   
+                  <a class="nav-link" href="{{ url_for('users.logout') }}"><i class="fa fa-sign-out"> </i> Logout</a>   
                 </div>
               </li>
             </li>
           {% else %}
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('users.login') }}">Login</a>
+              <a class="nav-link" href="{{ url_for('users.login') }}"><i class="fa fa-sign-in"> </i> Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('users.register') }}">Register</a>
+              <a class="nav-link animated delay-2s shake slow" href="{{ url_for('users.register') }}"><i class="fa fa-user-plus"> </i> Register</a>
             </li>
           {% endif %}
         </ul>
@@ -116,14 +116,14 @@
     <div class="col-md-2 sideslider text-center">
       <div class="main ml-3">
         <div class="single-column">
-          <a href="#"><img src="{{ url_for('static', filename='images/gallery/pic1.jpg') }}" alt="image"></a>
-          <a href="#"><img src="{{ url_for('static', filename='images/gallery/pic2.jpg') }}" alt="image"></a>
-          <a href="#"><img src="{{ url_for('static', filename='images/gallery/pic3.jpg') }}" alt="image"></a>
-          <a href="#"><img src="{{ url_for('static', filename='images/gallery/pic4.jpg') }}" alt="image"></a>
-          <a href="#"><img src="{{ url_for('static', filename='images/gallery/pic5.jpg') }}" alt="image"></a>
-          <a href="#"><img src="{{ url_for('static', filename='images/gallery/pic6.jpg') }}" alt="image"></a>
-          <a href="#"><img src="{{ url_for('static', filename='images/gallery/pic7.jpg') }}" alt="image"></a>
-          <a href="#"><img src="{{ url_for('static', filename='images/gallery/pic8.jpg') }}" alt="image"></a>
+          <a href="#"><img class="animated infinite pulse slower"  src="{{ url_for('static', filename='images/gallery/pic1.jpg') }}" alt="image"></a>
+          <a href="#"><img class="animated infinite pulse slower"  src="{{ url_for('static', filename='images/gallery/pic2.jpg') }}" alt="image"></a>
+          <a href="#"><img class="animated infinite pulse slower"  src="{{ url_for('static', filename='images/gallery/pic3.jpg') }}" alt="image"></a>
+          <a href="#"><img class="animated infinite pulse slower"  src="{{ url_for('static', filename='images/gallery/pic4.jpg') }}" alt="image"></a>
+          <a href="#"><img class="animated infinite pulse slower"  src="{{ url_for('static', filename='images/gallery/pic5.jpg') }}" alt="image"></a>
+          <a href="#"><img class="animated infinite pulse slower"  src="{{ url_for('static', filename='images/gallery/pic6.jpg') }}" alt="image"></a>
+          <a href="#"><img class="animated infinite pulse slower"  src="{{ url_for('static', filename='images/gallery/pic7.jpg') }}" alt="image"></a>
+          <a href="#"><img class="animated infinite pulse slower"  src="{{ url_for('static', filename='images/gallery/pic8.jpg') }}" alt="image"></a>
           </div>
       </div><hr>
       <p>&copy SRMS Gallery</p>
@@ -139,14 +139,14 @@
     <div class="col-md-2 sideslider text-center">
       <div class="main mr-2">
         <div class="single-column">
-          <a href="#"><img src="{{ url_for('static', filename='images/gallery/pic9.jpg') }}" alt="image"></a>
-          <a href="#"><img src="{{ url_for('static', filename='images/gallery/pic10.jpg') }}" alt="image"></a>
-          <a href="#"><img src="{{ url_for('static', filename='images/gallery/pic11.jpg') }}" alt="image"></a>
-          <a href="#"><img src="{{ url_for('static', filename='images/gallery/pic12.jpg') }}" alt="image"></a>
-          <a href="#"><img src="{{ url_for('static', filename='images/gallery/pic13.jpg') }}" alt="image"></a>
-          <a href="#"><img src="{{ url_for('static', filename='images/gallery/pic14.jpg') }}" alt="image"></a>
-          <a href="#"><img src="{{ url_for('static', filename='images/gallery/pic15.jpg') }}" alt="image"></a>
-          <a href="#"><img src="{{ url_for('static', filename='images/gallery/pic16.jpg') }}" alt="image"></a>
+          <a href="#"><img class="animated infinite pulse slower" src="{{ url_for('static', filename='images/gallery/pic9.jpg') }}" alt="image"></a>
+          <a href="#"><img class="animated infinite pulse slower" src="{{ url_for('static', filename='images/gallery/pic10.jpg') }}" alt="image"></a>
+          <a href="#"><img class="animated infinite pulse slower" src="{{ url_for('static', filename='images/gallery/pic11.jpg') }}" alt="image"></a>
+          <a href="#"><img class="animated infinite pulse slower" src="{{ url_for('static', filename='images/gallery/pic12.jpg') }}" alt="image"></a>
+          <a href="#"><img class="animated infinite pulse slower" src="{{ url_for('static', filename='images/gallery/pic13.jpg') }}" alt="image"></a>
+          <a href="#"><img class="animated infinite pulse slower" src="{{ url_for('static', filename='images/gallery/pic14.jpg') }}" alt="image"></a>
+          <a href="#"><img class="animated infinite pulse slower" src="{{ url_for('static', filename='images/gallery/pic15.jpg') }}" alt="image"></a>
+          <a href="#"><img class="animated infinite pulse slower" src="{{ url_for('static', filename='images/gallery/pic16.jpg') }}" alt="image"></a>
         </div>
     </div><hr>
     <p>&copy SRMS Gallery</p>
