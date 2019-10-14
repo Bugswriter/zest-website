@@ -12,38 +12,44 @@ event = Blueprint('event', __name__)
 def all_events():
 	page = request.args.get('page', 1, type=int)
 	pagelimit = 10
-	category = request.args.get('cat')
-	subcat = request.args.get('subcat')
-	events = Event.query.paginate(page=page, per_page=pagelimit)
 	active = ['','','','']
-	title = 'All Zest Events'
-
-	if category == 'aamod':
-		active[3] = 'active'
-		title = 'Aamod Events'
-		events = Event.query.filter_by(category='aamod').paginate(page=page, per_page=10)
-
-	elif category == 'zestopen':
-		active[1] = 'active'
-		title = 'Zest Open'
-		events = Event.query.filter_by(category='zestopen').paginate(page=page, per_page=10)
+	query = request.args.get('q')
+	if query != None:
+		title = "Search results for '" + query + "'"
+		events = Event.query.filter(Event.title.like('%' + query + '%')).paginate(page=page, per_page=10)
+	else:
+		category = request.args.get('cat')
+		subcat = request.args.get('subcat')
+		events = Event.query.paginate(page=page, per_page=pagelimit)
 		
-	elif category == 'zestclose':
-		active[2] = 'active'
-		title = 'Zest Close'
-		events = Event.query.filter_by(category='zestclose').paginate(page=page, per_page=10)
-
-	if subcat != None:
-		title = subcat.capitalize() + ' Events'
-		events = Event.query.filter_by(subcategory=subcat).paginate(page=page, per_page=10)
-
-	if events == None:
-		flash('No events in your filter', category='info')
 		title = 'All Zest Events'
-		events = Event.query.all()
 
-	if 'active' not in active:
-		active[0] = 'active'
+		if category == 'aamod':
+			active[3] = 'active'
+			title = 'Aamod Events'
+			events = Event.query.filter_by(category='aamod').paginate(page=page, per_page=10)
+
+		elif category == 'zestopen':
+			active[1] = 'active'
+			title = 'Zest Open'
+			events = Event.query.filter_by(category='zestopen').paginate(page=page, per_page=10)
+			
+		elif category == 'zestclose':
+			active[2] = 'active'
+			title = 'Zest Close'
+			events = Event.query.filter_by(category='zestclose').paginate(page=page, per_page=10)
+
+		if subcat != None:
+			title = subcat.capitalize() + ' Events'
+			events = Event.query.filter_by(subcategory=subcat).paginate(page=page, per_page=10)
+
+		if events == None:
+			flash('No events in your filter', category='info')
+			title = 'All Zest Events'
+			events = Event.query.paginate(page=page, per_page=pagelimit)
+
+		if 'active' not in active:
+			active[0] = 'active'
 
 	last = ceil(events.total/pagelimit)
 	

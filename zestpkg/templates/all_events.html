@@ -6,7 +6,7 @@
 	<hr>
 </div>
 <div class="row justify-content-center animated zoomIn mb-4">
-<ul class="nav nav-tabs  card-header-tabs" id="eventnavbar">
+	<ul class="nav nav-tabs card-header-tabs" id="eventnavbar">
 	  <li class="nav-item">
         <a class="nav-link {{active[0]}}" href="/events">All Events</a>
       </li>
@@ -20,6 +20,30 @@
         <a class="nav-link {{ active[3] }}" href="/events/?cat=aamod">Aamod Events</a>
       </li>
     </ul>
+</div>
+<div class="row justify-content-center">
+	<form class="form-inline" action="" method="GET">
+		<div class="input-group m-3 animated bounceInUp">
+		  <div class="input-group-prepend">
+		    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by</button>
+		    <div class="dropdown-menu">
+		      <a class="dropdown-item" href="/events/?subcat=sports">Sports</a>
+		      <a class="dropdown-item" href="/events/?subcat=athletics">Athletics</a>
+		      <a class="dropdown-item" href="/events/?subcat=music">Music</a>
+		      <a class="dropdown-item" href="/events/?subcat=dance">Dance</a>
+		      <a class="dropdown-item" href="/events/?subcat=informals">Informals</a>
+		      <a class="dropdown-item" href="/events/?subcat=literary">Literary</a>
+		      <a class="dropdown-item" href="/events/?subcat=deco">Deco</a>
+		    </div>
+		  </div> 
+		  <input type="text" name="q" placeholder="Search your event..." class="form-control" aria-label="Serach Event">
+		  <div class="input-group-append">
+		    <button type="submit" class="btn btn-outline-info" type="button"><i class="fa fa-search"></i></button>
+		  </div>
+			
+		</div>
+	</form>
+
 </div>
 {% for event in events.items %}
 	<div class="row p-4 justify-content-center animated zoomIn" id="events">
