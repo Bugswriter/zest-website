@@ -30,6 +30,7 @@ h6{
 	font-size: 20px; 
 }
 
+
 #mainheader h2{
 	font-family: 'Playfair Display', serif;
 	font-weight: bolder;
@@ -51,11 +52,21 @@ h6{
 }
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-    color: white; /*Sets the text hover color on navbar*/
+    color: #DFF280; /*Sets the text hover color on navbar*/
 }
 
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
     color: white; /*BACKGROUND color for active*/
+}
+
+.custom-toggler.navbar-toggler {
+    border-color: #ffffff;
+}
+.custom-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+.custom-toggler .navbar-toggler-icon:hover {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,0, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
 
 .navbar-default {
@@ -133,8 +144,6 @@ h6{
 	width: 30rem;
 }
 
-
-
 #profile .profile-body{
 	margin-top: -85px;
 }
@@ -181,7 +190,17 @@ h6{
 	    font-family: 'Open Sans', sans-serif;
 	    font-size: 14px;
 	}
+	.windy-demo ul.wi-container {
+		width: 200px;
+		height: 275px;
+		box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+	}
+
 	#mainheader{
+		display: none;
+	}
+
+	.sideslider{
 		display: none;
 	}
 
@@ -200,10 +219,12 @@ h6{
 
 @media (max-width: 720px){
 
+
 	body, p, li, span{
 	    font-family: 'Open Sans', sans-serif;
 	    font-size: 12px;
 	}
+
 
 	h1 { font-size: 22px; }
 	h2 { font-size: 20px; }

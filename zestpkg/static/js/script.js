@@ -44,7 +44,8 @@ $(document).ready(function() {
 				data:{"image": response},
 				success:function(data){
 				    $('#cropimage').modal('hide');
-				    $('#feedback').html("Profile picture updated! Please referesh page"); 
+				    $('#feedback').html("Profile picture updated! Please referesh page");
+				    location.reload();
 				}
 		    });
 		});	
