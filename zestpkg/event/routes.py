@@ -17,6 +17,8 @@ def all_events():
 	if query != None:
 		title = "Search results for '" + query + "'"
 		events = Event.query.filter(Event.title.like('%' + query + '%')).paginate(page=page, per_page=10)
+		print(events.items)
+
 	else:
 		category = request.args.get('cat')
 		subcat = request.args.get('subcat')
