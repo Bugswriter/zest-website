@@ -22,9 +22,8 @@
     </ul>
 </div>
 <div class="row justify-content-center">
-	<div class="col-5">
-	<form class="form-inline" action="" method="GET">
-		<div class="input-group m-3 animated bounceInUp">
+	<form action="" method="GET">
+		<div class="input-group m-3">
 		  <div class="input-group-prepend">
 		    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by</button>
 		    <div class="dropdown-menu">
@@ -41,10 +40,8 @@
 		  <div class="input-group-append">
 		    <button type="submit" class="btn btn-outline-info" type="button"><i class="fa fa-search"></i></button>
 		  </div>
-			
-		</div>
+		</div>	
 	</form>
-</div>
 </div>
 {% for event in events.items %}
 	<div class="row p-4 justify-content-center animated zoomIn" id="events">
