@@ -161,7 +161,7 @@ def update_event(eid):
 
 	elif request.method == 'GET':
 		form.title.data = event.title
-		form.orguname.data = event.author.username
+		form.orguname.data = event.getOrganizer().username
 		form.num_of_member.data = event.team_limit
 		form.category.data = event.category
 		form.subcategory.data = event.subcategory
