@@ -9,13 +9,11 @@ def send_confirmation_link(username, email, password):
 	msg=Message('Verify your Account for Zest registeration account',
 				sender='akashraj5399@gmail.com',
 				recipients=[email])
-	msg.body='''<h1>Zest2019</h1> To Confirm your Account, visit following link:
-				<a href='{}'>Click here</a>
+	msg.body='''Zest2019 - To Confirm your Account, visit following link:
+				{}
 				If you did not make this request then simply ignore this email.
 			'''.format(url_for('users.confirmation', token=token, _external=True))
 	mail.send(msg)
-
-
 
 
 def send_reset_email(user):
@@ -24,9 +22,8 @@ def send_reset_email(user):
 				sender='akashraj5399@gmail.com',
 				recipients=[user.email])
 	msg.body='''
-			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 			To Reset your password, visit following link:
-				<a href='{}'>Click here</a>
+				{}
 				If you did not make this request then simply ignore this email.
 			'''.format(url_for('users.reset_token', token=token, _external=True))
 	mail.send(msg)

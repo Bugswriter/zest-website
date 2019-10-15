@@ -44,8 +44,8 @@
      <img class="rounded-circle animated pulse slower infinite" height="100px" width="100px" src="{{ url_for('static', filename='images/logo.png') }}">
      </div>
      <div data-tilt class="col-8">
-       <h2 class="animated infinite pulse slower" style="color:#B21117;">SHRI RAM MURTI SMARAK COLLEGE OF ENGINEERING BAREILLY</h2>
-       <h5 class="subhead">Tyro presents Zest & Aamod - a cultural and sports fest</h5>
+       <h2 class="h3 animated infinite pulse slower" style="color:#B21117;">SHRI RAM MURTI SMARAK <i>COLLEGE OF ENGINEERING AND TECHNOLOGY</i> BAREILLY</h2>
+       <h5 class="subhead animated delay-1s zoomInDown slower">Tyro presents Zest & Aamod - a cultural and sports fest</h5>
        <a href="https://instagram.com/tyro.srms" target="_blank" class="fa fa-instagram"> Tyro Instagram</a> |
        <a href="https://srms.ac.in" target="_blank" class="fa fa-browser">SRMS Official Website</a>
      </div>
@@ -75,7 +75,7 @@
                   {% if current_user.profile == None %}
                     <img width="30px" class="rounded-circle animated infinite swing slower" src="{{ url_for('static', filename='profile_pics/default.jpg')}}">
                   {% else %} 
-                    <img width="30px" class="rounded-circle animated infinite swing slower" src="{{ url_for('static', filename='profile_pics/'+current_user.profile.image)}}">
+                    <img width="30px" class="rounded-circle animated infinite pulse slower" src="{{ url_for('static', filename='profile_pics/'+current_user.profile.image)}}">
                   {% endif %} 
                   <span> {{ current_user.username }} <b class="text-info">PID: {{ current_user.id }}</b> </span>
                 </a>
