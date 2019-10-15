@@ -71,10 +71,6 @@ def update_profile():
 	form = ProfileForm()
 	if form.validate_on_submit():
 		profile.name = form.first_name.data + ' ' + form.last_name.data
-		print(str(form.image.data))
-		if form.image.data:
-			profile.image = save_picture(form.image.data)
-			
 
 		profile.course = form.course.data
 		profile.branch = form.branch.data
