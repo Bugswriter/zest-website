@@ -38,7 +38,11 @@ def AdminPannel():
 def AdminUsers():
 	AdminCheck()
 	page = request.args.get('page', 1, type=int)
-	users = User.query.paginate(page=page ,per_page=20)
+	query = request.args.get('q')
+	if query != None:
+		users = User.query.filter(User.username.like('%' + query + '%')).paginate(page=page, per_page=10)
+	else:
+		users = User.query.paginate(page=page ,per_page=20)
 	last = ceil(users.total/20)	
 	return render_template('AdminUsers.html', title='User View', users=users, last_page=last)
 
@@ -97,8 +101,13 @@ admin event related
 @login_required
 def AdminEvents():
 	AdminCheck()
+	query = request.args.get('q')
 	page = request.args.get('page', 1, type=int)
-	events = Event.query.paginate(page=page ,per_page=10)
+	if query != None:
+		events = Event.query.filter(Event.title.like('%' + query + '%')).paginate(page=page, per_page=10)
+	else:
+		events = Event.query.paginate(page=page ,per_page=10)
+
 	last = ceil(events.total/10)
 	return render_template('AdminEvents.html', title='Events View', events=events, last_page=last)
 

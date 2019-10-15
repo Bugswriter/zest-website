@@ -6,14 +6,12 @@
 </div>
 <div class="row justify-content-around">
 	{% if participations %}
-	<div class="card m-3" style="max-width: 60rem;">
-	   <div class="card-body"> 
-	  </div>
-	  <table class="table text-center">
+
+	   	<table class="table text-center w-50" >
 		  <thead class="thead-dark">
 		    <tr>
-		      <th scope="col">Event ID</th>
-		      <th scope="col">Team ID</th>
+		      <th scope="col">Event</th>
+		      <th scope="col">Team</th>
 		      <th scope="col">Withdraw</th>
 		    </tr>
 		  </thead>
@@ -23,19 +21,21 @@
 			      <td><a href="{{ url_for('event.event_page', eid=p.event.id) }}">{{ p.event.title }}</td>
 			      {% if p.team %}
 			      	<td>
-			      		<a href="{{ url_for('team.team_card', tid=p.team.id) }}">{{ p.team.name }}</a>
+			      		<a href="{{ url_for('team.team_card', tid=p.team.id) }}">{{ p.team.name }}</a> (TID: {{ p.team.id }})
 			      	</td>
 			      {% else %}
 			      	<td>-</td>
 			      {% endif %}
-			      <td><a href="#" class='btn btn-outline-danger ml-3 rounded-circle'>✘</a></td>
+			      <td><a href="{{ url_for('contestant.withdraw', eid=p.event.id) }}" class='btn btn-outline-danger ml-3 rounded-circle'>✘</a></td>
 			    </tr>
 			{% endfor %}
 		   
 		  </tbody>
-		</table>
+		</table> 
+	 
+	  
 
-	</div>
+
 	{% else %}
 		<p>You are registered in no events</p>
 		<a class="btn btn-outline-success" href="{{ url_for('event.all_events') }}">Browse Events</a>

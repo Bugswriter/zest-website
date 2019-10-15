@@ -6,6 +6,29 @@
     <h2>Events</h2>
     <hr>
   </div>
+  <div class="row justify-content-center m-3 p-3">
+    <form action="" method="GET">
+      <div class="input-group m-3">
+        <div class="input-group-prepend">
+          <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by</button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="/events/?subcat=sports">Sports</a>
+            <a class="dropdown-item" href="/events/?subcat=atheletics">Atheletics</a>
+            <a class="dropdown-item" href="/events/?subcat=music">Music</a>
+            <a class="dropdown-item" href="/events/?subcat=dance">Dance</a>
+            <a class="dropdown-item" href="/events/?subcat=informals">Informals</a>
+            <a class="dropdown-item" href="/events/?subcat=literary">Literary</a>
+            <a class="dropdown-item" href="/events/?subcat=deco">Deco</a>
+            <a class="dropdown-item" href="/events/?subcat=drama">Drama</a>
+          </div>
+        </div> 
+        <input type="text" name="q" placeholder="Search your event..." class="form-control" aria-label="Serach Event">
+        <div class="input-group-append">
+          <button type="submit" class="btn btn-outline-info" type="button"><i class="fa fa-search"></i></button>
+        </div>
+      </div>  
+    </form>
+  </div>
 	<table class="table text-center mt-4 border table-striped">
 		<thead class="thead-dark table-striped">
     		<th>Title</th>

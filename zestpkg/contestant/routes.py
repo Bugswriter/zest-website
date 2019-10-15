@@ -43,9 +43,12 @@ def withdraw(eid):
 		flash('You need to create your Profile Card first!', category='info')
 		return redirect(url_for('profile.create_profile'))
 
-
 	event = Event.query.get_or_404(eid)
-	with_draw(eid)
+	x = Contestant.query.filter_by(user_id=current_user.id, event_id=eid).first()
+	if x != None:
+		db.session.delete(x)
+		db.session.commit()
+
 	flash(f'You are removed from {event.title} event', category='info')
 
 	return redirect('/events')

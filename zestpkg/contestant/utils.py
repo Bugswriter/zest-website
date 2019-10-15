@@ -22,8 +22,4 @@ def joinParty(eid, code=None):
 	
 
 
-def with_draw(eid):
-	x = Contestant.query.filter_by(user_id=current_user.id, event_id=eid).first()
-	if x != None:
-		db.session.delete(x)
 	
