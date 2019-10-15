@@ -78,7 +78,8 @@ def participant_list(eid):
 	event = Event.query.get_or_404(eid)
 	if event.eventType() == 'Solo':
 		contestants = event.getParticipants()
-		return render_template('participants.html', contestants=contestants)
+		return render_template('participants.html', contestants=contestants, event=event)
 	else:
 		teams = event.getParticipants()
-		return render_template('teamlist.html', teams=teams)
+		print(teams)
+		return render_template('teamlist.html', teams=teams, event=event)

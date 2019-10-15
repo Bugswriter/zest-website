@@ -8,18 +8,18 @@
   <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Username</th>
-      <th scope="col">Name</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Team name</th>
+      <th scope="col">TID</th>
+      <th scope="col">Members</th>
     </tr>
   </thead>
   <tbody>
-  	{% for contestant in contestants%}
+  	{% for team in teams%}
     <tr>
       <th scope="row">1</th>
-      <td><a href="/{{contestant.username}}">{{ contestant.username }}</a></td>
-      <td>{{ contestant.getProfile().name }}</td>
-      <td>{{ contestant.getProfile().college }}</td>
+      <td><a href="/{{contestant.username}}">{{ team.name }}</a></td>
+      <td><b class="text-info">{{ team.id }}</b></td>
+      <td>{{ team.getNumOfMember() }}</td>
     </tr>
     {% endfor %}
   </tbody>

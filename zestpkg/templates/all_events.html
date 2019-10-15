@@ -71,7 +71,10 @@
 							<small class="text-success">You don't need a team.</small><br>
 						{% endif %}
 						<span class="text-light">Time: 3:40pm to 4:30pm</span><br>
-						<small>{{ event.getParticipants()|length }} participations</small>
+						<small>{{ event.getParticipants()|length }} participations</small><br>
+						{% if current_user.username == 'admin' %}
+							<small><a class="text-light" href="{{ url_for('event.participant_list', eid=event.id) }}">Contestants list</a></small>
+						{% endif %}
 					</p>
 				</div>
 			</div>
