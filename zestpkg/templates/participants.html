@@ -1,25 +1,50 @@
 {% extends 'layout.html' %}
 {% block content %}
+<script>
+  function printpage() {
+    window.print();
+  }
+</script>
+<style type="text/css">
+  body
+  {
+      counter-reset: Serial;           /* Set the Serial counter to 0 */
+  }
+
+  table
+  {
+      border-collapse: separate;
+  }
+
+  tr td:first-child:before
+  {
+    counter-increment: Serial;      /* Increment the Serial counter */
+    content: "Serial is: " counter(Serial); /* Display the counter */
+  }
+</style>
 <div class="text-center mt-4 animated bounceInDown">
-	<h1>{{ event.title }}</h1>
+	<h2 class="text-uppercase">{{ event.title }} event Participants</h2>
+  <a href="#" onclick="printpage()">Print list</a>
 	<hr>
 </div>
-<table class="table">
+<table class="table text-uppercase">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Username</th>
+      <th scope="col">PID</th>
       <th scope="col">Name</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Course</th>
+      <th scope="col">Roll Number</th>
+      <th scope="col">College</th>
     </tr>
   </thead>
   <tbody>
   	{% for contestant in contestants%}
     <tr>
-      <th scope="row">1</th>
-      <td><a href="/{{contestant.username}}">{{ contestant.username }}</a></td>
-      <td>{{ contestant.getProfile().name }}</td>
-      <td>{{ contestant.getProfile().college }}</td>
+      <th scope="row" class="text-danger">{{ contestant.id }}</th>
+      <td><a href="/{{contestant.username}}">{{ contestant.profile.name }}</a></td>
+      <td>{{ contestant.profile.course }}</td>
+      <td>{{ contestant.profile.roll_number }}</td>
+      <td>{{ contestant.profile.college }}</td>
     </tr>
     {% endfor %}
   </tbody>

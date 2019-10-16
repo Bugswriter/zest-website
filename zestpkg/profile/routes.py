@@ -86,7 +86,7 @@ def update_profile():
 	elif request.method == 'GET':
 		name = profile.name.split()
 		fname = name[0]
-		lname = name[1]
+		lname = name[1]	
 		form.first_name.data = fname
 		form.last_name.data = lname
 		form.course.data = profile.course
