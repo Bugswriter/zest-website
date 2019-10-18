@@ -16,7 +16,7 @@ def register():
 	registerform = RegisterForm()
 	if registerform.validate_on_submit():
 		send_confirmation_link( registerform.username.data, registerform.email.data, registerform.password.data)
-		success = {'title': 'Confirmation link sent', 'heading': 'Confirmation Link had been sent.', 'message': 'A email confirmation link has been sended to email address you used at the time of creating account'}
+		success = {'title': 'Confirmation link sent', 'heading': 'Confirmation Link has been sent.', 'message': 'A email confirmation link has been sended to email address you used at the time of creating account'}
 		return render_template('success.html', **success)
 	return render_template('register.html', title='Register', form=registerform)
 
