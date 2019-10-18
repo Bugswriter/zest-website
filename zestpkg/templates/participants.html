@@ -32,7 +32,7 @@
       <small class="text-muted">for boys & girls both</small>
     {% endif %}
   </h3>
-  <a target="_blank" href="{{ url_for('event.generate_excel', eid=event.id) }}">Download List</a>
+  <a href="{{ url_for('event.generate_excel', eid=event.id) }}">Download List</a>
 	<hr>
 </div>
 <table class="table text-uppercase">
