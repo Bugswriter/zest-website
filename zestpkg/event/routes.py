@@ -83,3 +83,23 @@ def participant_list(eid):
 		teams = event.getParticipants()
 		print(teams)
 		return render_template('teamlist.html', teams=teams, event=event)
+
+
+
+@event.route('/event/<string:eid>/generate_sheet')
+@login_required
+def generate_excel(eid):
+	if current_user.verified != True:
+		flash("Your account is not verified", category='warning')
+		abort(500)
+
+
+	event = Event.query.get_or_404(eid)
+	if event.eventType() == 'Solo':
+		fileName = "./zestpkg/static/sheets/" + event.title.upper() + "-" + str(event.id) + ".csv"
+		print(fileName)
+		niggas = event.getParticipants()
+		sheet = generate_sheet_solo(fileName, niggas)
+
+	return redirect(url_for('static', filename='sheets/'+event.title.upper() + "-" + str(event.id) + ".xlsx"))
+

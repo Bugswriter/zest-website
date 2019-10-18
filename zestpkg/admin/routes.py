@@ -67,7 +67,7 @@ def UserCreation():
 def delete_account(uid):
 	AdminCheck()
 	user = User.query.get(uid)
-	name = user.profile.name
+	username = user.username
 	profile = Profile.query.filter_by(user_id=uid).first()
 	contestants = Contestant.query.filter_by(user_id=uid)
 	events = Event.query.filter_by(user_id=uid)
@@ -88,7 +88,7 @@ def delete_account(uid):
 
 	db.session.commit()
 
-	flash(f'{name} account has been been deleted!', category='success')
+	flash(f'{username} account has been been deleted!', category='success')
 	return redirect(url_for('admin.AdminUsers'))
 
 

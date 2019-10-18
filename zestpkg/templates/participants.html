@@ -19,29 +19,39 @@
   tr td:first-child:before
   {
     counter-increment: Serial;      /* Increment the Serial counter */
-    content: "Serial is: " counter(Serial); /* Display the counter */
+    content: counter(Serial); /* Display the counter */
   }
 </style>
 <div class="text-center mt-4 animated bounceInDown">
-	<h2 class="text-uppercase">{{ event.title }} event Participants</h2>
-  <a href="#" onclick="printpage()">Print list</a>
+	<h3 class="">{{ event.title }} 
+    {% if event.gender == 'M' %}
+      <small class="text-muted">for boys only</small>
+    {% elif event.gender == 'F' %}
+      <small class="text-muted">for girls only</small>
+    {% else %}
+      <small class="text-muted">for boys & girls both</small>
+    {% endif %}
+  </h3>
+  <a target="_blank" href="{{ url_for('event.generate_excel', eid=event.id) }}">Download List</a>
 	<hr>
 </div>
 <table class="table text-uppercase">
   <thead class="thead-dark">
     <tr>
+      <th scope="col">#</th>
       <th scope="col">PID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Course</th>
-      <th scope="col">Roll Number</th>
-      <th scope="col">College</th>
+      <th scope="col">NAME</th>
+      <th scope="col">COURSE</th>
+      <th scope="col">ROLL NUMBER</th>
+      <th scope="col">COLLEGE</th>
     </tr>
   </thead>
   <tbody>
   	{% for contestant in contestants%}
     <tr>
-      <th scope="row" class="text-danger">{{ contestant.id }}</th>
-      <td><a href="/{{contestant.username}}">{{ contestant.profile.name }}</a></td>
+      <td></td>
+      <td scope="row" class="text-danger">{{ contestant.id+1000 }}</td>
+      <td><a href="{{ url_for('profile.profile_card', username=contestant.username) }}">{{ contestant.profile.name }}</a></td>
       <td>{{ contestant.profile.course }}</td>
       <td>{{ contestant.profile.roll_number }}</td>
       <td>{{ contestant.profile.college }}</td>

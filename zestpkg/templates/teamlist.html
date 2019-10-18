@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% block content %}
 <div class="text-center mt-4 animated bounceInDown">
-	<h1>{{ event.title }}</h1>
+	<h1>{{ event.title }} Event Teams</h1>
 	<hr>
 </div>
 <table class="table">
@@ -17,7 +17,7 @@
   	{% for team in teams%}
     <tr>
       <th scope="row">1</th>
-      <td><a href="/{{contestant.username}}">{{ team.name }}</a></td>
+      <td><a href="{{ url_for() }}">{{ team.name }}</a></td>
       <td><b class="text-info">{{ team.id }}</b></td>
       <td>{{ team.getNumOfMember() }}</td>
     </tr>

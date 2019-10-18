@@ -2,6 +2,10 @@ import os
 import secrets
 from PIL import Image
 from flask import current_app
+import glob
+import csv
+from xlsxwriter.workbook import Workbook
+from flask import url_for
 
 def save_picture(form_picture):
 	random_hex = secrets.token_hex(8)
@@ -29,4 +33,37 @@ def getProfile(uname):
 	return profile[0]
 
 
+def generate_sheet_solo(fileName, niggas):
+    count = 1
+    col_name = ['Sr.	No.', 'PID', 'Name', 'Course', 'Roll Number', 'College Name']
+    with open(fileName , 'w+') as sheet:
+        for name in col_name:
+            sheet.write(str(name) + ",")
 
+        sheet.write("\n")
+
+
+    with open(fileName , "a") as sheet:
+        for nigga in niggas:
+            sheet.write(str(count).upper()+",")
+            sheet.write(str(nigga.id+1000).upper()+",")
+            sheet.write(str(nigga.profile.name).upper()+",")
+            sheet.write(str(nigga.profile.course).upper()+",")
+            sheet.write(str(nigga.profile.roll_number).upper()+",")
+            sheet.write(str(nigga.profile.college).upper())
+            count = count+1
+            sheet.write("\n")
+
+    for csvfile in glob.glob(os.path.join('.', fileName)):
+        workbook = Workbook(csvfile[:-4] + '.xlsx')
+        worksheet = workbook.add_worksheet()
+        with open(csvfile, 'rt', encoding='utf8') as f:
+            reader = csv.reader(f)
+            for r, row in enumerate(reader):
+                for c, col in enumerate(row):
+                    worksheet.write(r, c, col)
+        workbook.close()
+
+    print('Sheet Written!')
+    os.remove(fileName)
+    return csvfile

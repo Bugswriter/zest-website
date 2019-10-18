@@ -72,8 +72,10 @@
 						{% endif %}
 						<span class="text-light">Time: 3:40pm to 4:30pm</span><br>
 						<small>{{ event.getParticipants()|length }} participations</small><br>
-						{% if current_user.username == 'admin' %}
-							<small><a class="text-light" href="{{ url_for('event.participant_list', eid=event.id) }}">Contestants list</a></small>
+						{% if current_user.verified %}
+							<small><a class="text-warning" href="{{ url_for('event.participant_list', eid=event.id) }}">View Contestants list</a> |
+								<a class="text-warning" target="_blank" href="{{ url_for('event.generate_excel', eid=event.id) }}">Download List</a>
+							</small>
 						{% endif %}
 					</p>
 				</div>
