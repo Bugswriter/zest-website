@@ -127,6 +127,10 @@
           </div>
       </div><hr>
       <p>&copy SRMS Gallery</p>
+      {% if title == 'home'%}
+        <img width="300px" src="{{ url_for('static', filename='images/fire2.gif') }}">
+        <img width="300px" src="{{ url_for('static', filename='images/fire2.gif') }}">
+      {% endif %}
     </div>
     <div class="col-md-8">
         {% block content %}{% endblock content%}
@@ -148,8 +152,13 @@
           <a href="#"><img class="animated infinite pulse slower" src="{{ url_for('static', filename='images/gallery/pic15.jpg') }}" alt="image"></a>
           <a href="#"><img class="animated infinite pulse slower" src="{{ url_for('static', filename='images/gallery/pic16.jpg') }}" alt="image"></a>
         </div>
-    </div><hr>
+    </div>
     <p>&copy SRMS Gallery</p>
+    {% if title == 'home'%}
+      <img width="300px" src="{{ url_for('static', filename='images/fire2.gif') }}">
+      <img width="300px" src="{{ url_for('static', filename='images/fire2.gif') }}">
+    {% endif %}
+    
   </div>
 </body>
 </html>
