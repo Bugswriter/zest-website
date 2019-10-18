@@ -1,3 +1,4 @@
+import getpass
 from flask import Blueprint, render_template, redirect, flash, request, abort, url_for
 from flask_login import current_user, login_required
 from zestpkg.event.forms import EventForm
@@ -96,7 +97,7 @@ def generate_excel(eid):
 
 	event = Event.query.get_or_404(eid)
 	if event.eventType() == 'Solo':
-		fileName = "./zestpkg/static/sheets/" + event.title.upper() + "-" + str(event.id) + ".csv"
+		fileName = "/home/"+ getpass.getuser() +"/zest-website/zestpkg/static/sheets/"+event.title.upper() + "-" + str(event.id) + ".csv"
 		print(fileName)
 		niggas = event.getParticipants()
 		sheet = generate_sheet_solo(fileName, niggas)
