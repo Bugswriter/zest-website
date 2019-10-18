@@ -35,7 +35,7 @@ def getProfile(uname):
 
 def generate_sheet_solo(fileName, niggas):
     count = 1
-    col_name = ['Sr.	No.', 'PID', 'Name', 'Course', 'Roll Number', 'College Name']
+    col_name = ['Sr.No.', 'PID', 'Name', 'Course', 'Roll Number', 'College Name']
     with open(fileName , 'w+') as sheet:
         for name in col_name:
             sheet.write(str(name) + ",")
