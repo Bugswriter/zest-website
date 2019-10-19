@@ -195,7 +195,7 @@
 .main {
   display: flex;
   overflow: hidden;
-  height: 200vh;
+  height: 175vh;
   margin-top: 4%;
   background: white;
 }
