@@ -3,7 +3,7 @@
 <style type="text/css">
 	h1, h2, h3, h4, h5, h6{
 		font-family: 'Roboto';
-		text-shadow: 1px 3px 1px rgba(0,0,0,0.3);
+		text-shadow: 1px 2px 1px rgba(0,0,0,0.3);
 		font-weight: bold;
 		color: #B21117;
 	}
@@ -20,7 +20,20 @@
 		font-weight: lighter;
 		line-height: 1.8em;
 	}
+
+	#timerhead h3{
+		font-family: 'Roboto', cursive;
+	}
+	#timerhead span{
+		color: #B21117;
+	}
+	#timerhead h6{
+		font-family: 'Pacifico', cursive;
+		font-weight: lighter;
+		text-shadow: 0px 0px 0px rgba(0,0,0,0);
+	}
 </style>
+
 <div class="row justify-content-center">
 	<div class="col-md-12">
 		<ul id="sb-slider" class="sb-slider">
@@ -79,29 +92,7 @@
 	</div>
 </div>
 <div class="row justify-content-center m-3 p-3">
-	<div class="col-lg-6">
-		<h3 class="animated infinite pulse ml-3 slower">ABOUT THE EVENT</h3><hr>
-		<p><b>Zest and Aamod</b> is a cultural and sports fest held at SRMS CET , Bareilly every year. The motive of this events is to allow or provide freedom to the students to take part in various cultural and sports activities and showcase their talents . </p>
-		<p> In this students of not only this college but also of various other colleges from different places come and take part in various competitions and show their talents every year. </p>
-
-		<h6 class="p-2">🎶 🎖️ 💃 🤾‍♂️ 🕺 🏆 ⛹️‍♀️ 🥇 🎤 🎁 🥈 ⚽ 🏏 🏓</h6>
-		<b>Our theme of this year:</b>
-		<p class="display-3 text-center animated rubberBand slower" id="theme">Antaragni</p>
-	</div>
-	<div class="col-lg-6">
-		<ul id="elasticstack" class="elasticstack animated pulse slower infinite">
-			<li><img src="{{url_for('static', filename='images/gallery/pic1.jpg')}}" height="260px" width="300px" alt="01"/><h5>Sports</h5></li>
-			<li><div class="overlay"></div><img src="{{url_for('static', filename='images/gallery/pic6.jpg')}}" height="260px" alt="02"/><h5>Dance</h5></li>
-			<li><img src="{{url_for('static', filename='images/gallery/pic2.jpg')}}" height="260px" width="300px" alt="03"/><h5>Kho Kho</h5></li>
-			<li><img src="{{url_for('static', filename='images/gallery/pic3.jpg')}}"  height="260px" width="300px" alt="04"/><h5>Price distribution</h5></li>
-			<li><img src="{{url_for('static', filename='images/gallery/pic4.jpg')}}" height="260px" width="300px" alt="05"/><h5>Volley Ball</h5></li>
-			<li><img src="{{url_for('static', filename='images/gallery/pic5.jpg')}}" height="260px" width="300px" alt="06"/><h5>Drama</h5></li>
-		</ul>
-	</div>
-</div>
-<div class="row justify-content-center m-3 p-3">
 	<div class="col-lg-12 text-center">
-		<h3 class="animated infinite pulse slower">INFORMATION</h3><hr>
 		<div class="row">
 			<div class="col-md-4 clickbox m-auto">
 				<a href="{{ url_for('event.all_events') }}"><img class="animated infinite bounce slower" src="{{ url_for('static', filename='images/icons/browse.png') }}"><br>
@@ -119,58 +110,44 @@
 	</div>
 </div><br><br>
 <div class="row justify-content-center m-3 p-3">
- 	<div class="col-lg-4 windy-demo animated infinite pulse slower">
-		<ul id='wi-el' class="wi-container">
-			<li>
-				<img class="img-thumbnail" src="{{url_for('static', filename='images/tyromember/hafsa_khan.jpg')}}" alt="image1"/>
-				<h5>Hafsa Khan (VP)</h5>
-			</li>
-			<li>
-				<img class="img-thumbnail" src="{{url_for('static', filename='images/tyromember/harshita_singh_vp.jpg')}}" alt="image1"/>
-				<h5>Harshita Singh (VP)</h5>
-			</li>
-			<li>
-				<img class="img-thumbnail" src="{{ url_for('static', filename='images/tyromember/bhowmik_pandey_vp.jpg') }}" alt="image1">
-				<h5>Bhowmik Pandey (VP)</h5>
-			</li>
-			<li>
-				<img class="img-thumbnail" src="{{url_for('static', filename='images/tyromember/akanksha_kushwaha_vp.jpg')}}" alt="image1"/>
-				<h5>Akansha Kushwaha (VP)</h5>
-			</li>
-			<li>
-				<img class="img-thumbnail" src="{{url_for('static', filename='images/tyromember/neha_chauhan_vp.jpg')}}" alt="image1"/>
-				<h5>Neha Chauhan (VP)</h5>
-			</li>
-		</ul>
-		<nav>
-			<span id="nav-prev">prev</span>
-			<span id="nav-next">next</span>
-		</nav>
+	<div class="col-lg-6">
+		<h3 class="animated infinite pulse ml-3 slower">ABOUT THE EVENT</h3><hr>
+		<p><b>Zest and Aamod</b> is a cultural and sports fest held at SRMS CET , Bareilly every year. The motive of this events is to allow or provide freedom to the students to take part in various cultural and sports activities and showcase their talents . </p>
+		<p> In this students of not only this college but also of various other colleges from different places come and take part in various competitions and show their talents every year. </p>
 	</div>
-	<div class="col-lg-8" id='chairman'>
-		<h3 class="animated infinite pulse slower">⚝ ABOUT TYRO ⚝</h3><hr>
-		<blockquote class="blockquote"><p><b>TYRO – A Beginner</b>, established in <b>1997</b>,a panel of students comprising the very best amongst the best. The sole aim of Tyro is to bring about diversity of art, culture, academics and sports on a common platform.”</i> It is dedicated to bring joy and jubilation by nurturing budding talent.</p>
-		</blockquote>
-
-		<p>Tyro comes into full swing for the organization of a mega event – <b>'ZEST' & ‘AAMOD’</b>. This is the platform wherein young and creative minds get to exhibit their talent through various competitions.</p>
-
-		<p>It’s time to extract the series of creativity from the best brains...So, herein, we extend our invitation to all, to be a part of this grand event.</p>
+	<div class="col-lg-6">
+		<ul id="elasticstack" class="elasticstack animated pulse slower infinite">
+			<li><img src="{{url_for('static', filename='images/gallery/pic1.jpg')}}" height="260px" width="300px" alt="01"/><h5>Sports</h5></li>
+			<li><div class="overlay"></div><img src="{{url_for('static', filename='images/gallery/pic6.jpg')}}" height="260px" alt="02"/><h5>Dance</h5></li>
+			<li><img src="{{url_for('static', filename='images/gallery/pic2.jpg')}}" height="260px" width="300px" alt="03"/><h5>Kho Kho</h5></li>
+			<li><img src="{{url_for('static', filename='images/gallery/pic3.jpg')}}"  height="260px" width="300px" alt="04"/><h5>Price distribution</h5></li>
+			<li><img src="{{url_for('static', filename='images/gallery/pic4.jpg')}}" height="260px" width="300px" alt="05"/><h5>Volley Ball</h5></li>
+			<li><img src="{{url_for('static', filename='images/gallery/pic5.jpg')}}" height="260px" width="300px" alt="06"/><h5>Drama</h5></li>
+		</ul>
+	</div>
+</div>
+<div class="row justify-content-around m-3 mt-5 p-3">
+	<div class="col-lg-8" id='timerhead'>
+		<h3>TIME LEFT <span class="text-info">🕒</span> </h3>
+		<h6 class="text-muted">- 10 November, 2019</h6><hr><br>
+		<div class="clock"></div>
 	</div>
 </div>
 <div class="row justify-content-center m-3 mt-5 p-3">
 	<div class="col-lg-8">
 		<h3 class="animated infinite pulse slower">🔥 ABOUT OUR THEME 🔥</h3><hr>
 		<p>The name <b>Antaragni</b> is a union of two Sanskrit words — <i>antar</i> meaning 'within' and <i>agni</i> meaning fire. Put together, they form <b>'Antar Ki Agni'</b>	 or 'Antaragni' for short, literally meaning <b>'the fire within'</b>.</p>
-		<blockquote class="blockquote text-left p-2">The most powerful weapon on earth is human soul on fire.
-			<footer class="blockquote-footer">Ferdinand Foch<cite title="Source Title"> Military Theorist </cite></footer>
-		</blockquote>
-		<blockquote class="blockquote text-center p-2">Find the fire within you that burns through all blocks and fear.
+		<p>The fire that makes you stand up whenever we fall, that makes you achieve your goals, that makes you different from others and
+		unique in yourself, that begins when you decide to do something not only for yourself but for a novel cause and the fire that originates
+		to enlighthen the lives and turn all the worries, pains and negativities to ashes.
+		</p>
+		<blockquote class="blockquote text-left p-2">Find the fire within you that burns through all blocks and fear.
 			<footer class="blockquote-footer">Ashley Turner <cite title="Source Title">writer</cite></footer>
 		</blockquote>
 		<blockquote class="blockquote p-2 text-right">Ignite the fire within you and it will allow you to your special dreams in life. You were born for it and your destiny. Now ...live it!
 		<footer class="blockquote-footer">Timothy Pina <cite title="Source Title">writer</cite></footer>
 		</blockquote>
-		<p class="display-4 text-center animated rubberBand slower" id="theme">The Fire within Self</p>
+		<p class="display-4 text-center animated rubberBand slower" id="theme">Antaragni - The Fire within</p>
 	</div>
 	<div class="col-lg-4 text-center">
 		<img class='img-thumbnail animated infinite slower' width="300px" src="{{ url_for('static', filename='images/fire.gif') }}">

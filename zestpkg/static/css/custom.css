@@ -47,9 +47,15 @@ h6{
 }
 #theme{
 	font-family: 'Pacifico', cursive;
-	color: #E25822;
-	text-decoration: underline;
+	background: -webkit-linear-gradient(#FFFF99, #e25822);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 	line-height: 2em;
+}
+
+#timerhead h3{
+	font-family: 'Pacifico', cursive;
+	text-shadow: 0px;
 }
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
