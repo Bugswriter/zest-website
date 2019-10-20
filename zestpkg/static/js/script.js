@@ -178,12 +178,8 @@ $(document).ready(function() {
 	
 	$(function() {
 		var date = new Date(2019, 10, 10);
-		console.log(date)
-
 	    var now = new Date();
-	    console.log(now)
 	    var diff = (date.getTime()/1000) - (now.getTime()/1000);
-
 	    var clock = $('.clock').FlipClock(diff,{
 	        clockFace: 'DailyCounter',
 	        countdown: true

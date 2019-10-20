@@ -1,6 +1,5 @@
 {% extends 'layout.html' %}
 {% block content %}
-
 <div class="text-center mt-4 animated bounceInDown" id="heading">
 	<h2>{{ title }}</h2>
 	<hr>
@@ -22,7 +21,7 @@
     </ul>
 </div>
 <div class="row justify-content-center">
-	<form action="" method="GET">
+	<form action="" id="eventsearch" class="col-lg-4 col-md-8 col-sm-8" style="max-width: 70%" method="GET">
 		<div class="input-group m-3">
 		  <div class="input-group-prepend">
 		    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by</button>

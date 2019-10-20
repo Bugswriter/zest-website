@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/animate.css') }}">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   
   <!-- Jquery plugins CSS -->
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/croppie.css') }}">
@@ -25,18 +25,20 @@
 
   <!-- Jquery and it's fancy plugins -->
   <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/popper.min.js')}}"></script>
-  <script src="{{ url_for('static', filename='js/modernizr.custom.46884.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/modernizr.custom.79639.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/jquery.slicebox.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/jquery.windy.js') }}"></script>
   <script src="{{ url_for('static', filename='js/croppie.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/draggabilly.pkgd.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/flipclock.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/elastiStack.js') }}"></script>
+  {% if title == 'home' %}
+    <script src="{{ url_for('static', filename='js/modernizr.custom.46884.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/modernizr.custom.79639.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.slicebox.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.windy.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/draggabilly.pkgd.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/flipclock.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/elastiStack.js') }}"></script>
+  {% endif %}
 
   <!-- bootstrap and my JS -->
-  <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 </head>
