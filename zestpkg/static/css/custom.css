@@ -4,6 +4,7 @@ body, p, li, span{
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     color: #696969;
+    overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6{
