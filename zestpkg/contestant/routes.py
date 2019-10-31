@@ -14,6 +14,10 @@ def participate(eid):
 		return redirect(url_for('profile.create_profile'))
 
 	event = Event.query.get_or_404(eid)
+	if event.status == False:
+		flash("Registeration for this event is closed right now.", category='warning')
+		return redirect(url_for('event.event_page', eid=eid))
+
 	user_gender = current_user.profile.gender
 	if event.gender != None and event.gender != user_gender:
 		if event.gender == "M":
@@ -44,6 +48,10 @@ def withdraw(eid):
 		return redirect(url_for('profile.create_profile'))
 
 	event = Event.query.get_or_404(eid)
+	if event.status == False:
+		flash("You can't withdraw now! This event is offline right now.", category='warning')
+		return redirect(url_for('event.event_page', eid=eid))
+	
 	x = Contestant.query.filter_by(user_id=current_user.id, event_id=eid).first()
 	if x != None:
 		db.session.delete(x)

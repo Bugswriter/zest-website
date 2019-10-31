@@ -134,7 +134,12 @@ def add_event():
 		else:
 			picture = "default.jpg"
 		try:	
-			event = Event(title=form.title.data, category=form.category.data, subcategory=form.subcategory.data ,image=picture, user_id=oid, team_limit=form.num_of_member.data, about=form.about.data)
+			if form.status.data == 'T':
+				form.status.data = True
+			else:
+				form.status.data = False
+
+			event = Event(title=form.title.data, category=form.category.data, subcategory=form.subcategory.data ,image=picture, user_id=oid, team_limit=form.num_of_member.data, about=form.about.data, status=form.status.data)
 			db.session.add(event)
 			db.session.commit()
 			flash('Your Event Registered Successfully!', 'success')
@@ -163,6 +168,10 @@ def update_event(eid):
 		event.category = form.category.data
 		event.subcategory = form.subcategory.data
 		event.about = form.about.data
+		if form.status.data == 'T':
+			event.status = True
+		else:
+			event.status = False
 
 		db.session.commit()
 		flash('Your event is updated!', category='success')
@@ -175,6 +184,10 @@ def update_event(eid):
 		form.category.data = event.category
 		form.subcategory.data = event.subcategory
 		form.about.data = event.about
+		if event.status == True:
+			form.status.data = 'T'
+		else:
+			form.status.data = 'F'
 
 	return render_template('addevent.html', form=form, title='Update Event')
 

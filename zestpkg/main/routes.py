@@ -9,6 +9,11 @@ def home():
 	return render_template('home.html', title='home')
 
 
+@main.route('/stats', methods=['GET', 'POST'])
+def stats():
+	return render_template('stats.html', title='Statistics')
+
+
 '''
 homepage
 about

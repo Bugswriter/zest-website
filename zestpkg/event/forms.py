@@ -14,6 +14,7 @@ class EventForm(FlaskForm):
 	num_of_member = IntegerField('Number of member',validators=[DataRequired()])
 	time = StringField('Event Time')
 	about = StringField('Event Details', widget=TextArea())
+	status = SelectField('Status', validators=[DataRequired(), Optional()], choices=[('T', 'Online'), ('F', 'Offline')])
 	submit = SubmitField('Register Event')
 
 	def validate_orguname(self, orguname):

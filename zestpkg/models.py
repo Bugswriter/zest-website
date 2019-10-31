@@ -95,6 +95,7 @@ class Event(db.Model):
 	gender = db.Column(db.String(1), nullable=True)
 	participants = db.relationship('Contestant', backref='event', lazy=True)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+	status = db.Column(db.Boolean, nullable=False, default=True)
 
 	def eventType(self):
 		if self.team_limit == 1:

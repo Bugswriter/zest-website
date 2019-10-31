@@ -54,7 +54,6 @@
 					<div class="col form-group">
 						{{ form.category.label(class='form-control-label') }}
 						{{ form.category(class='form-control') }}
-
 						<div class="invalid-feedback d-block">
 							{% if form.category.errors %}
 								{% for error in form.category.errors %}
@@ -75,6 +74,8 @@
 							{% endif %}
 						</div>
 					</div>
+				</div>
+				<div class="form-row">
 					<div class="col form-group">
 						{{ form.image.label(class='form-control-label') }}
 						{{ form.image(class='form-control-file') }}
@@ -86,8 +87,18 @@
 							{% endif %}
 						</div>
 					</div>
+					<div class="col form-group">
+						{{ form.status.label(class='form-control-label') }}
+						{{ form.status(class='form-control') }}
+						<div class="invalid-feedback d-block">
+							{% if form.status.errors %}
+								{% for error in form.status.errors %}
+									{{ error }}
+								{% endfor %}
+							{% endif %}
+						</div>
+					</div>
 				</div>
-				
 				<div class="form-group">
 					{{ form.about.label(class='form-control-label') }}
 					{{ form.about(class='form-control', id='textarea') }}

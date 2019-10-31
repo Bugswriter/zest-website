@@ -53,17 +53,26 @@
 			{% if current_user.is_authenticated %}
 				<hr>
 				<div class="d-flex justify-content-around">
-					{% if event.eventType() == 'Solo' %}
-						<a href="{{ url_for('contestant.participate', eid=event.id) }}" class="btn btn-success">Take Participation</a>
+					{% if event.status %}
+						{% if event.eventType() == 'Solo' %}
+							<a href="{{ url_for('contestant.participate', eid=event.id) }}" class="btn btn-success">Take Participation</a>
+						{% else %}
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createteam">
+								Create team
+							</button>
+							<button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#jointeam">
+								Join team
+							</button>
+						{% endif %}
 					{% else %}
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createteam">
-							Create team
-						</button>
-						<button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#jointeam">
-							Join team
-						</button>
+						<p class="text-danger">Registeration for this event is <b>closed right now</b></p>
 					{% endif %}
 				</div>
+			{% else %}
+			<hr>
+			<div class="d-flex justify-content-around">
+				<p class="text-muted">You need to <a href="{{ url_for('users.register') }}">Create Account</a> for registering into any event.</p>
+			</div>
 			{% endif %}
 		</div>	
 	</div>

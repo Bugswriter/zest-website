@@ -10,7 +10,7 @@
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/animate.css') }}">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  
+  <link rel="shortcut icon" type="image/ico" href="{{ url_for('static', filename='favicon.ico') }}"/>
   <!-- Jquery plugins CSS -->
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/croppie.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/slicebox.css') }}">
@@ -43,20 +43,22 @@
 
 </head>
 <body>
-  <header id="mainheader" class="text-center row justify-content-center p-3">
-    <div class="col">
-     <img class="rounded-circle animated pulse slower infinite" height="100px" width="100px" src="{{ url_for('static', filename='images/logo.png') }}">
-     </div>
-     <div data-tilt class="col-8">
-       <h2 class="h3 animated infinite pulse slower" style="color:#B21117;">SHRI RAM MURTI SMARAK COLLEGE OF ENGINEERING AND TECHNOLOGY, BAREILLY</h2>
-       <h5 class="subhead animated delay-1stu zoomInDown slower">Tyro presents Zest & Aamod - a cultural fest and sports meet</h5>
-       <a href="https://instagram.com/tyro.srms" target="_blank" class="fa fa-instagram"> Tyro Instagram</a> |
-       <a href="https://srms.ac.in" target="_blank" class="fa fa-browser">SRMS Official Website</a>
-     </div>
-     <div class="col">
-       <img src="{{ url_for('static', filename='images/srmslogo.png') }}" class="animated pulse slower infinite">
-     </div>
-  </header>
+  {% if title=='home' %}
+    <header id="mainheader" class="text-center row justify-content-center p-3">
+      <div class="col">
+       <img class="rounded-circle animated pulse slower infinite" height="100px" width="100px" src="{{ url_for('static', filename='images/logo.png') }}">
+       </div>
+       <div data-tilt class="col-8">
+         <h2 class="h3 animated infinite pulse slower" style="color:#B21117;">SHRI RAM MURTI SMARAK COLLEGE OF ENGINEERING AND TECHNOLOGY, BAREILLY</h2>
+         <h5 class="subhead animated delay-1stu zoomInDown slower">Tyro presents Zest & Aamod - a cultural fest and sports meet</h5>
+         <a href="https://instagram.com/tyro.srms" target="_blank" class="fa fa-instagram"> Tyro Instagram</a> |
+         <a href="https://srms.ac.in" target="_blank" class="fa fa-browser">SRMS Official Website</a>
+       </div>
+       <div class="col">
+         <img src="{{ url_for('static', filename='images/srmslogo.png') }}" class="animated pulse slower infinite">
+       </div>
+    </header>
+  {% endif %}
   <nav class="navbar navbar-default sticky-top navbar-expand-lg">
     <div class="container">
 

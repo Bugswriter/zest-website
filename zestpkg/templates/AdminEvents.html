@@ -40,7 +40,14 @@
   	</thead>
   	{% for event in events.items %}	
 	  		<tr>
-	    		<td><a href="{{url_for('event.event_page', eid=event.id)}}">{{event.title}}</a></td>
+	    		<td><a href="{{url_for('event.event_page', eid=event.id)}}">{{event.title}}</a> 
+            {% if event.status %}
+              <span class="badge float-right  badge-success">Online</span> 
+            {% else %}
+              <span class="badge float-right badge-danger">Offline</span>
+            {% endif %}
+          </td>
+            
           {% if event.gender == 'M' %}
             <td>Boys</td>
           {% elif event.gender == 'F' %}
