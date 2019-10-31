@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+		body{
+			font-size: 18px;
+		}
+
+		.button {
+		  background-color: #009ACD;
+		  box-shadow: 0 5px 0 #000;
+		  border-radius: 10px;
+		  color: white;
+		  padding: .7em 1em;
+		  position: relative;
+		  text-decoration: none;
+		  text-transform: uppercase;
+		}
+
+		footer{
+			margin-top: 30px;
+			color: grey;
+		}
+
+		a:hover {
+		  background-color: #39B7CD;
+		  cursor: pointer;
+		}
+		b{
+			color: #39B7CD;
+		}
+		.note{
+			font-size: 14px;
+			
+		}
+		i{
+			color: #8d021f;
+		}
+	</style>
+</head>
+<body>
+	<h2>Dear <b>{{ username }}</b>!</h2><hr>
+
+	<p>Hi, I am the <a href="https://zest2019.in/admin" style="color: #BE0808">admin</a> of <a href="https://zest2019.in">zest2019</a>.<br>
+	We just got a forget password request. If you forgot your password and this request is from you... <b class="text-info">reset your password</b> by clicking the button below - </p>
+	<br>
+	<a class="button" style="color: #ffffff" href="{{ url_for('users.confirmation', token=token, _external=True) }}">Reset Password</a>
+	<footer>
+		<p>For any technical diffculty - feel free to email 📧 me - <b>admin@zest2019.in</b></p>
+		<p>or you can call/telegram/whatsapp too - <b>+91-7417224655</b></p>
+	</footer>
+	<hr>
+	<p class="note"><b>Note</b>: If you get any <i>link expired</i> message means you clicked button 10 min late.<br> You need to send reset password request again</p>
+	<p class="note"><b>Note 2</b>: If you didn't ask for this... simply ignore this email 📧. Don't panic, no one can hack you if you don't share this email.</p>
+</body>
+</html>
