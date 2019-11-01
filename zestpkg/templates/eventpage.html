@@ -40,14 +40,24 @@
 			<div class="row">
 				<div class="col-md-12">
 					<h5>Event Rules</h5>
-					<p>Breaking any of these rules given below will disqualify you!</p>
-					<ul>
-						<li>Props that can cause any danger are strictly prohibited (e.g. metal, sticks, rods & fire).</li>
-						<li>Time limit: 2:00 to 3:00 minutes.</li>
-						<li>There will be one round in solo dance.</li>
-						<li>These are only the dummy rules.</li>
-						<li>Real rules will update ASAP</li>
-					</ul>
+					<p class="m-2">Please read your event category general rules (if exist) too on <a href="#">Zest&Aamod Rulebook</a></p>
+						{% if event.category != 'aamod' %}
+							<ul>
+							{% for rule in rules%}
+								<li class="p-2">{{ rule }}</li>
+							{% endfor %}	
+							</ul>
+						{% elif event.subcategory == 'atheletics' %}
+							<ul>
+								<li>Events of Atheletics are individually counted as 1 event in Aamod.</li>
+								<li>Participants can take part in maximum 2 event of atheletics</li>
+								<li>Relay (4*100m , 4*400m) is open event for participant.</li>
+							</ul>
+						{% else %}
+							<ul>
+								<li>Games will be played prescribed by the internation federations.</li>
+							</ul>
+						{% endif %}
 				</div>
 			</div>
 			{% if current_user.is_authenticated %}

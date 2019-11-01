@@ -44,7 +44,7 @@
 	<p>Hi, I am the <a href="https://zest2019.in/admin" style="color: #BE0808">admin</a> of <a href="https://zest2019.in">zest2019</a>.<br>
 	We just got a forget password request. If you forgot your password and this request is from you... <b class="text-info">reset your password</b> by clicking the button below - </p>
 	<br>
-	<a class="button" style="color: #ffffff" href="{{ url_for('users.confirmation', token=token, _external=True) }}">Reset Password</a>
+	<a class="button" style="color: #ffffff" href="{{ url_for('users.reset_token', token=token, _external=True) }}">Reset Password</a>
 	<footer>
 		<p>For any technical diffculty - feel free to email 📧 me - <b>admin@zest2019.in</b></p>
 		<p>or you can call/telegram/whatsapp too - <b>+91-7417224655</b></p>

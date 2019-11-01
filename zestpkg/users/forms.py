@@ -5,7 +5,7 @@ from zestpkg.models import User
 
 
 class RegisterForm(FlaskForm):
-	username = StringField('Username', validators=[DataRequired(), Regexp('^[A-Za-z][A-Za-z0-9]{3,15}$', message="Username must start with alphabet with no special characters") ,Length(min=3, max=15)])
+	username = StringField('Username', validators=[DataRequired(), Regexp('^[A-Za-z][A-Za-z0-9]{3,15}$', message="Username must start with alphabet with no spaces and special characters") ,Length(min=3, max=15)])
 	email = StringField('Email', validators=[DataRequired(), Email()])
 	password = PasswordField('Password', validators=[DataRequired(), Length(min=6, message="Password must be of minimum 6 characters")])
 	confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])

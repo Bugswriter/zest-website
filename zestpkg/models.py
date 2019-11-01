@@ -1,5 +1,6 @@
 import string
 import random
+from datetime import datetime
 from zestpkg import db
 from flask_login import UserMixin
 from zestpkg import login_manager
@@ -23,6 +24,7 @@ class User(db.Model, UserMixin):
 	password = db.Column(db.String(60), nullable=False)
 	profile = db.relationship('Profile', backref='account', uselist=False)
 	participations = db.relationship('Contestant', backref='user')
+	date = db.Column(db.String(30), nullable=False, default=datetime.strftime(datetime.today(), "%b %d %Y"))
 	verified = db.Column(db.Boolean, nullable=False, default=False)
 
 	def getTeam(self):
@@ -90,11 +92,13 @@ class Event(db.Model):
 	subcategory = db.Column(db.String(40), nullable=False)
 	image = db.Column(db.String(60), nullable=False, default='default.jpg')
 	team_limit = db.Column(db.Integer, nullable=False, default=1)
+	min_limit = db.Column(db.Integer, nullable=True)
 	time = db.Column(db.String(15), nullable=True)
 	about = db.Column(db.Text(60), nullable=True)
 	gender = db.Column(db.String(1), nullable=True)
 	participants = db.relationship('Contestant', backref='event', lazy=True)
-	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), default='1000')
+	rules = db.relationship('Rule', backref='event', lazy=True)
 	status = db.Column(db.Boolean, nullable=False, default=True)
 
 	def eventType(self):
@@ -117,8 +121,8 @@ class Event(db.Model):
 
 
 	def getParticipants(self):
+		party = self.participants
 		if self.team_limit == 1:
-			party = self.participants
 			participants = []
 			for member in party: 
 				user = User.query.get_or_404(member.user_id)
@@ -126,8 +130,6 @@ class Event(db.Model):
 
 			return participants
 		else:
-
-			party = self.participants
 			teams = []
 			for member in party:
 				team = Team.query.get_or_404(member.team_id)
@@ -148,6 +150,7 @@ class Contestant(db.Model):
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)	
 	event_id = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=False)
 	team_id = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=True)
+	date = db.Column(db.String(30), nullable=False, default=datetime.strftime(datetime.today(), "%b %d %Y"))
 
 	def __repr__(self):
 		user = User.query.get(self.user_id)
@@ -161,7 +164,7 @@ class Team(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	name = db.Column(db.String(30), nullable=False)
 	members = db.relationship('Contestant', backref='team', lazy=True)
-	event_id = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=False )
+	event_id = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=False)
 	team_code = db.Column(db.String(10), nullable=False, default=generate_team_code())
 
 	def getMember(self):
@@ -187,5 +190,10 @@ class Team(db.Model):
 
 
 
+class Rule(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	rule = db.Column(db.Text, nullable=False)
+	event_id = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=False)
 
-
+	def __repr__(self):
+		return "Rule({}, {})".format(self.rule, self.event_id)

@@ -127,7 +127,12 @@ def joinTeam():
 			# Team code validation check
 			flash('Your Team Code is wrong check twice!', category='danger')
 			return redirect(url_for('event.event_page', eid=event.id))
-		
+
+		if len(team.getMember()) == event.team_limit:
+			flash('This Team full no space left for you!', category='info')
+			return redirect(url_for('event.event_page', eid=event.id))
+
+
 		if Contestant.query.filter_by(user_id=current_user.id, event_id=eid).first() == None:
 			try:
 				# Making a contestant in that team

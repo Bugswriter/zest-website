@@ -25,8 +25,8 @@
 
   <!-- Jquery and it's fancy plugins -->
   <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/popper.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/croppie.js') }}"></script>
   {% if title == 'home' %}
     <script src="{{ url_for('static', filename='js/modernizr.custom.46884.js') }}"></script>
@@ -83,7 +83,7 @@
                   {% else %} 
                     <img width="30px" class="rounded-circle animated infinite pulse slower" src="{{ url_for('static', filename='profile_pics/'+current_user.profile.image)}}">
                   {% endif %} 
-                  <span> {{ current_user.username }} <b class="text-info">PID: {{ current_user.id+1000 }}</b> </span>
+                  <span> {{ current_user.username }} <b class="text-info">PID: {{ current_user.id }}</b> </span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="nav-dd">
                   <a class="nav-link" href="{{ url_for('profile.profile_card', username=current_user.username) }}">My Profile</a>

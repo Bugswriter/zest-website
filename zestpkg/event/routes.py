@@ -63,7 +63,7 @@ def all_events():
 def event_page(eid):
 	event = Event.query.get_or_404(eid)
 	profile = Profile.query.filter_by(user_id=event.getOrganizer().id).first()
-	return render_template('eventpage.html', event=event, user=profile)
+	return render_template('eventpage.html', event=event, rules=event.rules, user=profile)
 
 
 @event.route('/event/my', methods=['GET', 'POST'])

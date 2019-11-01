@@ -40,7 +40,7 @@ def create_profile():
 		db.session.commit()
 		flash("You created your profile successfully!", category='success')
 
-		return redirect(url_for('main.home'))
+		return redirect(url_for('event.all_events'))
 
 	return render_template('addprofile.html', form=form, legend='Create profile', title='Create Profile')
 

@@ -15,7 +15,7 @@ def send_confirmation_link(username, email, password):
 
 
 def send_reset_email(user):
-	token=user.get_reset_token()
+	token = user.get_reset_token()
 	msg = Message('Password Reset Request',
 				sender='admin@zest2019.in',
 				recipients=[user.email])
