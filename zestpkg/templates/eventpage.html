@@ -2,9 +2,6 @@
 {% block content %}
 <div class="text-center mt-4 animated bounceInDown" id="heading">
 	<h2>{{ event.title }}</h2>
-	{% if current_user.id == event.user_id %}
-		<a href="#" class="text-muted">update event info</a>
-	{% endif %}
 	<hr>
 </div>
 <div class="d-flex justify-content-center">
@@ -16,16 +13,18 @@
 		    </div>
 	    	<hr>
 	    	<div class="row">
-		    	<div class="col-md-6">
+		    	<div class="col">
 					<h5 class="">{{ event.eventType() }} Event</h5>
 					{% if event.eventType() == 'Team' %}
 						<small class="text-info">{{ event.team_limit }} member team is required.</small><br>
 					{% else %}
 						<small class="text-success">You don't need a team.</small><br>
 					{% endif %}
+					{% if event.time %}
 					<span>Time: {{ event.time }}</span>
+					{% endif %}
 				</div>
-				<div class="col-md-6">
+				<div class="col">
 					<div class="row organizer">
 						<img class="rounded-circle" src="{{ url_for('static', filename='profile_pics/'+user.image) }}">
 						<div class="ml-2">
@@ -40,24 +39,26 @@
 			<div class="row">
 				<div class="col-md-12">
 					<h5>Event Rules</h5>
-					<p class="m-2">Please read your event category general rules (if exist) too on <a href="#">Zest&Aamod Rulebook</a></p>
+					<p class="">Please read your event category general rules (if exist) too on <a href="#">Zest&Aamod Rulebook</a></p>
+					<ol>
 						{% if event.category != 'aamod' %}
-							<ul>
+							
 							{% for rule in rules%}
 								<li class="p-2">{{ rule.rule }}</li>
 							{% endfor %}
-							</ul>
+							
 						{% elif event.subcategory == 'atheletics' %}
-							<ul>
+							
 								<li>Events of Atheletics are individually counted as 1 event in Aamod.</li>
 								<li>Participants can take part in maximum 2 event of atheletics</li>
 								<li>Relay (4*100m , 4*400m) is open event for participant.</li>
-							</ul>
+							
 						{% else %}
-							<ul>
+							
 								<li>Games will be played prescribed by the internation federations.</li>
-							</ul>
+							
 						{% endif %}
+					</ul>
 				</div>
 			</div>
 			{% if current_user.is_authenticated %}
@@ -65,7 +66,7 @@
 				<div class="d-flex justify-content-around">
 					{% if event.status %}
 						{% if event.eventType() == 'Solo' %}
-							<a href="{{ url_for('contestant.participate', eid=event.id) }}" class="btn btn-success">Take Participation</a>
+							<a href="{{ url_for('contestant.participate', eid=event.id) }}" class="btn btn-success btn-block mx-3">Take Participation</a>
 						{% else %}
 							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createteam">
 								Create team
