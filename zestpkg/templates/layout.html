@@ -79,9 +79,9 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {% if current_user.profile == None %}
-                    <img width="30px" class="rounded-circle animated infinite swing slower" src="{{ url_for('static', filename='profile_pics/default.jpg')}}">
+                    <img width="23em" class="rounded-circle animated infinite swing slower" src="{{ url_for('static', filename='profile_pics/default.jpg')}}">
                   {% else %} 
-                    <img width="30px" class="rounded-circle animated infinite pulse slower" src="{{ url_for('static', filename='profile_pics/'+current_user.profile.image)}}">
+                    <img width="23em" class="rounded-circle animated infinite pulse slower" src="{{ url_for('static', filename='profile_pics/'+current_user.profile.image)}}">
                   {% endif %} 
                   <span> {{ current_user.username }} <b class="text-info">PID: {{ current_user.id }}</b> </span>
                 </a>
