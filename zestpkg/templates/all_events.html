@@ -58,14 +58,18 @@
 				<small>(<a href='/events/?subcat={{event.subcategory}}' class="text-info">#{{ event.subcategory }}</a>)</small>
 			</h5>
 			<div class="card text-white event-card">
-				<img class="card-img" style="filter: brightness(50%);" src="{{ url_for('static', filename='event_pics/'+ event.image) }}" width="850px"	 alt="Card image">
+				<a href="{{ url_for('event.event_page', eid=event.id) }}"><img class="card-img" style="filter: brightness(50%);" src="{{ url_for('static', filename='event_pics/'+ event.image) }}" width="850px" alt="Card image">
 				<div class="card-img-overlay" style="max-width: 550px;">
 					<p class="card-text event-detail">{{ event.about }}</p>
 
 					<p class="event-info">
 						{{ event.getCategory() }} Event <br>
 						{% if event.eventType() == 'Team' %}
-							<small class="text-info">{{ event.team_limit }} member team is required.</small><br>
+							{% if event.min_limit != None %}
+								<small class="text-warning">Min {{ event.min_limit }} and Max {{ event.team_limit }} members team is required.</small><br>
+							{% else %}
+								<small class="text-info">{{ event.team_limit }} members team is required.</small><br>
+							{% endif %}
 						{% else %}
 							<small class="text-success">You don't need a team.</small><br>
 						{% endif %}
@@ -78,6 +82,7 @@
 						{% endif %}
 					</p>
 				</div>
+			</a>
 			</div>
 		</section>
 	</div>
