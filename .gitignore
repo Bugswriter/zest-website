@@ -1,6 +1,6 @@
 *.pyc
-zestpkg/site.db
 */__pycache__/
-zestpkg/static/profile_pics/*
 zestpkg/static/sheets/*
-
+zestpkg/static/event_pics/*
+zestpkg/static/profile_pics/*
+zestpkg/site.db

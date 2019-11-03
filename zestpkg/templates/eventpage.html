@@ -22,7 +22,7 @@
 						<small class="text-info">{{ event.team_limit }} member team is required.</small><br>
 					{% else %}
 						<small class="text-success">You don't need a team.</small><br>
-					{% endif %}	
+					{% endif %}
 					<span>Time: 3:40pm to 4:30pm</span>
 				</div>
 				<div class="col-md-6">
@@ -44,8 +44,8 @@
 						{% if event.category != 'aamod' %}
 							<ul>
 							{% for rule in rules%}
-								<li class="p-2">{{ rule }}</li>
-							{% endfor %}	
+								<li class="p-2">{{ rule.rule }}</li>
+							{% endfor %}
 							</ul>
 						{% elif event.subcategory == 'atheletics' %}
 							<ul>
@@ -84,7 +84,7 @@
 				<p class="text-muted">You need to <a href="{{ url_for('users.register') }}">Create Account</a> for registering into any event.</p>
 			</div>
 			{% endif %}
-		</div>	
+		</div>
 	</div>
 </div>
 <div class="modal animated bounceInDown" id="createteam" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

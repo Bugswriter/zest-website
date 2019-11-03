@@ -35,12 +35,12 @@
 		      <a class="dropdown-item" href="/events/?subcat=deco">Deco</a>
 		      <a class="dropdown-item" href="/events/?subcat=drama">Drama</a>
 		    </div>
-		  </div> 
+		  </div>
 		  <input type="text" name="q" placeholder="Search your event..." class="form-control" aria-label="Serach Event">
 		  <div class="input-group-append">
 		    <button type="submit" class="btn btn-outline-info" type="button"><i class="fa fa-search"></i></button>
 		  </div>
-		</div>	
+		</div>
 	</form>
 </div>
 {% for event in events.items %}
@@ -60,8 +60,8 @@
 			<div class="card text-white event-card">
 				<img class="card-img" style="filter: brightness(50%);" src="{{ url_for('static', filename='event_pics/'+ event.image) }}" width="850px"	 alt="Card image">
 				<div class="card-img-overlay" style="max-width: 550px;">
-					<p class="card-text event-detail">This is the dummy text. Here we will display the information about event. for example what event purpose or task. When all event detail finalize we will update this text too.</p>
-					
+					<p class="card-text event-detail">{{ event.about }}</p>
+
 					<p class="event-info">
 						{{ event.getCategory() }} Event <br>
 						{% if event.eventType() == 'Team' %}
@@ -94,7 +94,7 @@
             <li class="page-item"><a class="page-link" href="{{ url_for('event.all_events', page=page_num) }}">First</a></li>
           {% elif page_num == last_page %}
             <li class="page-item"><a class="page-link" href="{{ url_for('event.all_events', page=page_num) }}">Last</a></li>
-          {% else %} 
+          {% else %}
             <li class="page-item"><a class="page-link" href="{{ url_for('event.all_events', page=page_num) }}">{{page_num}}</a></li>
           {% endif %}
         {% endif %}

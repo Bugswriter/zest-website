@@ -32,7 +32,7 @@
 		}
 		.note{
 			font-size: 14px;
-			
+
 		}
 		i{
 			color: #8d021f;
@@ -42,11 +42,11 @@
 <body>
 	<h2>Dear <b>{{ username }}</b>!</h2><hr>
 
-	<p>Hi, I am the <a href="https://zest2019.in/admin" style="color: #BE0808;">admin</a> of <a href="https://zest2019.in">zest2019</a>.<br> Just wanted to tell you, that your account is almost setted up.<br> Now all you need to do for finishing this registeration process is to <b class="text-info">Confirm your email</b> by clicking the button below - </p>
+	<p>Hi, I am the <a href="https://zest2019.in/admin" style="color: #BE0808;">admin</a> of <a href="https://zest2019.in">zest2019</a>.<br> Just wanted to tell you, that your account is almost set up.<br> Now all you need to do for finishing this registeration process is to <b class="text-info">Confirm your email</b> by clicking the button below - </p>
 	<p>After this you can simply create your <a href="https://zest2019.in">zest2019</a> Profile</p>
 	<br>
 	<a class="button" style="color: #ffffff" href="{{ url_for('users.confirmation', token=token, _external=True) }}">Confirm my email</a>
-	
+
 	<footer>
 		<p>For any technical diffculty - feel free to email 📧 me - <b>admin@zest2019.in</b></p>
 		<p>or you can call/telegram/whatsapp too - <b>+91-7417224655</b></p>
