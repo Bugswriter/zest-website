@@ -75,7 +75,7 @@
 								<small class="text-success">You don't need a team.</small><br>
 							{% endif %}
 							{% if event.time != None %}
-							<span class="text-light">Time: {{ event.time }}</span><br>
+							<span class="text-light">{{ event.time }}</span><br>
 							{% endif %}
 							<small>{{ event.getParticipants()|length }} participations</small><br>
 							{% if current_user.verified %}
