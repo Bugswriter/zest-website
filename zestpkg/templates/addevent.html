@@ -25,7 +25,17 @@
 						{% endif %}
 					</div>
 				</div>
-
+				<div class="form-group">
+					{{ form.time.label(class='form-control-label') }}
+					{{ form.time(class='form-control') }}
+					<div class="invalid-feedback d-block">
+						{% if form.time.errors %}
+							{% for error in form.time.errors %}
+								{{ error }}
+							{% endfor %}
+						{% endif %}
+					</div>
+				</div>
 				<div class="form-row">
 					<div class="col form-group">
 						{{ form.orguname.label(class='form-control-label') }}

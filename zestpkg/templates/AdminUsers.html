@@ -42,13 +42,13 @@
 	    		<td>{{user.email}}</td>
 	    		<td>
             {% if user.verified %}
-              <a class='btn btn-success' href="{{url_for('admin.toggleVerfiy', username=user.username)}}">✔️</a> 
+              <a class='btn btn-success' onclick="return confirm('Are you sure?')" href="{{url_for('admin.toggleVerfiy', username=user.username)}}">✔️</a> 
             {% else %}          
-              <a class='btn btn-secondary' href="{{url_for('admin.toggleVerfiy', username=user.username)}}">✔️</a>
+              <a class='btn btn-secondary' onclick="return confirm('Are you sure?')" href="{{url_for('admin.toggleVerfiy', username=user.username)}}">✔️</a>
             {% endif %}
           </td>
           <td>
-            <a href="{{ url_for('admin.delete_account', uid=user.id) }}" class='btn btn-outline-danger ml-3 rounded-circle'>✘</a>
+            <a href="{{ url_for('admin.delete_account', uid=user.id) }}" onclick="return confirm('Are you sure with deleting {{ user.username }}'s' account?')" class='btn btn-outline-danger ml-3 rounded-circle'>✘</a>
           </td>
 	  		</tr>
     {% endfor %}

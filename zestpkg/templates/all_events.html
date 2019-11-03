@@ -4,7 +4,7 @@
 	<h2>{{ title }}</h2>
 	<hr>
 </div>
-<div class="row justify-content-center animated zoomIn mb-4">
+<div class="row justify-content-center animated zoomIn mb-3">
 	<ul class="nav nav-tabs card-header-tabs" id="eventnavbar">
 	  <li class="nav-item">
         <a class="nav-link {{active[0]}}" href="/events">All Events</a>
@@ -20,11 +20,11 @@
       </li>
     </ul>
 </div>
-<div class="row justify-content-center">
-	<form action="" id="eventsearch" class="col-lg-4 col-md-8 col-sm-8" style="max-width: 70%" method="GET">
+<div class="row justify-content-around">
+	<form action="" id="eventsearch" class="w-75 mr-4" method="GET">
 		<div class="input-group m-3">
 		  <div class="input-group-prepend">
-		    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by</button>
+		    <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by</button>
 		    <div class="dropdown-menu">
 		      <a class="dropdown-item" href="/events/?subcat=sports">Sports</a>
 		      <a class="dropdown-item" href="/events/?subcat=atheletics">Atheletics</a>
@@ -57,33 +57,36 @@
 				{% endif %}
 				<small>(<a href='/events/?subcat={{event.subcategory}}' class="text-info">#{{ event.subcategory }}</a>)</small>
 			</h5>
-			<div class="card text-white event-card">
-				<a href="{{ url_for('event.event_page', eid=event.id) }}"><img class="card-img" style="filter: brightness(50%);" src="{{ url_for('static', filename='event_pics/'+ event.image) }}" width="850px" alt="Card image">
-				<div class="card-img-overlay" style="max-width: 550px;">
-					<p class="card-text event-detail">{{ event.about }}</p>
+				<div class="card text-white event-card">
+					
+				<a href="{{ url_for('event.event_page', eid=event.id) }}" class="text-light"><img class="card-img" style="filter: brightness(50%);" src="{{ url_for('static', filename='event_pics/'+ event.image) }}" width="850px" alt="Card image">
+					<div class="card-img-overlay" style="max-width: 550px;">
+						<p class="card-text event-detail">{{ event.about }}</p>
 
-					<p class="event-info">
-						{{ event.getCategory() }} Event <br>
-						{% if event.eventType() == 'Team' %}
-							{% if event.min_limit != None %}
-								<small class="text-warning">Min {{ event.min_limit }} and Max {{ event.team_limit }} members team is required.</small><br>
+						<p class="event-info">
+							{{ event.getCategory() }} Event <br>
+							{% if event.eventType() == 'Team' %}
+								{% if event.min_limit != None %}
+									<small class="text-warning">Min {{ event.min_limit }} and Max {{ event.team_limit }} members team is required.</small><br>
+								{% else %}
+									<small class="text-info">{{ event.team_limit }} members team is required.</small><br>
+								{% endif %}
 							{% else %}
-								<small class="text-info">{{ event.team_limit }} members team is required.</small><br>
+								<small class="text-success">You don't need a team.</small><br>
 							{% endif %}
-						{% else %}
-							<small class="text-success">You don't need a team.</small><br>
-						{% endif %}
-						<span class="text-light">Time: 3:40pm to 4:30pm</span><br>
-						<small>{{ event.getParticipants()|length }} participations</small><br>
-						{% if current_user.verified %}
-							<small><a class="text-warning" href="{{ url_for('event.participant_list', eid=event.id) }}">View Contestants list</a> |
-								<a class="text-warning" href="{{ url_for('event.generate_excel', eid=event.id) }}">Download List</a>
-							</small>
-						{% endif %}
-					</p>
+							{% if event.time != None %}
+							<span class="text-light">Time: {{ event.time }}</span><br>
+							{% endif %}
+							<small>{{ event.getParticipants()|length }} participations</small><br>
+							{% if current_user.verified %}
+								<small><a class="text-warning" href="{{ url_for('event.participant_list', eid=event.id) }}">View Contestants list</a> |
+									<a class="text-warning" href="{{ url_for('event.generate_excel', eid=event.id) }}">Download List</a>
+								</small>
+							{% endif %}
+						</p>
+					</div>		
 				</div>
 			</a>
-			</div>
 		</section>
 	</div>
 {% endfor %}

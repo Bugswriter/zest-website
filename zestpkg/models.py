@@ -93,7 +93,7 @@ class Event(db.Model):
 	image = db.Column(db.String(60), nullable=False, default='default.jpg')
 	team_limit = db.Column(db.Integer, nullable=False, default=1)
 	min_limit = db.Column(db.Integer, nullable=True)
-	time = db.Column(db.String(15), nullable=True)
+	time = db.Column(db.String(30), nullable=True)
 	about = db.Column(db.Text(60), nullable=True)
 	gender = db.Column(db.String(1), nullable=True)
 	participants = db.relationship('Contestant', backref='event', lazy=True)

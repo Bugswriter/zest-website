@@ -167,6 +167,7 @@ def update_event(eid):
 		event.team_limit = form.num_of_member.data
 		event.category = form.category.data
 		event.subcategory = form.subcategory.data
+		event.time = form.time.data
 		event.about = form.about.data
 		if form.status.data == 'T':
 			event.status = True
@@ -182,6 +183,7 @@ def update_event(eid):
 		form.orguname.data = event.getOrganizer().username
 		form.num_of_member.data = event.team_limit
 		form.category.data = event.category
+		form.time.data = event.time
 		form.subcategory.data = event.subcategory
 		form.about.data = event.about
 		if event.status == True:
