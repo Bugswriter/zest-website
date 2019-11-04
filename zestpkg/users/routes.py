@@ -33,11 +33,13 @@ def confirmation(token):
 		user = User(username=username, email=email, password=hashed_password)
 		db.session.add(user)
 		db.session.commit()
-		flash("Your account has been created!", category='success')
+		login_user(user, remember=False)
+		flash("Your account has been created and automatically logged in!", category='success')
+
 	except Exception as e:
 		flash("Sorry your link is expired, try again", category='danger')
 
-	return redirect(url_for('users.login'))
+	return redirect(url_for('profile.create_profile'))
 
 
 @users.route('/login', methods=['GET', 'POST'])
