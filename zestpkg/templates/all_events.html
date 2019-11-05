@@ -77,8 +77,8 @@
 							{% if event.time != None %}
 							<span class="text-light">{{ event.time }}</span><br>
 							{% endif %}
-							<small>{{ event.getParticipants()|length }} participations</small><br>
 							{% if current_user.verified %}
+								<small>{{ event.getParticipants()|length }} participations</small><br>
 								<small><a class="text-warning" href="{{ url_for('event.participant_list', eid=event.id) }}">View Contestants list</a> |
 									<a class="text-warning" href="{{ url_for('event.generate_excel', eid=event.id) }}">Download List</a>
 								</small>

@@ -113,9 +113,9 @@ class Event(db.Model):
 		
 	def getCategory(self):
 		if self.category == 'zestopen':
-			return "Zest (Open)"
+			return "Zest"
 		elif self.category == 'zestclose':
-			return "Zest (Close)"
+			return "Zest"
 		else:
 			return "Aamod"
 

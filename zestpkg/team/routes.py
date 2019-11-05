@@ -76,7 +76,8 @@ def createTeam():
 				team = Team(name=tname, event_id=eid)
 				db.session.add(team)
 				db.session.commit()
-				code = team.team_code
+				temp = Team.query.filter_by(name=tname, event_id=eid).first()
+				code = temp.team_code
 				contestant = Contestant(user_id=current_user.id, event_id=eid, team_id=team.id)
 				db.session.add(contestant)
 				db.session.commit()
