@@ -104,22 +104,6 @@ $(document).ready(function() {
 	});
 
 	$(function() {
-
-		var $el = $( '#wi-el' ),
-			windy = $el.windy( {
-				// rotation and translation boundaries for the items transitions
-				boundaries : {
-					rotateX : { min : 40 , max : 90 },
-					rotateY : { min : -15 , max : 45 },
-					rotateZ : { min : -10 , max : 10 },
-					translateX : { min : -400 , max : 400 },
-					translateY : { min : -400 , max : 400 },
-					translateZ : { min : 350 , max : 550 }
-				}
-			} ),
-			allownavnext = false,
-			allownavprev = false;
-
 		$( '#nav-prev' ).on( 'mousedown', function( event ) {
 
 			allownavprev = true;

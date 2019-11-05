@@ -23,7 +23,6 @@ def profile_card(username):
 	
 
 
-
 @profile.route('/create_profile', methods=['GET', 'POST'])
 @login_required
 def create_profile():
@@ -71,7 +70,6 @@ def update_profile():
 	form = ProfileForm()
 	if form.validate_on_submit():
 		profile.name = form.first_name.data + ' ' + form.last_name.data
-
 		profile.course = form.course.data
 		profile.branch = form.branch.data
 		profile.roll_number = form.roll_num.data
@@ -96,7 +94,9 @@ def update_profile():
 		form.college.data = profile.college
 		form.gender.data = profile.gender
 
-		return render_template('addprofile.html', form=form, legend='Update Profile', title='Update Profile')
+	
+	return render_template('addprofile.html', form=form, legend='Update Profile', title='Update Profile')
+
 
 
 
