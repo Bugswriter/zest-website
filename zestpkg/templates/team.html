@@ -57,7 +57,6 @@
 	    	<tr>
 	    		{% if team.getEvent().min_limit == None %}
 	    			{% if members | length != team.getEvent().team_limit %}
-
 	    			<td colspan="3" class="text-center"><small class="text-danger">{{ team.getEvent().team_limit - members | length  }} more member(s) needed.</small>
 	    			{% else %}
 	    			<td colspan="3" class="text-center"><small class="text-success">Team card completed</small>

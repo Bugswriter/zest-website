@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     setTimeout(function(){
   		$('#flashmessage').hide('slow');
-    }, 5000);
+    }, 8000);
 
     $image_crop = $('#cropper').croppie({
 		enableExif: true,

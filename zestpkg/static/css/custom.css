@@ -6,6 +6,10 @@ body, p, li, span{
     color: #696969;
 }
 
+p{
+	font-family: 'Quicksand';
+}
+
 body{
 	overflow-x: hidden;
 }
@@ -232,6 +236,9 @@ h6{
 
 	}
 }
+.emptymyevents{
+	border: 0px solid;
+}
 
 @media (max-width: 720px){
 
@@ -251,6 +258,9 @@ h6{
 
 	#eventnavbar{
 		font-size: 12px;
+	}
+	.emptymyevents{
+		width: 300px;
 	}
 	
 	#profile .avatar{
@@ -283,7 +293,6 @@ h6{
 		display: none;
 	}
 
-	
 
 	#eventnavbar a{
 		font-size: 10px;

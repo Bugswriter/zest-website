@@ -1,15 +1,16 @@
 {% extends 'layout.html' %}
 {% block content %}
 <div class="text-center mt-4 animated bounceInDown">
-	<h2>Your Account</h2>
+	<h2>Settings</h2>
 	<hr>
 </div>
-<div class="row mt-5 p-3">
-	<div class="col-md-5 p-4">
-		<img class="img-thumbnail float-right mr-4 rounded-circle" width="200px" src="{{ url_for('static', filename='profile_pics/'+user.profile.image) }}">
-	</div>
-	<div class="col-md-7">
-		<h3 class="text-info">{{ user.email }}</h3><hr>
+<div class="row p-3">
+	<div class="col-md-12">
+		<center>
+		<div class="mb-3">
+			<h4 class="text-dark">{{ user.email }}</h4>
+			<small>Reset password</small>
+		</div>
 		<form method="POST" action="" class="animated bounceInRight" style="max-width: 300px;">
 			{{ form.hidden_tag() }}
 			<fieldset class="form-group">
@@ -47,12 +48,12 @@
 					</div>
 				</div>
 			</fieldset>
-			<div class="form-group">
-				{{ form.submit(class="btn btn-outline-info") }}
+			<div class="form-group px-2">
+				{{ form.submit(class="btn btn-primary btn-block mx-auto") }}
 			</div>
 		</form>	
+		</center>
 	</div>
 </div>
-
 
 {% endblock%}

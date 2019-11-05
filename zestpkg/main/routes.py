@@ -13,6 +13,10 @@ def home():
 def stats():
 	return render_template('stats.html', title='Statistics')
 
+@main.route('/faq')
+def faq():
+	return render_template('faq.html', title='FAQ')
+
 
 
 @main.route('/stat_data', methods=['GET', 'POST'])

@@ -62,8 +62,15 @@ def all_events():
 @event.route('/event/<int:eid>')
 def event_page(eid):
 	event = Event.query.get_or_404(eid)
+	title = event.title
 	profile = Profile.query.filter_by(user_id=event.getOrganizer().id).first()
-	return render_template('eventpage.html', event=event, rules=event.rules, user=profile)
+	notreg = True
+	if current_user.is_authenticated:
+		x = Contestant.query.filter_by(user_id=current_user.id, event_id=event.id).first()
+		if x:
+			notreg = False
+
+	return render_template('eventpage.html', event=event, rules=event.rules, user=profile, notreg=notreg, title=title)
 
 
 @event.route('/event/my', methods=['GET', 'POST'])

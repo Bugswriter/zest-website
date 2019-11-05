@@ -5,9 +5,9 @@
 	<hr>
 </div>
 <div class="row justify-content-around">
-	{% if participations %}
 
-	   	<table class="table text-center w-50" >
+	{% if participations %}
+	   	<table class="table text-center" >
 		  <thead class="thead-dark">
 		    <tr>
 		      <th scope="col">Event</th>
@@ -26,19 +26,24 @@
 			      {% else %}
 			      	<td>-</td>
 			      {% endif %}
-			      <td><a href="{{ url_for('contestant.withdraw', eid=p.event.id) }}" onclick="return confirm('After this you will no longer be participant of {{ p.event.title }} event?')" class='btn btn-outline-danger ml-3 rounded-circle'>✘</a></td>
+
+			      <td>
+			      	{% if p.event.status %}
+			      		<a href="{{ url_for('contestant.withdraw', eid=p.event.id) }}" onclick="return confirm('After this you will no longer be participant of {{ p.event.title }} event?')" class='btn btn-outline-danger ml-3 rounded-circle'>✘</a>
+			      	{% else %}
+			      		<button type="button" class="btn btn-outline-danger ml-3 rounded-circle" data-toggle="popover" title="Oops you can't!" data-content="Event registeration is closed right now, don't run away!">✘</button>
+			      	{% endif %}
+			      </td>
 			    </tr>
 			{% endfor %}
 		   
 		  </tbody>
 		</table> 
-	 
-	  
-
-
 	{% else %}
-		<p>You are registered in no events</p>
-		<a class="btn btn-outline-success" href="{{ url_for('event.all_events') }}">Browse Events</a>
+	<div class="container text-center">
+		<img class="img-thumbnail m-2 emptymyevents" src="https://cdn.dribbble.com/users/24885/screenshots/1797793/events-empty-data-set_1x.png"><br>		
+		<a class="btn btn-primary m-2" href="{{ url_for('event.all_events') }}">Browse Events</a>
+	</div>
 	{% endif %}
 </div>
 {% endblock%}

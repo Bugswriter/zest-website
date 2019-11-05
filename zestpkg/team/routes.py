@@ -3,7 +3,6 @@ from zestpkg.profile.forms import ProfileForm
 from flask_login import current_user, login_required
 from zestpkg import db
 from zestpkg.models import Profile, User, Team, Event, Contestant
-from zestpkg.contestant.utils import joinParty
 
 
 team = Blueprint('team', __name__)
@@ -42,10 +41,16 @@ def createTeam():
 
 		# Checking event exist
 		event = Event.query.get_or_404(eid)
+
+		if len(current_user.participations) > 4:
+			flash("Limit Reached - You are already in 5 events, can't register for more!", category='info')
+			return redirect(url_for('event.my_events'))
+
 		if event.eventType() == 'Solo':
 			# checking event is not solo
 			flash('You cannot create team in solo event', category='warning')
 			abort(500)
+
 
 		user_gender = current_user.profile.gender
 		if event.gender != None and event.gender != user_gender:
@@ -56,6 +61,7 @@ def createTeam():
 			
 			return redirect(url_for('event.event_page', eid=event.id))
 	
+
 		contestant = Contestant.query.filter_by(user_id=current_user.id, event_id=eid).first()	
 		if contestant != None:
 			# checking if user already in another team
@@ -70,8 +76,11 @@ def createTeam():
 				team = Team(name=tname, event_id=eid)
 				db.session.add(team)
 				db.session.commit()
-				team = Team.query.filter_by(name=tname).first()
-				joinParty(eid, team.team_code)
+				code = team.team_code
+				contestant = Contestant(user_id=current_user.id, event_id=eid, team_id=team.id)
+				db.session.add(contestant)
+				db.session.commit()
+
 				flash(f'Your team is added for {event.title} event successffully', category='success')
 				return redirect(url_for('team.team_card', tid=team.id))
 
@@ -107,6 +116,11 @@ def joinTeam():
 			abort(500)
 	
 		event = Event.query.get_or_404(eid)
+
+		if len(current_user.participations) > 4:
+			flash("Limit Reached - You are already in 5 events, can't register for more!", category='info')
+			return redirect(url_for('event.my_events'))
+
 		if event.eventType() == 'Solo':
 			# if event is Solo
 			flash('You are trying to join a team in Solo event', category='danger')
@@ -123,29 +137,39 @@ def joinTeam():
 
 		
 		team =	Team.query.filter_by(team_code=tcode).first()
+
 		if team == None:
 			# Team code validation check
 			flash('Your Team Code is wrong check twice!', category='danger')
 			return redirect(url_for('event.event_page', eid=event.id))
 
-		if len(team.getMember()) == event.team_limit:
-			flash('This Team full no space left for you!', category='info')
+		if team.event_id != event.id:
+			flash(f"Incorrect code! This code is not of {event.title} event's team.!", category="danger")
 			return redirect(url_for('event.event_page', eid=event.id))
 
+		if len(team.members) == event.team_limit:
+			flash('This Team is full no space left for you!', category='info')
+			return redirect(url_for('event.event_page', eid=event.id))
 
-		if Contestant.query.filter_by(user_id=current_user.id, event_id=eid).first() == None:
+		uparty = Contestant.query.filter_by(user_id=current_user.id, event_id=eid).first()
+		if uparty == None:
 			try:
-				# Making a contestant in that team
-				joinParty(event.id, tcode)
-				flash('Successfully Join the team', category='success')
+				p = Contestant(user_id=current_user.id, event_id=eid, team_id=team.id)
+				db.session.add(p)
+				db.session.commit()
+				flash(f'You successfully join the team {team.name}', category='success')
 
 				return redirect(url_for('team.team_card', tid=team.id))
 			except:
 				flash('Database error something wrong try later!', category='danger')
 				abort(403)
 		else:
-			flash('You are already a member of this team!', category='success')
-			return redirect(url_for('team.team_card', tid=team.id))
+			if uparty.team_id == team.id:
+				flash('You are already a member of this team!', category='success')
+				return redirect(url_for('team.team_card', tid=team.id))
+			else:
+				flash(f'You are already a member of team <b>{team.name}</b> of <b>{event.title}</b> event!', category='info')
+				return redirect(url_for('team.team_card', tid=uparty.team_id))
 
 	else:
 		flash('No data for joining team', category='warning')
