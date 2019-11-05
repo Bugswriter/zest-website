@@ -120,6 +120,7 @@
   </div>
   <div class="row justify-content-center">
     <div class="col-md-2 sideslider text-center">
+      {% if title == 'home'%}
       <div class="main ml-3">
         <div class="single-column">
           <a href="#"><img class="animated infinite pulse slower"  src="{{ url_for('static', filename='images/gallery/pic1.jpg') }}" alt="image"></a>
@@ -132,8 +133,7 @@
           <a href="#"><img class="animated infinite pulse slower"  src="{{ url_for('static', filename='images/gallery/pic8.jpg') }}" alt="image"></a>
           </div>
       </div><hr>
-      <p>&copy SRMS Gallery</p>
-      {% if title == 'home'%}
+      <p>&copy SRMS Gallery</p> 
         <img width="300px" src="{{ url_for('static', filename='images/fire2.gif') }}">
         <img width="300px" src="{{ url_for('static', filename='images/fire2.gif') }}">
       {% endif %}
@@ -147,6 +147,7 @@
       </footer>
     </div>
     <div class="col-md-2 sideslider text-center">
+      {% if title == 'home'%}
       <div class="main mr-2">
         <div class="single-column">
           <a href="#"><img class="animated infinite pulse slower" src="{{ url_for('static', filename='images/gallery/pic9.jpg') }}" alt="image"></a>
@@ -160,11 +161,9 @@
         </div>
     </div>
     <p>&copy SRMS Gallery</p>
-    {% if title == 'home'%}
       <img width="300px" src="{{ url_for('static', filename='images/fire2.gif') }}">
       <img width="300px" src="{{ url_for('static', filename='images/fire2.gif') }}">
     {% endif %}
-    
   </div>
 </body>
 </html>
