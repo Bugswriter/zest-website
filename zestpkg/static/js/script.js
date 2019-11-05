@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     setTimeout(function(){
   		$('#flashmessage').hide('slow');
-    }, 4000);
+    }, 5000);
 
     $image_crop = $('#cropper').croppie({
 		enableExif: true,
@@ -16,6 +16,10 @@ $(document).ready(function() {
 		  height:300
 		}
     });
+
+    $(function () {
+	  $('[data-toggle="popover"]').popover()
+	})
 
     $("#uploadimagebtn").click(function() {
 	    $("input[id='uploadimage']").click();
