@@ -3,7 +3,8 @@ from zestpkg.profile.forms import ProfileForm
 from flask_login import current_user, login_required
 from zestpkg import db
 from zestpkg.models import Profile, User, Team, Event, Contestant
-
+import string
+import random
 
 team = Blueprint('team', __name__)
 
@@ -73,7 +74,8 @@ def createTeam():
 			# Checking if team already exist
 			try:
 				# Creating team
-				team = Team(name=tname, event_id=eid)
+				teamsecret = ''.join(random.choices(string.ascii_uppercase + string.digits, k=5))
+				team = Team(name=tname, event_id=eid, team_code=teamsecret)
 				db.session.add(team)
 				db.session.commit()
 				temp = Team.query.filter_by(name=tname, event_id=eid).first()
