@@ -19,3 +19,4 @@ SQLAlchemy>=1.2.7
 Werkzeug>=0.14.1
 WTForms==2.1
 XlsxWriter==1.2.2
+Flask-Compress

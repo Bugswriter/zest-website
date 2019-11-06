@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 from flask_mail import Mail
+from flask_compress import Compress
 
 app = Flask(__name__)
 
@@ -14,6 +15,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
+app.config['COMPRESS_MIMETYPES'] = ['text/html', 'text/css', 'text/xml', 'application/json', 'application/javascript']
+app.config['COMPRESS_LEVEL'] = 6
+app.config['COMPRESS_MIN_SIZE'] = 500
 app.config['MAIL_USERNAME'] = 'admin@zest2019.in'
 app.config['MAIL_PASSWORD'] = 'uxsaaqoabuaplxxz' # admin@zest2019.in
 #app.config['MAIL_PASSWORD'] = 'vgdvirbrjdlakbky' #akashraj5399
@@ -25,6 +29,7 @@ db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'users.login'
 login_manager.login_message_category = 'info'
+Compress(app)
 bcrypt = Bcrypt(app)
 mail = Mail(app)
 
