@@ -15,9 +15,16 @@ def register():
 
 	registerform = RegisterForm()
 	if registerform.validate_on_submit():
-		send_confirmation_link( registerform.username.data, registerform.email.data, registerform.password.data)
-		success = {'title': 'Confirmation link sent', 'heading': 'Confirmation Link has been sent.', 'message': 'A email confirmation link has been sended to email address you used at the time of creating account'}
-		return render_template('success.html', **success)
+		#send_confirmation_link( registerform.username.data, registerform.email.data, registerform.password.data)
+		#success = {'title': 'Confirmation link sent', 'heading': 'Confirmation Link has been sent.', 'message': 'A email confirmation link has been sended to email address you used at the time of creating account'}
+		#return render_template('success.html', **success)
+		hashed_password = bcrypt.generate_password_hash(registerform.password.data).decode('utf-8')
+		user = User(username=registerform.username.data, email=registerform.email.data, password=hashed_password)
+		db.session.add(user)
+		db.session.commit()
+		login_user(user, remember=False)
+		return redirect(url_for('profile.create_profile'))
+
 	return render_template('register.html', title='Register', form=registerform)
 
 
