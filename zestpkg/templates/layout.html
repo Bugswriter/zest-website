@@ -13,11 +13,13 @@
   <link rel="shortcut icon" type="image/ico" href="{{ url_for('static', filename='favicon.ico') }}"/>
   <!-- Jquery plugins CSS -->
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/croppie.css') }}">
+  {% if title == 'home' %}
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/slicebox.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/windy.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/normalize.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/component.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/flipclock.css') }}">
+  {% endif %}
   
   <!-- My Custom CSS -->
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/plugins.css') }}">

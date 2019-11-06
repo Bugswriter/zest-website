@@ -279,7 +279,13 @@ h6{
 	#profile{
 		width: auto;
 	}
-
+	.action-img{
+		max-width: 80px;
+	}
+	.clock{
+	   zoom: 0.5;
+	   -moz-transform: scale(0.5)
+	}
 
 	#events .event-info{
 		margin-left: 5%;
