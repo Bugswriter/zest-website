@@ -7,7 +7,8 @@ from flask_mail import Mail
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///site.db"
+#app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///site.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://bugswriter:Suraj_20@bugswriter.mysql.pythonanywhere-services.com/bugswriter$default"
 app.config['SECRET_KEY'] = "9be8f28f87c515b14ea6bf8a647fdcf5"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
