@@ -9,7 +9,7 @@ class EventForm(FlaskForm):
 	title = StringField('Event Title', validators=[DataRequired()])	
 	orguname = StringField('Organizer Username', validators=[DataRequired()])
 	category = SelectField('Category', validators=[DataRequired(), Optional()], choices=[('zestopen', 'Zest Open'), ('zestclose', 'Zest Close'),('aamod', 'Aamod')])
-	subcategory = SelectField('Sub Category', validators=[DataRequired(),Optional()], choices=[('sports', 'Sports'),('dance', 'Dance'),('drama','Drama'),('music','Music'),('informals','Informals'),('deco', 'Decoration'),('fine arts', 'Fine Arts'), ('literary','Literary'), ('renaissance','Renaissance')])
+	subcategory = SelectField('Sub Category', validators=[DataRequired(),Optional()], choices=[('sports', 'Sports'), ('atheletics', 'Atheletics'),('dance', 'Dance'),('drama','Drama'),('music','Music'),('informals','Informals'),('deco', 'Decoration'),('fine arts', 'Fine Arts'), ('literary','Literary'), ('renaissance','Renaissance')])
 	image = FileField('Cover Picture', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
 	num_of_member = IntegerField('Number of member',validators=[DataRequired()])
 	time = StringField('Event Time')
