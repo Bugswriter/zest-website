@@ -4,7 +4,6 @@ from flask_login import current_user, login_required
 from zestpkg import db
 from zestpkg.models import Profile, User, Team, Event, Contestant
 
-
 team = Blueprint('team', __name__)
 
 @team.route('/team/<int:tid>')
