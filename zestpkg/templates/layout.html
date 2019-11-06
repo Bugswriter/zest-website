@@ -120,23 +120,7 @@
     </div>
     <div class="row justify-content-center">
       <div class="col-md-2 sideslider text-center">
-        {% if title == 'home'%}
-        <div class="main ml-3">
-          <div class="single-column">
-            <a href="#"><img class="animated infinite pulse slower"  src="{{ url_for('static', filename='images/gallery/pic1.jpg') }}" alt="image"></a>
-            <a href="#"><img class="animated infinite pulse slower"  src="{{ url_for('static', filename='images/gallery/pic2.jpg') }}" alt="image"></a>
-            <a href="#"><img class="animated infinite pulse slower"  src="{{ url_for('static', filename='images/gallery/pic3.jpg') }}" alt="image"></a>
-            <a href="#"><img class="animated infinite pulse slower"  src="{{ url_for('static', filename='images/gallery/pic4.jpg') }}" alt="image"></a>
-            <a href="#"><img class="animated infinite pulse slower"  src="{{ url_for('static', filename='images/gallery/pic5.jpg') }}" alt="image"></a>
-            <a href="#"><img class="animated infinite pulse slower"  src="{{ url_for('static', filename='images/gallery/pic6.jpg') }}" alt="image"></a>
-            <a href="#"><img class="animated infinite pulse slower"  src="{{ url_for('static', filename='images/gallery/pic7.jpg') }}" alt="image"></a>
-            <a href="#"><img class="animated infinite pulse slower"  src="{{ url_for('static', filename='images/gallery/pic8.jpg') }}" alt="image"></a>
-            </div>
-        </div><hr>
-        <p>&copy SRMS Gallery</p> 
-          <img width="300px" src="{{ url_for('static', filename='images/fire2.gif') }}">
-          <img width="300px" src="{{ url_for('static', filename='images/fire2.gif') }}">
-        {% endif %}
+        
       </div>
       <div class="col-md-8">
           {% block content %}{% endblock content%}
@@ -147,23 +131,7 @@
         </footer>
       </div>
       <div class="col-md-2 sideslider text-center">
-        {% if title == 'home'%}
-        <div class="main mr-2">
-          <div class="single-column">
-            <a href="#"><img class="animated infinite pulse slower" src="{{ url_for('static', filename='images/gallery/pic9.jpg') }}" alt="image"></a>
-            <a href="#"><img class="animated infinite pulse slower" src="{{ url_for('static', filename='images/gallery/pic10.jpg') }}" alt="image"></a>
-            <a href="#"><img class="animated infinite pulse slower" src="{{ url_for('static', filename='images/gallery/pic11.jpg') }}" alt="image"></a>
-            <a href="#"><img class="animated infinite pulse slower" src="{{ url_for('static', filename='images/gallery/pic12.jpg') }}" alt="image"></a>
-            <a href="#"><img class="animated infinite pulse slower" src="{{ url_for('static', filename='images/gallery/pic13.jpg') }}" alt="image"></a>
-            <a href="#"><img class="animated infinite pulse slower" src="{{ url_for('static', filename='images/gallery/pic14.jpg') }}" alt="image"></a>
-            <a href="#"><img class="animated infinite pulse slower" src="{{ url_for('static', filename='images/gallery/pic15.jpg') }}" alt="image"></a>
-            <a href="#"><img class="animated infinite pulse slower" src="{{ url_for('static', filename='images/gallery/pic16.jpg') }}" alt="image"></a>
-          </div>
-      </div>
-      <p>&copy SRMS Gallery</p>
-        <img width="300px" src="{{ url_for('static', filename='images/fire2.gif') }}">
-        <img width="300px" src="{{ url_for('static', filename='images/fire2.gif') }}">
-      {% endif %}
+        
     </div>
   </div>
 </body>

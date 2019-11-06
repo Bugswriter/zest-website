@@ -36,14 +36,14 @@
 
       {% if page_num %}
         {% if teams.page == page_num %}
-          <li class="page-item active"><a class="page-link" href="{{ url_for('admin.AdminEvents', page=page_num) }}">{{ page_num }}</a></li>
+          <li class="page-item active"><a class="page-link" href="{{ url_for('admin.AdminTeams', page=page_num) }}">{{ page_num }}</a></li>
         {% else %}
           {% if page_num == 1 %}
-            <li class="page-item"><a class="page-link" href="{{ url_for('admin.AdminEvents', page=page_num) }}">First</a></li>
+            <li class="page-item"><a class="page-link" href="{{ url_for('admin.AdminTeams', page=page_num) }}">First</a></li>
           {% elif page_num == last_page %}
-            <li class="page-item"><a class="page-link" href="{{ url_for('admin.AdminEvents', page=page_num) }}">Last</a></li>
+            <li class="page-item"><a class="page-link" href="{{ url_for('admin.AdminTeams', page=page_num) }}">Last</a></li>
           {% else %} 
-            <li class="page-item"><a class="page-link" href="{{ url_for('admin.AdminEvents', page=page_num) }}">{{page_num}}</a></li>
+            <li class="page-item"><a class="page-link" href="{{ url_for('admin.AdminTeams', page=page_num) }}">{{page_num}}</a></li>
           {% endif %}
         {% endif %}
       {% endif %}
