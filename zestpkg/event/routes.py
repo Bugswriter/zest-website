@@ -13,6 +13,7 @@ event = Blueprint('event', __name__)
 def all_events():
 	page = request.args.get('page', 1, type=int)
 	pagelimit = 10
+	cat = ''
 	active = ['','','','']
 	query = request.args.get('q')
 	if query != None:
@@ -46,7 +47,7 @@ def all_events():
 
 		if subcat != None:
 			title = subcat.capitalize() + ' Events'
-			events = Event.query.filter_by(subcategory=subcat).paginate(page=page, per_page=10)
+			events = Event.query.filter_by(subcategory=subcat).paginate(page=page, per_page=15)
 
 		if events == None:
 			cat = ''
