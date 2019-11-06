@@ -23,22 +23,25 @@ def all_events():
 		category = request.args.get('cat')
 		subcat = request.args.get('subcat')
 		events = Event.query.paginate(page=page, per_page=pagelimit)
-		
+		cat = ''
 		title = 'All Zest Events'
 
 		if category == 'aamod':
 			active[3] = 'active'
 			title = 'Aamod Events'
+			cat = 'aamod'
 			events = Event.query.filter_by(category='aamod').paginate(page=page, per_page=10)
 
 		elif category == 'zestopen':
 			active[1] = 'active'
 			title = 'Zest Open'
+			cat = 'zestopen'
 			events = Event.query.filter_by(category='zestopen').paginate(page=page, per_page=10)
 			
 		elif category == 'zestclose':
 			active[2] = 'active'
 			title = 'Zest Close'
+			cat = 'zestclose'
 			events = Event.query.filter_by(category='zestclose').paginate(page=page, per_page=10)
 
 		if subcat != None:
@@ -46,6 +49,7 @@ def all_events():
 			events = Event.query.filter_by(subcategory=subcat).paginate(page=page, per_page=10)
 
 		if events == None:
+			cat = ''
 			flash('No events in your filter', category='info')
 			title = 'All Zest Events'
 			events = Event.query.paginate(page=page, per_page=pagelimit)
@@ -55,7 +59,7 @@ def all_events():
 
 	last = ceil(events.total/pagelimit)
 	
-	return render_template('all_events.html', events=events, title=title, active=active, last_page=last)
+	return render_template('all_events.html', events=events, title=title, active=active, last_page=last, cat=cat)
 
 
 
