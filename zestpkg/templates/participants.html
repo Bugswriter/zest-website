@@ -50,7 +50,7 @@
   	{% for contestant in contestants%}
     <tr>
       <td></td>
-      <td scope="row" class="text-danger">{{ contestant.id+1000 }}</td>
+      <td scope="row" class="text-danger">{{ contestant.id }}</td>
       <td><a href="{{ url_for('profile.profile_card', username=contestant.username) }}">{{ contestant.profile.name }}</a></td>
       <td>{{ contestant.profile.course }}</td>
       <td>{{ contestant.profile.roll_number }}</td>
