@@ -3,4 +3,5 @@
 zestpkg/static/sheets/*
 zestpkg/static/event_pics/*
 zestpkg/static/profile_pics/*
+zestpkg/static/backup/site.db
 zestpkg/site.db
