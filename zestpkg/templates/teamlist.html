@@ -17,7 +17,7 @@
   	{% for team in teams %}
     <tr>
       <th scope="row">1</th>
-      <td><a href="{{ url_for('team.team_card, tid=team.id') }}">{{ team.name }}</a></td>
+      <td><a href="{{ url_for('team.team_card', tid=team.id) }}">{{ team.name }}</a></td>
       <td><b class="text-info">{{ team.id }}</b></td>
       <td>{{ team.getNumOfMember() }}</td>
     </tr>
