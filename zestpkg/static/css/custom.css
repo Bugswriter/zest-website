@@ -62,6 +62,29 @@ h6{
 	line-height: 2em;
 }
 
+.instruction{
+	line-height: 2em;
+}
+
+.prizeamount{
+	font-size: 20px;
+}
+
+.social-media a{
+	font-size: 50px;
+}
+.facebook a{
+	color: #3b5998;
+}
+.instagram a{
+	color: #c13584;
+}
+.youtube a{
+	color: #c4302b;
+}
+
+
+
 #timerhead h3{
 	font-family: 'Pacifico', cursive;
 	text-shadow: 0px;
@@ -274,6 +297,9 @@ h6{
 	#heading{
 		margin: 0px;
 		padding: 0px;
+	}
+	.social-media a{
+		font-size: 25px;	
 	}
 
 	#profile{
