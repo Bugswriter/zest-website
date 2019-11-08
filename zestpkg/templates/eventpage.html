@@ -29,7 +29,9 @@
 						<img class="rounded-circle" src="{{ url_for('static', filename='profile_pics/'+user.image) }}">
 						<div class="ml-2">
 							<span><a href="{{ url_for('profile.profile_card', username=user.account.username) }}">{{ user.name }}</a></span><br>
-							<small>{{ user.phone }}</small><br>
+							{% if user.gender == 'M' %}
+								<small>{{ user.phone }}</small><br>
+							{% endif %}
 							<small class="text-muted">Organizer</small>
 						</div>
 					</div>
