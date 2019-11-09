@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+
+	<title>Event Pass</title>
+	<style type="text/css">
+
+		body{
+		    font-family: 'Open Sans', sans-serif;
+		}
+		.letter{
+			max-width: 630px;
+		}
+
+		.css-serial {
+		  counter-reset: serial-number;  /* Set the serial number counter to 0 */
+		}
+
+		.css-serial td:first-child:before {
+		  counter-increment: serial-number;  /* Increment the serial number counter */
+		  content: counter(serial-number);  /* Display the counter */
+		}
+
+		.letter p{
+			font-size: 22px;
+			line-height: 1.8em;
+		}
+		img{
+			float: right;
+		}
+		.details td{
+			padding: 10px;
+		}
+
+		.sign{
+			float: right;
+			margin-right: 20px;
+			margin-top: 18%;
+		}
+		.srms-logo{
+			position: relative;
+			bottom: 40px;
+		}
+		.details{
+			font-size: 17px;
+			border: 1px solid black;
+		}
+		.details td,  .details th{
+			border: 1px solid black;
+		}
+		.participation{
+			margin-top: 4%;
+		}
+		.ourwishes{
+			margin-top: 50px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container letter">
+		<header class="text-left">
+			<h3>Shri Ram Murti Smarak<br>College of Engineering & Technology,<br>Bareilly<img src="http://www.srms.ac.in/comptech/img/q.png" class="srms-logo" width="180"></h3>
+			<small>Established & run by Shri Ram Murti Smarak Trust)</small><hr>
+		</header>
+		<h3 class="text-capitalize text-center" style="margin-top: 5%"><b>{{ user.profile.name }}</b> (PID: <b>{{ user.id }}</b>)</h3><br>
+		<table class="details">
+			<tr>
+				<td>Course:</td>
+				<td>
+					{% if user.profile.course != 'Other' %}
+						{{ user.profile.course }}
+						{% if user.profile.branch != 'Other' %}
+							({{user.profile.branch}})
+						{% endif %}
+					{% else %}
+						🖊️
+					{% endif %}
+
+				</td>
+				<td>College:</td>
+				<td>
+					{% if college != 'Other' %}
+						{{ user.profile.college }}
+					{% else %}
+						🖊️
+					{% endif %}
+					
+				</td>
+			</tr>
+			<tr>
+				<td>Roll Number:</td>
+				<td>
+					{{ user.profile.roll_number }}
+				</td>
+				<td>Roll Number:</td>
+				<td>
+					{{ user.profile.roll_number }}
+				</td>
+			</tr>
+		</table>
+		<table class="table participation css-serial" id="table">
+			<thead class="text-center">
+				<tr class="heading">
+					<th>#</th>
+					<th>Event</th>
+					<th>TID</th>
+					<th>Date</th>
+				</tr>
+			</thead>
+			{% for con in contestants %}
+				<tr>
+					<td></td>
+					<td>
+						{{ con.event.title }}
+						{% if con.event.gender == 'M' %}
+							(for Boys)
+						{% elif con.event.gender == 'F' %}
+							(for Girls)
+						{% endif %}
+					</td>
+					{% if con.team_id %}
+					<td>{{ con.team.name }} (TID: {{ con.team_id }})</td>
+					{% else %}
+					<td>-</td>
+					{% endif %}
+					<td>{{ con.date }}</td>
+				</tr>
+			{% endfor %}
+		</table>
+		<div class="text-center ourwishes">
+			<h3>Best of Luck for your event 👍</h3>
+			<small>- by Registration Committee</small>
+		</div>
+		<p class="sign">{{ current_user.profile.name }} <small>(RC Member)</small> -</p>
+	</div>
+</body>
+</html>

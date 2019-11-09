@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+{% block content %}
+<style type="text/css">
+	.pidframe{
+		max-width: 630px;
+	}
+	iframe{
+		border: 2px solid black;
+	}
+</style>
+<div class="text-center mt-4 animated bounceInDown">
+	<h2>PID Pass Generator</h2>
+	<hr>
+</div>
+<div class="row justify-content-center">
+	<form action="" class="w-25" method="POST">
+	  {{ form.hidden_tag() }}
+	  <div class="form-row">
+	  <div class="input-group m-3">
+ 	  	{{ form.pid(class='form-control') }}
+	  	<div class="invalid-feedback d-block">
+			{% if form.pid.errors %}
+				{% for error in form.pid.errors %}
+					{{ error }}
+				{% endfor %}
+			{% endif %}
+		</div>
+		<div class="input-group">
+	      {{ form.submit(class='btn btn-info') }}
+	    </div>
+	</div>
+	  </div>  
+	</form>
+</div><hr>
+{% if pid %}
+<button id="printpassbtn" class="float-right btn btn-success">Print this pass</button>
+<div class="embed-responsive embed-responsive-1by1 mt-4">
+	<iframe class="embed-responsive-item" id="printf" name="printf" src="{{ url_for('main.pid_detail', pid=pid) }}"></iframe>
+</div>
+{% endif %}
+{% endblock %}

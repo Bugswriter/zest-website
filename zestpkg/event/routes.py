@@ -12,7 +12,7 @@ event = Blueprint('event', __name__)
 @event.route('/events/', methods=['GET'])
 def all_events():
 	page = request.args.get('page', 1, type=int)
-	pagelimit = 10
+	pagelimit = 7
 	cat = ''
 	active = ['','','','']
 	query = request.args.get('q')

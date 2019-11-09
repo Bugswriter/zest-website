@@ -1,7 +1,12 @@
-from flask import Blueprint, render_template, jsonify
+from datetime import datetime
+from flask import Blueprint, render_template, jsonify, request
+from shutil import copy
+from zestpkg import db
+from zestpkg.models import *
+from flask_login import login_required
+from zestpkg.main.forms import PIDSearch
 
 main = Blueprint('main', __name__)
-
 
 @main.route('/')
 @main.route('/home')
@@ -18,27 +23,31 @@ def faq():
 	return render_template('faq.html', title='FAQ')
 
 
-
-@main.route('/stat_data', methods=['GET', 'POST'])
-def stat_data():
-	data = {
-		'chart1': [34,56,76,23,12],
-		'chart2': [36,67,23,51,65,44],
-		'chart3': [5,78,457,31,46,7]
-	}
-	return jsonify(data)
+@main.route('/backup')
+@login_required
+def backup():
+	copy('zestpkg/site.db','zestpkg/static/backup')
+	return "<h2>Last backup: " + str(datetime.now()) + "</h2>"
 
 
-@main.route('/emailtest')
-def emailtest():
-	data = {'username': 'Bugswriter', 'token': '#'}
-	return render_template('account_email.html', **data)
+@main.route('/account/<int:pid>')
+def pid_detail(pid):
+	user = User.query.get(pid)
+	if user==None:
+		return "<h1>No PID found</h1>"
+
+	return render_template('pid_pass.html',user=user, contestants=user.participations, title='PID Pass')
 
 
-'''
-homepage
-about
-rule book
-authorities
+@main.route('/getinfo', methods=['POST', 'GET'])
+def getinfo():
+	form = PIDSearch()
+	pid = None
+	if form.validate_on_submit():
+		pid = form.pid.data
+		user = User.query.get(pid)
+		if user == None:
+			flash('Form Validation for PID failed, call admin now!', category='danger')
+			abort(403)
 
-'''
+	return render_template('getinfo.html', title='PID Pass', form=form, pid=pid)

@@ -17,6 +17,11 @@ $(document).ready(function() {
 		}
     });
 
+    $('#printpassbtn').click(function(){
+    	window.frames["printf"].focus();
+		window.frames["printf"].print();
+    });
+
     $(function () {
 	  $('[data-toggle="popover"]').popover()
 	})
