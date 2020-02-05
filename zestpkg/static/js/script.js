@@ -170,7 +170,7 @@ $(document).ready(function() {
     var clock, minute;
 	
 	$(function() {
-		var date = new Date(2019, 10, 10);
+		var date = new Date(2020, 1, 14);
 	    var now = new Date();
 	    var diff = (date.getTime()/1000) - (now.getTime()/1000);
 	    var clock = $('.clock').FlipClock(diff,{
