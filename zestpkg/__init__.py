@@ -18,9 +18,9 @@ app.config['MAIL_USE_TLS'] = True
 app.config['COMPRESS_MIMETYPES'] = ['text/html', 'text/css', 'text/xml', 'application/json', 'application/javascript']
 app.config['COMPRESS_LEVEL'] = 6
 app.config['COMPRESS_MIN_SIZE'] = 500
-app.config['MAIL_USERNAME'] = 'admin@zest2019.in'
-app.config['MAIL_PASSWORD'] = 'uxsaaqoabuaplxxz' # admin@zest2019.in
-#app.config['MAIL_PASSWORD'] = 'vgdvirbrjdlakbky' #akashraj5399
+app.config['MAIL_USERNAME'] = 'akashraj5399@gmail.com'
+#app.config['MAIL_PASSWORD'] = 'uxsaaqoabuaplxxz' # admin@zest2019.in
+app.config['MAIL_PASSWORD'] = 'vgdvirbrjdlakbky' #akashraj5399
 #app.config['MAIL_PASSWORD'] = 'ypuhhcnuxhawaswq' #zest2k19@gmail.com
 
 
