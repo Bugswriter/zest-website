@@ -26,7 +26,6 @@ class User(db.Model, UserMixin):
 	participations = db.relationship('Contestant', backref='user')
 	date = db.Column(db.String(30), nullable=False, default=datetime.strftime(datetime.today(), "%b %d %Y"))
 	verified = db.Column(db.Boolean, nullable=False, default=False)
-	rcverify = db.relationship('UserVerify', backref='user', uselist=False)
 
 	def getTeam(self):
 		party = Contestant.query.filter_by(user_id=self.id)
@@ -167,7 +166,6 @@ class Team(db.Model):
 	members = db.relationship('Contestant', backref='team', lazy=True)
 	event_id = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=False)
 	team_code = db.Column(db.String(10), nullable=False, default=generate_team_code())
-	rcverify = db.relationship('TeamVerify', backref='team', uselist=False)
 
 	def getMember(self):
 		party = self.members
@@ -201,14 +199,3 @@ class Rule(db.Model):
 		return "Rule({}, {})".format(self.rule, self.event_id)
 
 
-
-class UserVerify(db.Model):
-	id = db.Column(db.Integer, primary_key=True)
-	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), unique=True, nullable=False)
-	verified = db.Column(db.Boolean, nullable=False)
-
-
-class TeamVerify(db.Model):
-	id = db.Column(db.Integer, primary_key=True)
-	team_id = db.Column(db.Integer, db.ForeignKey('team.id'), unique=True, nullable=False)
-	verified = db.Column(db.Boolean, nullable=False)
