@@ -29,7 +29,7 @@
 
 			      <td>
 			      	{% if p.event.status %}
-			      		<a href="{{ url_for('contestant.withdraw', eid=p.event.id) }}" onclick="return confirm('After this you will no longer be participant of {{ p.event.title }} event?')" class='btn btn-outline-danger ml-3 rounded-circle'>✘</a>
+			      		<a href="{{ url_for('contestant.withdraw', eid=p.event.id) }}" onclick="return confirm('After this you will no longer be participant of {{ p.event.title }} event?')" class='btn btn-outline-danger ml-3 rounded-circle disabled'>✘</a>
 			      	{% else %}
 			      		<button type="button" class="btn btn-outline-danger ml-3 rounded-circle" data-toggle="popover" title="Oops you can't!" data-content="Event registeration is closed right now, don't run away!">✘</button>
 			      	{% endif %}
