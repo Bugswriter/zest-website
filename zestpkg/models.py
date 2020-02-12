@@ -201,14 +201,3 @@ class Rule(db.Model):
 		return "Rule({}, {})".format(self.rule, self.event_id)
 
 
-
-class UserVerify(db.Model):
-	id = db.Column(db.Integer, primary_key=True)
-	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), unique=True, nullable=False)
-	verified = db.Column(db.Boolean, nullable=False)
-
-
-class TeamVerify(db.Model):
-	id = db.Column(db.Integer, primary_key=True)
-	team_id = db.Column(db.Integer, db.ForeignKey('team.id'), unique=True, nullable=False)
-	verified = db.Column(db.Boolean, nullable=False)
